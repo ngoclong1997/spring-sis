@@ -13,9 +13,6 @@ import vn.edu.hou.sis.services.UserService;
 @Controller
 public class GiaoVuController {
 
-	@Autowired
-	private UserService userService;
-
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
 	public String giaoVuForm(Model model, Principal principal) {
 		model.addAttribute("username", principal.getName());
