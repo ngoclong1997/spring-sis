@@ -13,3 +13,6 @@
 	access="hasRole('ROLE_CAN_BO_TUYEN_SINH') and isAuthenticated()">
 	<jsp:include page="/WEB-INF/menu/can-bo-tuyen-sinh_menu.jsp" />
 </sec:authorize>
+<sec:authorize access="!isAuthenticated()">
+	<jsp:include page="/WEB-INF/menu/default_menu.jsp"/>
+</sec:authorize>
