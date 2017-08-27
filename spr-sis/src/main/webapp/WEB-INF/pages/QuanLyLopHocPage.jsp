@@ -25,6 +25,7 @@
 				</div>
 			</td>
 		</tr>
+		<tr id = "space"></tr>
 		<tr align="left">
 			<td width="10%"></td>
 			<td width="80%">
@@ -33,6 +34,7 @@
 				
 			<td width="10%"></td>
 		</tr>
+		<tr id = "space"></tr>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>
 

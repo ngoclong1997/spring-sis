@@ -25,6 +25,7 @@
 				</div>
 			</td>
 		</tr>
+		<tr id = "space"></tr>
 		<tr align="left">
 			<td width="10%"></td>
 			<td width="80%">
@@ -32,6 +33,26 @@
 			</td>
 				
 			<td width="10%"></td>
+		</tr>
+		<tr id = "space"></tr>
+		<tr>
+			<table>
+			  <thead>
+				  <tr>
+				  	<th>STT</th>
+				    <th>ID</th>
+				    <th>Ten Nganh</th>
+				  </tr>
+			  </thead>
+			  <tbody>
+			  	<tr th:each="temp,iterStat : ${list}">
+			  		<td th:text="${iterStat.count}"></td>
+                    <td th:text="${temp.id}"></td>
+                    <td th:text="${temp.tenNganh}"></td>
+			  	</tr>
+			  </tbody>
+			</table>
+
 		</tr>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>

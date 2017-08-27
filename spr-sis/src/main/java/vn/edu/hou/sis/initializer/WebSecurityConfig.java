@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers("/can-bo-tuyen-sinh", "/nghiep-vu/quan-ly-ho-so-du-tuyen").access("hasRole('ROLE_CAN_BO_TUYEN_SINH')");
 		
-		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403Page");
+		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403-no-permission");
 		
 		// Config for Login Form
 		http.authorizeRequests().and().formLogin()
@@ -93,7 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		        } else if (authorities.contains("ROLE_SINH_VIEN") || authorities.contains("ROLE_GIAO_VU") || authorities.contains("ROLE_CAN_BO_TUYEN_SINH")){
 		        	targetUrl = "/user-info";
 		        } else {
-		        	throw new IllegalStateException();
+		        		throw new IllegalStateException();
 		        }
 				
 		        redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, targetUrl);

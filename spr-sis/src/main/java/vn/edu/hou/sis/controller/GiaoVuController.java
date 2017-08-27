@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import vn.edu.hou.sis.services.UserService;
+import vn.edu.hou.sis.services.NganhHocService;
 
 @Controller
 public class GiaoVuController {
 
 	@Autowired
-	private UserService userService;
-
+	private NganhHocService nganhHocService;
+	
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
 	public String giaoVuForm(Model model, Principal principal) {
 		model.addAttribute("username", principal.getName());
@@ -24,6 +24,7 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc")
 	public String nghiepVuQuanLyNganhHoc(Model model, Principal principal) {
+		model.addAttribute("list", nganhHocService.findAll());
 		return "QuanLyNganhHocPage";
 	}
 

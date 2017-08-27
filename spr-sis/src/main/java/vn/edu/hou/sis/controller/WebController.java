@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.edu.hou.sis.entities.User;
@@ -40,7 +42,7 @@ public class WebController {
 		return "LoginPage";
 	}
 
-	@RequestMapping(value = "/403Page", method = RequestMethod.GET)
+	@RequestMapping(value = "/403-no-permission", method = RequestMethod.GET)
 	public String accessDenied(Model model, Principal principal) {
 		if (principal != null) {
 			model.addAttribute("message",
@@ -48,7 +50,18 @@ public class WebController {
 		} else {
 			model.addAttribute("message", "You do not have permission to access this page!");
 		}
-		return "403Page";
+		return "403NoPermissionPage";
+	}
+	
+	@RequestMapping(value = "/404-not-found", method = RequestMethod.GET)
+	public String resourceNotFoundHandler(Model model, Principal principal) {
+		if (principal != null) {
+			model.addAttribute("message",
+					"Hi " + principal.getName() + "<br> Resource not found!");
+		} else {
+			model.addAttribute("message", "Resource not found!");
+		}
+		return "404NotFoundPage";
 	}
 
 	@RequestMapping(value = "/user-info", method = RequestMethod.GET)

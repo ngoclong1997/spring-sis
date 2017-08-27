@@ -5,15 +5,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/scripts/common.js"></script>
+
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/styles/common.css">
-<title>Trang chủ</title>
+<title>No permission</title>
 </head>
 <body>
 	<table width="80%" align="center">
@@ -25,16 +26,14 @@
 				</div>
 			</td>
 		</tr>
-		<tr id = "space"></tr>
-		<tr align="left">
-			<td width="10%"></td>
-			<td width="80%">
-				<button>Thêm mới khóa học</button>
+		<tr>
+			<td width="20%"></td>
+			<td width="60%">
+				<h1>403 Error, No Permission</h1>
+
 			</td>
-				
-			<td width="10%"></td>
+			<td width="20%"></td>
 		</tr>
-		<tr id = "space"></tr>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>
 

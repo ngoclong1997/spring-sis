@@ -13,9 +13,6 @@ import vn.edu.hou.sis.services.UserService;
 @Controller
 public class CanBoTuyenSinhController {
 
-	@Autowired
-	private UserService userService;
-
 	@RequestMapping(value = "/can-bo-tuyen-sinh", method = RequestMethod.GET)
 	public String canBoTuyenSinhForm(Model model, Principal principal) {
 		model.addAttribute("username", principal.getName());
