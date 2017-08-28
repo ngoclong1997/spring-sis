@@ -17,8 +17,7 @@ public class UserRole implements Serializable {
 	@Id
 	private Integer id;
 
-	@Column(name="isdeleted")
-	private Integer isDeleted;
+	private Integer isdeleted;
 
 	@Column(name="user_role_id")
 	private Integer userRoleId;
@@ -37,11 +36,11 @@ public class UserRole implements Serializable {
 	}
 
 	public Integer getIsdeleted() {
-		return this.isDeleted;
+		return this.isdeleted;
 	}
 
-	public void setIsdeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setIsdeleted(Integer isdeleted) {
+		this.isdeleted = isdeleted;
 	}
 
 	public Integer getUserRoleId() {

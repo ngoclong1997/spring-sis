@@ -16,9 +16,8 @@ public class Role implements Serializable {
 
 	@Id
 	private Integer id;
-	
-	@Column(name="isdeleted")
-	private Integer isDeleted;
+
+	private Integer isdeleted;
 
 	private String loai;
 
@@ -34,11 +33,11 @@ public class Role implements Serializable {
 	}
 
 	public Integer getIsdeleted() {
-		return this.isDeleted;
+		return this.isdeleted;
 	}
 
-	public void setIsdeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
+	public void setIsdeleted(Integer isdeleted) {
+		this.isdeleted = isdeleted;
 	}
 
 	public String getLoai() {
