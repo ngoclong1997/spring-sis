@@ -137,7 +137,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
 		localeResolver.setDefaultLocale(new Locale("en"));
 		localeResolver.setCookieName("my-locale-cookie");
-		localeResolver.setCookieMaxAge(3600);
+		localeResolver.setCookieMaxAge(60*60*24*31);
 		return localeResolver;
 	}
 
