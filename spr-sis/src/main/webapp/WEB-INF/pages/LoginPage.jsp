@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/pages/_include.jsp" %>
+<%@include file="/WEB-INF/pages/_include.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +35,7 @@
 				<div style="color: red; margin: 10px 0px;">
 
 					Login Failed!!!<br />
-					<spring:message code = "error.login"></spring:message>
+					<spring:message code="error.login"></spring:message>
 
 				</div>
 			</c:if>
@@ -64,16 +64,11 @@
 							placeholder="<spring:message code ="label.password"/>"
 							name="password">
 					</div>
-					<div class="checkbox">
-						<label> <input type="checkbox"> Check me out </label>
-					</div>
-
 
 					<input type="submit" class="btn btn-default" value="Submit"></input>
 				</form>
 			</div>
 		</div>
-
 
 	</div>
 </body>

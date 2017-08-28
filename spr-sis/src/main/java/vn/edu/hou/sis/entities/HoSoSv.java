@@ -19,8 +19,8 @@ public class HoSoSv implements Serializable {
 	@Id
 	private Integer id;
 
-	@Column(name="cb_tuyen_sinh_id")
-	private Integer cbTuyenSinhId;
+	@Column(name="cb_tuyen_sinh_username")
+	private String cbTuyenSinhUsername;
 
 	private String cmnd;
 
@@ -34,6 +34,18 @@ public class HoSoSv implements Serializable {
 
 	@Column(name="gioi_tinh")
 	private Integer gioiTinh;
+	
+	@Column(name="chuyen_nganh")
+	private String chuyenNganh;
+
+	@Column(name="nam_tot_nghiep")
+	private Integer namTotNghiep;
+
+	@Column(name="noi_cap")
+	private String noiCap;
+
+	@Column(name="trinh_do")
+	private String trinhDo;
 
 	@Column(name="ho_khau_thuong_tru")
 	private String hoKhauThuongTru;
@@ -63,9 +75,6 @@ public class HoSoSv implements Serializable {
 
 	private String sdt;
 
-	@Column(name="trinh_do_id")
-	private Integer trinhDoId;
-
 	public HoSoSv() {
 	}
 
@@ -77,12 +86,12 @@ public class HoSoSv implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getCbTuyenSinhId() {
-		return this.cbTuyenSinhId;
+	public String getCbTuyenSinhId() {
+		return this.cbTuyenSinhUsername;
 	}
 
-	public void setCbTuyenSinhId(Integer cbTuyenSinhId) {
-		this.cbTuyenSinhId = cbTuyenSinhId;
+	public void setCbTuyenSinhId(String cbTuyenSinhUsername) {
+		this.cbTuyenSinhUsername = cbTuyenSinhUsername;
 	}
 
 	public String getCmnd() {
@@ -141,14 +150,6 @@ public class HoSoSv implements Serializable {
 		this.hoTen = hoTen;
 	}
 
-	public Integer getIsDeleted() {
-		return this.isDeleted;
-	}
-
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
 	public Integer getNganhHocId() {
 		return this.nganhHocId;
 	}
@@ -196,13 +197,46 @@ public class HoSoSv implements Serializable {
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
 	}
-
-	public Integer getTrinhDoId() {
-		return this.trinhDoId;
+	
+	public String getChuyenNganh() {
+		return this.chuyenNganh;
 	}
 
-	public void setTrinhDoId(Integer trinhDoId) {
-		this.trinhDoId = trinhDoId;
+	public void setChuyenNganh(String chuyenNganh) {
+		this.chuyenNganh = chuyenNganh;
 	}
+
+	public Integer getIsDeleted() {
+		return this.isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Integer getNamTotNghiep() {
+		return this.namTotNghiep;
+	}
+
+	public void setNamTotNghiep(Integer namTotNghiep) {
+		this.namTotNghiep = namTotNghiep;
+	}
+
+	public String getNoiCap() {
+		return this.noiCap;
+	}
+
+	public void setNoiCap(String noiCap) {
+		this.noiCap = noiCap;
+	}
+
+	public String getTrinhDo() {
+		return this.trinhDo;
+	}
+
+	public void setTrinhDo(String trinhDo) {
+		this.trinhDo = trinhDo;
+	}
+
 
 }

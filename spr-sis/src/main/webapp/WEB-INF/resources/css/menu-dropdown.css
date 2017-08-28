@@ -22,7 +22,7 @@ ul li a {
   color: #fff;
 }
 
-ul li a:hover { background: #2c3e50; }
+ul li a:hover { background: #2c3e50; color: white; text-decoration: none;}
 
 li:hover > ul {
   display: block;
