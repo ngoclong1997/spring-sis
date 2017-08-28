@@ -15,3 +15,4 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Query("SELECT s from SinhVien s, User u where u.username = ?1 and u.id = s.userId and isDeleted = 0")
 	public SinhVien findSinhVienByUsername(String username);
 }
+
