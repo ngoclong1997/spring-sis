@@ -10,15 +10,16 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="khoa_hoc")
-@NamedQuery(name="KhoaHoc.findAll", query="SELECT k FROM KhoaHoc k")
+@NamedQuery(name="KhoaHoc.findAll", query="SELECT k FROM KhoaHoc k WHERE k.isDeleted = 0")
 public class KhoaHoc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name="is_deleted")
-	private Integer isDeleted;
+	private Integer isDeleted = 0;
 
 	@Column(name="nam_bat_dau")
 	private Integer namBatDau;

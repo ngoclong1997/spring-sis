@@ -30,11 +30,11 @@
 		<tr id="space"></tr>
 		<tr align="left">
 			<td width="10%"></td>
-			<td width="80%"><c:if test="${nganhHoc != null}">
+			<td width="80%"><c:if test="${nganhHoc.id != null}">
 					<h2>
 						Chinh Sua
 						<h2>
-				</c:if> <c:if test="${nganhHoc == null}">
+				</c:if> <c:if test="${nganhHoc.id == null}">
 					<h2>
 						Them Moi
 						<h2>
@@ -42,45 +42,22 @@
 			<td width="10%"></td>
 		</tr>
 		<tr>
-<!-- 			<form action="/nghiep-vu/quan-ly-nganh-hoc/save" method="POST" -->
-<!-- 				modelAttribute="nganhHoc"> -->
-<!-- 								<hidden path="id" /> -->
-<!-- 				<table> -->
-<!-- 					<tr> -->
-<!-- 						<td>Ten Nganh</td> -->
-<!-- 						<td><input path="tenNganh" type="text" -->
-<%-- 							value="${nganhHoc.getId()}" /></td> --%>
-<!-- 						<td><errors path="tenNganh" class="error-message" /></td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>Ky Hieu</td> -->
-<!-- 						<td><input path="kyHieu" type="text" -->
-<%-- 							value="${nganhHoc.tenNganh}" /></td> --%>
-<!-- 						<td><errors path="kyHieu" class="error-message" /></td> -->
-<!-- 					</tr> -->
-<!-- 					<tr> -->
-<!-- 						<td>&nbsp;</td> -->
-<!-- 						<td><input type="submit" value="Submit" /> <a -->
-<!-- 							href="quan-ly-nganh-hoc" class="button">cancel</a></td> -->
-<!-- 						<td>&nbsp;</td> -->
-<!-- 					</tr> -->
-<!-- 				</table> -->
-<!-- 			</form> -->
-
 			<form method="POST" modelAttribute="nganhHoc"
 				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-nganh-hoc/save">
-				<input type = "hidden" name = "id" value = "${nganhHoc.id}">
-				<input type = "hidden" name = "isDeleted" value = "${nganhHoc.isDeleted}">
-				<table>
+				<input type="hidden" name="id" value="${nganhHoc.id}"><input
+					type="hidden" name="isDeleted" value="${nganhHoc.isDeleted}">
+				<table style="width: 50%; border: 1px solid; margin: 0 auto;">
 					<tr>
 						<td>Ten Nganh</td>
-						<td><input path="tenNganh" name = "tenNganh" value="${nganhHoc.tenNganh}"/></td>
+						<td><input path="tenNganh" name="tenNganh"
+							value="${nganhHoc.tenNganh}" /></td>
 						<td><errors path="tenNganh" class="error-message" /></td>
 					</tr>
 
 					<tr>
 						<td>Ky Hieu</td>
-						<td><input path="kyHieu" name = "kyHieu" value="${nganhHoc.kyHieu}"/></td>
+						<td><input path="kyHieu" name="kyHieu"
+							value="${nganhHoc.kyHieu}" /></td>
 						<td><errors path="kyHieu" class="error-message" /></td>
 					</tr>
 

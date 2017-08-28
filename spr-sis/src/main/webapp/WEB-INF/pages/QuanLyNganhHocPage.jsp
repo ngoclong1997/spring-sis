@@ -43,6 +43,7 @@
 						<th>STT</th>
 						<th>ID</th>
 						<th>Ten Nganh</th>
+						<th>Ky Hieu</th>
 						<th>Thao Tac</th>
 					</tr>
 				</thead>
@@ -52,6 +53,7 @@
 							<td>${iterStat.count}</td>
 							<td>${temp.id}</td>
 							<td>${temp.tenNganh}</td>
+							<td>${temp.kyHieu}</td>
 <%-- 							<td>${temp.isDeleted}</td> --%>
 							<td><a href="quan-ly-nganh-hoc/edit?id=${temp.id}">Sua</a>
 							<a href="quan-ly-nganh-hoc/delete?id=${temp.id}">Xoa</a></td>

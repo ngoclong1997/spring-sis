@@ -2,13 +2,11 @@ package vn.edu.hou.sis.controller;
 
 import java.security.Principal;
 
-import javax.xml.ws.RequestWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import vn.edu.hou.sis.entities.NganhHoc;
 import vn.edu.hou.sis.exceptions.NganhHocNotFound;
+import vn.edu.hou.sis.services.KhoaHocService;
 import vn.edu.hou.sis.services.NganhHocService;
 
 @Controller
@@ -23,6 +22,8 @@ public class GiaoVuController {
 
 	@Autowired
 	private NganhHocService nganhHocService;
+	@Autowired
+	private KhoaHocService khoaHocServices;
 	
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
 	public String giaoVuForm(Model model, Principal principal) {
@@ -43,6 +44,8 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-khoa-hoc")
 	public String nghiepVuQuanLyKhoaHoc(Model model, Principal principal) {
+		model.addAttribute("listKhoaHoc", khoaHocServices.findAll());
+		model.addAttribute("listNganhHoc", nganhHocService.findAll());
 		return "QuanLyKhoaHocPage";
 	}
 	
@@ -78,6 +81,8 @@ public class GiaoVuController {
 		nganhHocService.save(nganhHoc);
 		return "redirect:/nghiep-vu/quan-ly-nganh-hoc"; 
 	}
+	
+	
 	
 	
 }

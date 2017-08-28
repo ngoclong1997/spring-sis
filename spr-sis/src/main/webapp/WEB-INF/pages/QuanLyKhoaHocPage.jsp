@@ -13,6 +13,8 @@
 	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/styles/common.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/styles/table.css">
 <title>Trang chủ</title>
 </head>
 <body>
@@ -25,16 +27,43 @@
 				</div>
 			</td>
 		</tr>
-		<tr id = "space"></tr>
+		<tr id="space"></tr>
 		<tr align="left">
 			<td width="10%"></td>
-			<td width="80%">
-				<button>Thêm mới khóa học</button>
-			</td>
-				
+			<td width="80%"><a href="quan-ly-khoa-hoc/add">Thêm mới
+					khóa học</a></td>
+
 			<td width="10%"></td>
 		</tr>
-		<tr id = "space"></tr>
+		<tr id="space"></tr>
+		<table class="context" style="width: 80%">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Tên Khóa Học</th>
+					<th>Năm Bắt Đầu</th>
+					<th>Năm Kết Thúc</th>
+					<th>Ngành Học</th>
+					<th>Thao Tác</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${listKhoaHoc}" var="temp">
+					<tr>
+						<td>${temp.id}</td>
+						<td>${temp.tenKhoaHoc}</td>
+						<td>${temp.namBatDau}</td>
+						<td>${temp.namKetThuc}</td>
+						<td><c:forEach items="${listNganhHoc}" var="nganh">
+							<c:if test="${nganh.id == temp.nganhHocId }">${nganh.tenNganh}</c:if>
+						</c:forEach></td>
+						<%-- 							<td>${temp.isDeleted}</td> --%>
+						<td><a href="quan-ly-khoa-hoc/edit?id=${temp.id}">Sua</a> <a
+							href="quan-ly-khoa-hoc/delete?id=${temp.id}">Xoa</a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>
 

@@ -4,52 +4,75 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 
-
-/**
- * The persistent class for the users database table.
- * 
- */
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@Table(name = "users")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@Column(name = "cmnd")
 	private String cmnd;
 
-	@Column(name="dia_chi")
+	@Column(name = "dia_chi")
 	private String diaChi;
 
+	@Column(name = "email")
 	private String email;
 
-	@Column(name="gioi_tinh")
+	@Column(name = "gioi_tinh")
 	private Integer gioiTinh;
 
-	@Column(name="ho_ten")
+	@Column(name = "ho_ten")
 	private String hoTen;
 
-	@Column(name="is_deleted")
+	@Column(name = "is_deleted")
 	private Integer isDeleted;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="ngay_sinh")
+	@Column(name = "ngay_sinh")
 	private Date ngaySinh;
 
-	@Column(name="noi_lam_viec")
+	@Column(name = "noi_lam_viec")
 	private String noiLamViec;
 
+	@Column(name = "password")
 	private String password;
 
+	@Column(name = "sdt1")
 	private String sdt1;
 
+	@Column(name = "sdt2")
 	private String sdt2;
 
+	@Column(name = "username")
 	private String username;
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public User() {
+	}
+
+	public User(int id, String cmnd, String diaChi, String email, int gioiTinh, String hoTen, int isDeleted,
+			Date ngaySinh, String noiLamViec, String password, String sdt1, String sdt2, String username) {
+		super();
+		this.id = id;
+		this.cmnd = cmnd;
+		this.diaChi = diaChi;
+		this.email = email;
+		this.gioiTinh = gioiTinh;
+		this.hoTen = hoTen;
+		this.isDeleted = isDeleted;
+		this.ngaySinh = ngaySinh;
+		this.noiLamViec = noiLamViec;
+		this.password = password;
+		this.sdt1 = sdt1;
+		this.sdt2 = sdt2;
+		this.username = username;
 	}
 
 	public Integer getId() {

@@ -1,6 +1,7 @@
 package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,9 +22,6 @@ public class HoSoSv implements Serializable {
 	@Column(name="cb_tuyen_sinh_username")
 	private String cbTuyenSinhUsername;
 
-	@Column(name="chuyen_nganh")
-	private String chuyenNganh;
-
 	private String cmnd;
 
 	@Column(name="dan_toc")
@@ -36,6 +34,18 @@ public class HoSoSv implements Serializable {
 
 	@Column(name="gioi_tinh")
 	private Integer gioiTinh;
+	
+	@Column(name="chuyen_nganh")
+	private String chuyenNganh;
+
+	@Column(name="nam_tot_nghiep")
+	private Integer namTotNghiep;
+
+	@Column(name="noi_cap")
+	private String noiCap;
+
+	@Column(name="trinh_do")
+	private String trinhDo;
 
 	@Column(name="ho_khau_thuong_tru")
 	private String hoKhauThuongTru;
@@ -45,9 +55,6 @@ public class HoSoSv implements Serializable {
 
 	@Column(name="is_deleted")
 	private Integer isDeleted;
-
-	@Column(name="nam_tot_nghiep")
-	private String namTotNghiep;
 
 	@Column(name="nganh_hoc_id")
 	private Integer nganhHocId;
@@ -63,16 +70,10 @@ public class HoSoSv implements Serializable {
 	@Column(name="ngoai_ngu")
 	private String ngoaiNgu;
 
-	@Column(name="noi_cap")
-	private String noiCap;
-
 	@Column(name="noi_sinh")
 	private String noiSinh;
 
 	private String sdt;
-
-	@Column(name="trinh_do")
-	private String trinhDo;
 
 	public HoSoSv() {
 	}
@@ -85,20 +86,12 @@ public class HoSoSv implements Serializable {
 		this.id = id;
 	}
 
-	public String getCbTuyenSinhUsername() {
+	public String getCbTuyenSinhId() {
 		return this.cbTuyenSinhUsername;
 	}
 
-	public void setCbTuyenSinhUsername(String cbTuyenSinhUsername) {
+	public void setCbTuyenSinhId(String cbTuyenSinhUsername) {
 		this.cbTuyenSinhUsername = cbTuyenSinhUsername;
-	}
-
-	public String getChuyenNganh() {
-		return this.chuyenNganh;
-	}
-
-	public void setChuyenNganh(String chuyenNganh) {
-		this.chuyenNganh = chuyenNganh;
 	}
 
 	public String getCmnd() {
@@ -157,22 +150,6 @@ public class HoSoSv implements Serializable {
 		this.hoTen = hoTen;
 	}
 
-	public Integer getIsDeleted() {
-		return this.isDeleted;
-	}
-
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public String getNamTotNghiep() {
-		return this.namTotNghiep;
-	}
-
-	public void setNamTotNghiep(String namTotNghiep) {
-		this.namTotNghiep = namTotNghiep;
-	}
-
 	public Integer getNganhHocId() {
 		return this.nganhHocId;
 	}
@@ -205,14 +182,6 @@ public class HoSoSv implements Serializable {
 		this.ngoaiNgu = ngoaiNgu;
 	}
 
-	public String getNoiCap() {
-		return this.noiCap;
-	}
-
-	public void setNoiCap(String noiCap) {
-		this.noiCap = noiCap;
-	}
-
 	public String getNoiSinh() {
 		return this.noiSinh;
 	}
@@ -228,6 +197,38 @@ public class HoSoSv implements Serializable {
 	public void setSdt(String sdt) {
 		this.sdt = sdt;
 	}
+	
+	public String getChuyenNganh() {
+		return this.chuyenNganh;
+	}
+
+	public void setChuyenNganh(String chuyenNganh) {
+		this.chuyenNganh = chuyenNganh;
+	}
+
+	public Integer getIsDeleted() {
+		return this.isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Integer getNamTotNghiep() {
+		return this.namTotNghiep;
+	}
+
+	public void setNamTotNghiep(Integer namTotNghiep) {
+		this.namTotNghiep = namTotNghiep;
+	}
+
+	public String getNoiCap() {
+		return this.noiCap;
+	}
+
+	public void setNoiCap(String noiCap) {
+		this.noiCap = noiCap;
+	}
 
 	public String getTrinhDo() {
 		return this.trinhDo;
@@ -236,5 +237,6 @@ public class HoSoSv implements Serializable {
 	public void setTrinhDo(String trinhDo) {
 		this.trinhDo = trinhDo;
 	}
+
 
 }
