@@ -238,5 +238,16 @@ public class HoSoSv implements Serializable {
 		this.trinhDo = trinhDo;
 	}
 
+	@Override
+	public String toString() {
+		return "HoSoSv [id=" + id + ", cbTuyenSinhUsername=" + cbTuyenSinhUsername + ", cmnd=" + cmnd + ", danToc="
+				+ danToc + ", diaChi=" + diaChi + ", email=" + email + ", gioiTinh=" + gioiTinh + ", chuyenNganh="
+				+ chuyenNganh + ", namTotNghiep=" + namTotNghiep + ", noiCap=" + noiCap + ", trinhDo=" + trinhDo
+				+ ", hoKhauThuongTru=" + hoKhauThuongTru + ", hoTen=" + hoTen + ", isDeleted=" + isDeleted
+				+ ", nganhHocId=" + nganhHocId + ", ngayLap=" + ngayLap + ", ngaySinh=" + ngaySinh + ", ngoaiNgu="
+				+ ngoaiNgu + ", noiSinh=" + noiSinh + ", sdt=" + sdt + "]";
+	}
+	
+	
 
 }

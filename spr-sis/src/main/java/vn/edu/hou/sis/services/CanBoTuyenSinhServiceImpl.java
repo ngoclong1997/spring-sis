@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.edu.hou.sis.entities.HoSoSv;
+import vn.edu.hou.sis.entities.NganhHoc;
 import vn.edu.hou.sis.exceptions.HoSoSVNotFound;
 import vn.edu.hou.sis.exceptions.UserNotFound;
 import vn.edu.hou.sis.repositories.HoSoSVRepository;
@@ -47,6 +48,11 @@ public class CanBoTuyenSinhServiceImpl implements CanBoTuyenSinhService {
 	@Override
 	public List<HoSoSv> findAll() {
 		return hoSoSVRepository.findAll();
+	}
+
+	@Override
+	public List<NganhHoc> findAllNganhHoc() {
+		return hoSoSVRepository.findAllNganhHoc();
 	}
 
 }

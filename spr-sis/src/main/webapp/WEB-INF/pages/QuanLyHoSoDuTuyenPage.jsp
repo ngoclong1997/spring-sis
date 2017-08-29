@@ -41,41 +41,16 @@
 		<tr id="space"></tr>
 		<tr align="left">
 			<td width="0%"></td>
-			<td width="100%" align="right">
-				<button type="button" class="btn btn-default" data-toggle="modal"
-					data-target="#myModal">Thêm hồ sơ dự tuyển</button>
-				<div id="myModal" class="modal fade" role="dialog">
-					<div class="modal-dialog">
-
-						<!-- Modal content-->
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title" align="left">Thêm hồ sơ</h4>
-							</div>
-							<div class="modal-body">
-								<form>
-									<div class="form-group">
-										<label for="email">Email address:</label> <input type="email"
-											class="form-control" id="email">
-									</div>
-									<div class="form-group">
-										<label for="pwd">Password:</label> <input type="password"
-											class="form-control" id="pwd">
-									</div>
-									<div class="checkbox">
-										<label><input type="checkbox"> Remember me</label>
-									</div>
-									<button type="submit" class="btn btn-default">Submit</button>
-								</form>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
+			<td width="100%" align="left">
+				<div align="right" style="padding-right: 30px;">
+					<button type="button" class="btn btn-default" data-toggle="modal"
+						data-target="#themHSSV">Thêm hồ sơ dự tuyển</button>
 				</div>
+				<form method="POST" action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so" modelAttribute="hoSoSV">
+					<div id="themHSSV" class="modal fade" role="dialog">
+						<jsp:include page="/WEB-INF/popup/ThemHoSoSVModal.jsp" />
+					</div>
+				</form>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -86,8 +61,6 @@
 							<th>Số cmnd</th>
 							<th>Địa chỉ</th>
 							<th>Trình độ</th>
-							<th>Năm tốt nghiệp</th>
-							<th>Chuyên ngành</th>
 							<th>Ngoại ngữ</th>
 							<th>Email</th>
 							<th>Số điện thoại</th>
@@ -98,16 +71,41 @@
 							<tr>
 								<td>${hssv.id }</td>
 								<td>${hssv.hoTen }</td>
-								<td>${hssv.gioiTinh }</td>
+								<td><c:set var="gioi_tinh" value="${hssv.gioiTinh }" /> <c:choose>
+										<c:when test="${gioi_tinh == '1' }">
+											<spring:message code="label.gender_male"></spring:message>
+										</c:when>
+										<c:otherwise>
+											<spring:message code="label.gender_female"></spring:message>
+										</c:otherwise>
+									</c:choose></td>
 								<td>${hssv.ngaySinh }</td>
 								<td>${hssv.cmnd }</td>
 								<td>${hssv.diaChi }</td>
 								<td>${hssv.trinhDo }</td>
-								<td>${hssv.namTotNghiep }</td>
-								<td>${hssv.chuyenNganh }</td>
 								<td>${hssv.ngoaiNgu }</td>
 								<td>${hssv.email }</td>
 								<td>${hssv.sdt }</td>
+								<td><p data-placement="top" data-toggle="tooltip"
+										title="Edit">
+										<button class="btn btn-primary btn-xs" data-title="Edit"
+											data-toggle="modal" data-target="#suaHSSV">
+											<span class="glyphicon glyphicon-pencil"></span>
+										</button>
+									</p></td>
+								<div id="suaHSSV" class="modal fade" role="dialog">
+									<jsp:include page="/WEB-INF/popup/SuaHoSoSVModal.jsp" />
+								</div>
+								<td><p data-placement="top" data-toggle="tooltip"
+										title="Delete">
+										<button class="btn btn-danger btn-xs" data-title="Delete"
+											data-toggle="modal" data-target="#xoaHSSV">
+											<span class="glyphicon glyphicon-trash"></span>
+										</button>
+									</p></td>
+								<div id="xoaHSSV" class="modal fade" role="dialog">
+									<jsp:include page="/WEB-INF/popup/XoaHoSoSVModal.jsp" />
+								</div>
 							</tr>
 						</c:forEach>
 					</tbody>
