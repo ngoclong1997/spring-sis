@@ -1,6 +1,8 @@
 package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,11 +19,14 @@ public class HoSoSv implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private Integer id;
 
 	@Column(name="cb_tuyen_sinh_username")
 	private String cbTuyenSinhUsername;
-
+	
+	@Column(name="cmnd")
 	private String cmnd;
 
 	@Column(name="dan_toc")
@@ -30,6 +35,7 @@ public class HoSoSv implements Serializable {
 	@Column(name="dia_chi")
 	private String diaChi;
 
+	@Column(name="email")
 	private String email;
 
 	@Column(name="gioi_tinh")
@@ -73,6 +79,7 @@ public class HoSoSv implements Serializable {
 	@Column(name="noi_sinh")
 	private String noiSinh;
 
+	@Column(name="sdt")
 	private String sdt;
 
 	public HoSoSv() {
@@ -86,11 +93,11 @@ public class HoSoSv implements Serializable {
 		this.id = id;
 	}
 
-	public String getCbTuyenSinhId() {
+	public String getCbTuyenSinhUsername() {
 		return this.cbTuyenSinhUsername;
 	}
 
-	public void setCbTuyenSinhId(String cbTuyenSinhUsername) {
+	public void setCbTuyenSinhUsername(String cbTuyenSinhUsername) {
 		this.cbTuyenSinhUsername = cbTuyenSinhUsername;
 	}
 
@@ -170,8 +177,14 @@ public class HoSoSv implements Serializable {
 		return this.ngaySinh;
 	}
 
-	public void setNgaySinh(Date ngaySinh) {
-		this.ngaySinh = ngaySinh;
+	public void setNgaySinh(String ngaySinh) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.ngaySinh = sdf.parse(ngaySinh);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getNgoaiNgu() {

@@ -28,6 +28,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 </head>
+
 <body>
 	<table width="80%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
@@ -46,11 +47,9 @@
 					<button type="button" class="btn btn-default" data-toggle="modal"
 						data-target="#themHSSV">Thêm hồ sơ dự tuyển</button>
 				</div>
-				<form method="POST" action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so" modelAttribute="hoSoSV">
-					<div id="themHSSV" class="modal fade" role="dialog">
-						<jsp:include page="/WEB-INF/popup/ThemHoSoSVModal.jsp" />
-					</div>
-				</form>
+				<div id="themHSSV" class="modal fade" role="dialog">
+					<jsp:include page="/WEB-INF/popup/ThemHoSoSVModal.jsp" />
+				</div>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -64,6 +63,7 @@
 							<th>Ngoại ngữ</th>
 							<th>Email</th>
 							<th>Số điện thoại</th>
+							<th>Chức năng</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -86,26 +86,36 @@
 								<td>${hssv.ngoaiNgu }</td>
 								<td>${hssv.email }</td>
 								<td>${hssv.sdt }</td>
-								<td><p data-placement="top" data-toggle="tooltip"
-										title="Edit">
-										<button class="btn btn-primary btn-xs" data-title="Edit"
-											data-toggle="modal" data-target="#suaHSSV">
+
+								<td><span id="func_btn" data-placement="top"
+									data-toggle="tooltip" title="Sửa hồ sơ"> <a
+										class="btn btn-primary" data-title="Edit" data-toggle="modal"
+										href="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/update?id=${hssv.id }">
 											<span class="glyphicon glyphicon-pencil"></span>
-										</button>
-									</p></td>
-								<div id="suaHSSV" class="modal fade" role="dialog">
-									<jsp:include page="/WEB-INF/popup/SuaHoSoSVModal.jsp" />
-								</div>
-								<td><p data-placement="top" data-toggle="tooltip"
-										title="Delete">
-										<button class="btn btn-danger btn-xs" data-title="Delete"
-											data-toggle="modal" data-target="#xoaHSSV">
+									</a>
+								</span> <span id="func_btn" data-placement="top" data-toggle="tooltip"
+									title="Xóa hồ sơ">
+										<button class="btn btn-danger" data-title="Delete"
+											data-toggle="modal"
+											href="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/delete/${hssv.id }">
 											<span class="glyphicon glyphicon-trash"></span>
 										</button>
-									</p></td>
-								<div id="xoaHSSV" class="modal fade" role="dialog">
-									<jsp:include page="/WEB-INF/popup/XoaHoSoSVModal.jsp" />
-								</div>
+								</span> <span id="func_btn" data-placement="top" data-toggle="tooltip"
+									title="Xem chi tiết">
+										<button class="btn btn-info" data-title="Detail"
+											data-toggle="modal"
+											href="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/detail/${hssv.id }">
+											<span class="glyphicon glyphicon-eye-open"></span>
+										</button>
+								</span> <span id="func_btn" data-placement="top" data-toggle="tooltip"
+									title="Tạo sinh viên">
+										<button class="btn btn-success" data-title="createStudent"
+											data-toggle="modal"
+											href="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/createStudent/${hssv.id }">
+											<span class="glyphicon glyphicon-share-alt"></span>
+										</button>
+								</span>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

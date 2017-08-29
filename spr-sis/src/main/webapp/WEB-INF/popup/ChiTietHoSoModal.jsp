@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/pages/_include.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
 
 	<!-- Modal content-->
 	<div class="modal-content">
@@ -12,14 +12,15 @@
 			<h4 class="modal-title">Thêm hồ sơ</h4>
 		</div>
 		<div class="modal-body">
-			<form>
+			<form method="POST"
+				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so"
+				modelAttribute="hoSoSV">
 				<div class="form-group">
-					<label for="nganh">Ngành</label> <select name="listString"
+					<label for="nganhHocId">Ngành</label> <select name="nganhHocId"
 						class="form-control">
-						<option value="NONE"> ---Select--- </option>
+						<option value="NONE">---Select---</option>
 						<c:forEach items="${dsNganhHoc}" var="item" varStatus="count">
-
-							<option value="${count.index}" name="${item.kyHieu }">${item.tenNganh}</option>
+							<option value="${item.id}" label="${item.tenNganh }"></option>
 						</c:forEach>
 					</select>
 				</div>
@@ -33,16 +34,15 @@
 					<label for="gioiTinh">Giới tính</label>
 					<div>
 						<label class="radio-inline"> <input type="radio"
-							name="male">Male
-						</label> <label class="radio-inline"> <input type="radio"
-							name="female">Female
-						</label>
+							name="gioiTinh" value="1">Male </label> <label
+							class="radio-inline"> <input type="radio" name="gioiTinh"
+							value="0">Female </label>
 					</div>
 				</div>
 				<div>
 					<label for="ngaySinh">Ngày sinh</label>
 					<div>
-						<input type="text" class="form-control" id="ngaySinh"
+						<input type="date" class="form-control" id="ngaySinh"
 							name="ngaySinh">
 					</div>
 				</div>
@@ -73,28 +73,25 @@
 					</div>
 				</div>
 				<div>
-					<label for="hoKhauThuongTru">Hộ khẩu thường trú</label>
+					<label for="diaChi">Địa chỉ</label>
 					<div>
 						<input type="text" class="form-control" id="hoKhauThuongTru"
-							name="hoKhauThuongTru">
+							name="diaChi">
 					</div>
 				</div>
 				<div>
-					<label for="hoKhauThuongTru">Đã tốt nghiệp</label>
+					<label for="trinhDo">Đã tốt nghiệp</label>
 					<div>
 						<label class="radio-inline"> <input type="radio"
-							name="thpt">THPT
-						</label> <label class="radio-inline"> <input type="radio"
-							name="thbt">THBT
-						</label> <label class="radio-inline"> <input type="radio"
-							name="tcnghe">TC nghề
-						</label> <label class="radio-inline"> <input type="radio"
-							name="tc">TC
-						</label> <label class="radio-inline"> <input type="radio"
-							name="cd">CĐ
-						</label> <label class="radio-inline"> <input type="radio"
-							name="dh">ĐH
-						</label>
+							name="trinhDo" value="THPT">THPT </label> <label
+							class="radio-inline"> <input type="radio" name="trinhDo"
+							value="THBT">THBT </label> <label class="radio-inline"> <input
+							type="radio" name="trinhDo" value="TC Nghề">TC nghề </label> <label
+							class="radio-inline"> <input type="radio" name="trinhDo"
+							value="TC">TC </label> <label class="radio-inline"> <input
+							type="radio" name="trinhDo" value="CĐ">CĐ </label> <label
+							class="radio-inline"> <input type="radio" name="trinhDo"
+							value="ĐH">ĐH </label>
 					</div>
 				</div>
 				<div>
@@ -120,37 +117,38 @@
 				<div>
 					<label for="ngoaiNgu">Ngoại ngữ</label>
 					<div>
-						<label class="radio-inline"> <input type="radio" name="ta">Tiếng
-							Anh
+						<label class="radio-inline"> <input type="radio"
+							name="ngoaiNgu" value="Tiếng Anh">Tiếng Anh </label> <label class="radio-inline">
+							<input type="radio" name="ngoaiNgu" value="Tiếng Nga">Tiếng Nga 
 						</label> <label class="radio-inline"> <input type="radio"
-							name="tn">Tiếng Nga
-						</label> <label class="radio-inline"> <input type="radio"
-							name="tt">Tiếng Trung
-						</label> <label class="radio-inline"> <input type="radio"
-							name="tp">Tiếng Pháp
+							name="ngoaiNgu" value="Tiếng Trung">Tiếng Trung </label> <label class="radio-inline">
+							<input path="ngoaiNgu" type="radio" name="ngoaiNgu" value="Tiếng Pháp">Tiếng Pháp
+						
 						</label>
 					</div>
 				</div>
 				<div>
 					<label for="email">Email</label>
 					<div>
-						<input type="email" class="form-control" id="email" name="email">
+						<input type="email" class="form-control" id="email"
+							name="email">
 					</div>
 				</div>
 				<div>
-					<label for="sdt">Số điện thoại</label>
+					<label for="sdt" >Số điện thoại</label>
 					<div>
-						<input type="text" class="form-control" id="sdt" name="sdt">
+						<input type="text" class="form-control" id="sdt"
+							name="sdt">
 					</div>
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" id='update' class="btn btn-primary">Update</button>
+					<input type="submit" id='insert' class="btn btn-primary"
+						value="Insert"></input>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
 			</form>
-
 		</div>
 	</div>
 </div>

@@ -3,17 +3,37 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/pages/_include.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<div class="modal-dialog modal-lg">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/scripts/common.js"></script>
 
-	<!-- Modal content-->
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Thêm hồ sơ</h4>
-		</div>
-		<div class="modal-body">
-			<form method="POST"
-				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so"
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/styles/common.css">
+<title>Trang chủ</title>
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
+	th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<table width="80%" align="center">
+		<tr>
+			<td>
+				<form method="POST"
+				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/update"
 				modelAttribute="hoSoSV">
 				<div class="form-group">
 					<label for="nganhHocId">Ngành</label> <select name="nganhHocId"
@@ -27,7 +47,7 @@
 				<div class="form-group">
 					<label for="hoTen">Họ tên</label>
 					<div>
-						<input type="text" class="form-control" id="hoTen" name="hoTen">
+						<input type="text" class="form-control" id="hoTen" name="hoTen" value="${hoSoSV.hoTen }">
 					</div>
 				</div>
 				<div class="form-group">
@@ -43,40 +63,34 @@
 					<label for="ngaySinh">Ngày sinh</label>
 					<div>
 						<input type="date" class="form-control" id="ngaySinh"
-							name="ngaySinh">
+							name="ngaySinh" value="${hoSoSV.ngaySinh }">
 					</div>
 				</div>
 				<div>
 					<label for="noiSinh">Nơi sinh</label>
 					<div>
 						<input type="text" class="form-control" id="noiSinh"
-							name="noiSinh">
+							name="noiSinh"  value="${hoSoSV.noiSinh }">
 					</div>
 				</div>
 				<div>
 					<label for="cmnd">Số CMND</label>
 					<div>
-						<input type="text" class="form-control" id="cmnd" name="cmnd">
+						<input type="text" class="form-control" id="cmnd" name="cmnd" value="${hoSoSV.cmnd }">
 					</div>
 				</div>
 				<div>
 					<label for="danToc">Dân tộc</label>
 					<div>
-						<input type="text" class="form-control" id="danToc" name="danToc">
+						<input type="text" class="form-control" id="danToc" name="danToc" value="${hoSoSV.danToc }">
 					</div>
 				</div>
-				<div>
-					<label for="tonGiao">Tôn giáo</label>
-					<div>
-						<input type="text" class="form-control" id="tonGiao"
-							name="tonGiao">
-					</div>
-				</div>
+				
 				<div>
 					<label for="diaChi">Địa chỉ</label>
 					<div>
 						<input type="text" class="form-control" id="hoKhauThuongTru"
-							name="diaChi">
+							name="diaChi" value="${hoSoSV.diaChi }">
 					</div>
 				</div>
 				<div>
@@ -98,20 +112,20 @@
 					<label for="namTotNghiep">Năm tốt nghiệp</label>
 					<div>
 						<input type="text" class="form-control" id="namTotNghiep"
-							name="namTotNghiep">
+							name="namTotNghiep" value="${hoSoSV.namTotNghiep }">
 					</div>
 				</div>
 				<div>
 					<label for="noiCap">Nơi cấp</label>
 					<div>
-						<input type="text" class="form-control" id="noiCap" name="noiCap">
+						<input type="text" class="form-control" id="noiCap" name="noiCap" value="${hoSoSV.noiCap }">
 					</div>
 				</div>
 				<div>
 					<label for="chuyenNganh">Chuyên ngành (TC trở lên)</label>
 					<div>
 						<input type="text" class="form-control" id="chuyenNganh"
-							name="chuyenNganh">
+							name="chuyenNganh" value="${hoSoSV.chuyenNganh }">
 					</div>
 				</div>
 				<div>
@@ -131,24 +145,26 @@
 					<label for="email">Email</label>
 					<div>
 						<input type="email" class="form-control" id="email"
-							name="email">
+							name="email" value="${hoSoSV.email }">
 					</div>
 				</div>
 				<div>
 					<label for="sdt" >Số điện thoại</label>
 					<div>
 						<input type="text" class="form-control" id="sdt"
-							name="sdt">
+							name="sdt" value="${hoSoSV.sdt }">
 					</div>
 				</div>
 
 				<div class="modal-footer">
 					<input type="submit" id='insert' class="btn btn-primary"
-						value="Insert"></input>
+						value="Update"></input>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 				</div>
 			</form>
-		</div>
-	</div>
-</div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

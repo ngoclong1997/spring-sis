@@ -10,3 +10,11 @@ a {
 #space {
 	height : 10px;
 }
+
+#func_btn {
+	margin : 5px;
+}
+
+label {
+	padding-top : 5px;
+}

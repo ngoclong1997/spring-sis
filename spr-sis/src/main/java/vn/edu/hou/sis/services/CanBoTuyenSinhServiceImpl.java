@@ -16,11 +16,9 @@ import vn.edu.hou.sis.repositories.HoSoSVRepository;
 @Service
 public class CanBoTuyenSinhServiceImpl implements CanBoTuyenSinhService {
 
-	
 	@Resource
 	private HoSoSVRepository hoSoSVRepository;
-	
-	
+
 	@Override
 	@Transactional
 	public List<HoSoSv> findByCbTuyenSinhUsername(String username) {
@@ -30,12 +28,12 @@ public class CanBoTuyenSinhServiceImpl implements CanBoTuyenSinhService {
 	@Override
 	@Transactional
 	public HoSoSv create(HoSoSv hssv) {
-		HoSoSv createdHssv = new HoSoSv();
+		HoSoSv createdHssv = hssv;
 		return hoSoSVRepository.save(createdHssv);
 	}
 
 	@Override
-	@Transactional(rollbackFor=HoSoSVNotFound.class)
+	@Transactional(rollbackFor = HoSoSVNotFound.class)
 	public HoSoSv delete(String cmnd) throws HoSoSVNotFound {
 		HoSoSv hssv = null;
 		hssv = hoSoSVRepository.findByCmnd(cmnd);
@@ -53,6 +51,25 @@ public class CanBoTuyenSinhServiceImpl implements CanBoTuyenSinhService {
 	@Override
 	public List<NganhHoc> findAllNganhHoc() {
 		return hoSoSVRepository.findAllNganhHoc();
+	}
+
+	@Override
+	public HoSoSv findById(Integer id) {
+		return hoSoSVRepository.findById(id);
+	}
+
+	@Override
+	public void update(HoSoSv hoSoSV) throws HoSoSVNotFound {
+		HoSoSv hssv = null;
+		hssv = hoSoSVRepository.findById(hoSoSV.getId());
+		if (hssv == null)
+			throw new HoSoSVNotFound();
+		hoSoSVRepository.updateHoSoById(hoSoSV.getCbTuyenSinhUsername(), hoSoSV.getChuyenNganh(), hoSoSV.getCmnd(),
+				hoSoSV.getDanToc(), hoSoSV.getDiaChi(), hoSoSV.getEmail(), hoSoSV.getGioiTinh(),
+				hoSoSV.getHoKhauThuongTru(), hoSoSV.getHoTen(), hoSoSV.getIsDeleted(), hoSoSV.getNamTotNghiep(),
+				hoSoSV.getNganhHocId(), hoSoSV.getNgayLap(), hoSoSV.getNgaySinh(), hoSoSV.getNgoaiNgu(),
+				hoSoSV.getNoiCap(), hoSoSV.getNoiSinh(), hoSoSV.getSdt(), hoSoSV.getTrinhDo(), hoSoSV.getId());
+
 	}
 
 }

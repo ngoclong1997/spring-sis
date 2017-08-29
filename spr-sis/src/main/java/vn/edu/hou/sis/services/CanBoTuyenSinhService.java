@@ -12,4 +12,6 @@ public interface CanBoTuyenSinhService {
 	public HoSoSv delete(String cmnd) throws HoSoSVNotFound;
 	public List<HoSoSv> findAll();
 	public List<NganhHoc> findAllNganhHoc();
+	public HoSoSv findById(Integer id);
+	public void update(HoSoSv hoSoSV) throws HoSoSVNotFound;
 }
