@@ -30,37 +30,53 @@
 		<tr id="space"></tr>
 		<tr align="left">
 			<td width="10%"></td>
-			<td width="80%"><c:if test="${nganhHoc.id != null}">
+			<td width="80%"><c:if test="${khoaHoc.id != null}">
 					<h2>
 						Chỉnh Sửa
-						<h2>
-				</c:if> <c:if test="${nganhHoc.id == null}">
+						</h2>
+				</c:if> <c:if test="${khoaHoc.id == null}">
 					<h2>
 						Thêm Mới
-						<h2>
+						</h2>
 				</c:if></td>
 			<td width="10%"></td>
 		</tr>
 		<tr>
-			<form method="POST" modelAttribute="nganhHoc"
-				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-nganh-hoc/save">
-				<input type="hidden" name="id" value="${nganhHoc.id}"><input
-					type="hidden" name="isDeleted" value="${nganhHoc.isDeleted}">
+			<form method="POST" modelAttribute="khoaHoc"
+				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-khoa-hoc/save">
+				<input type="hidden" name="id" value="${khoaHoc.id}">
+				<input type="hidden" name="isDeleted" value="${khoaHoc.isDeleted}">
 				<table style="width: 50%; border: 1px solid; margin: 0 auto;">
 					<tr>
-						<td>Ten Nganh</td>
-						<td><input path="tenNganh" name="tenNganh"
-							value="${nganhHoc.tenNganh}" /></td>
+						<td>Tên Khóa Hoc</td>
+						<td><input path="tenNganh" name="tenKhoaHoc"
+							value="${khoaHoc.tenKhoaHoc}" /></td>
 						<td><errors path="tenNganh" class="error-message" /></td>
 					</tr>
 
 					<tr>
-						<td>Ky Hieu</td>
-						<td><input path="kyHieu" name="kyHieu"
-							value="${nganhHoc.kyHieu}" /></td>
+						<td>Năm Bắt Đầu</td>
+						<td><input path="kyHieu" name="namBatDau"
+							value="${khoaHoc.namBatDau}" /></td>
 						<td><errors path="kyHieu" class="error-message" /></td>
 					</tr>
-
+					<tr>
+						<td>Năm Kết Thúc</td>
+						<td><input path="kyHieu" name="namKetThuc"
+							value="${khoaHoc.namKetThuc}" /></td>
+						<td><errors path="kyHieu" class="error-message" /></td>
+					</tr>
+					<tr>
+						<td>Ngành Học</td>
+						<td>
+						<select name="nganhHocId">
+							<c:forEach items="${listNganh}" var = "temp">
+								<option value="${temp.id}">${temp.tenNganh}</option>
+							</c:forEach>
+						</select>
+						</td>
+						<td><errors path="kyHieu" class="error-message" /></td>
+					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<td><input type="submit" value="Submit" /> <input

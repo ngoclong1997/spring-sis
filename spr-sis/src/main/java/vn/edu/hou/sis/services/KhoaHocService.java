@@ -19,4 +19,6 @@ public interface KhoaHocService {
 	public KhoaHoc save(KhoaHoc khoaHoc);
 
 	public boolean isDeleted(String id);
+	
+	public boolean isExist(KhoaHoc khoaHoc);
 }

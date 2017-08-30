@@ -1,5 +1,6 @@
 package vn.edu.hou.sis.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,12 +28,14 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 		try {
 			int iId = Integer.parseInt(id);
 			khoaHoc = khoaHocRepository.findKhoaHocById(iId);
+			if (khoaHoc == null)
+				throw new KhoaHocNotFound();
+			khoaHoc.setIsDeleted(1);
+			khoaHocRepository.save(khoaHoc);
 		} catch (Exception e) {
 		}
-		if (khoaHoc == null)
-			throw new KhoaHocNotFound();
-		khoaHoc.setIsDeleted(1);
-		return khoaHocRepository.save(khoaHoc);
+		
+		return null;
 	}
 
 	@Override
@@ -54,13 +57,12 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 
 	@Override
 	public List<KhoaHoc> findAll() {
-//		System.out.println(khoaHocRepository.findKhoaHocByIsdeleted().size());
 		return khoaHocRepository.findKhoaHocByIsdeleted();
 	}
 
 	@Override
 	public KhoaHoc save(KhoaHoc khoaHoc) {
-		return khoaHocRepository.saveAndFlush(khoaHoc);
+		return khoaHocRepository.save(khoaHoc);
 	}
 
 	@Override
@@ -76,6 +78,13 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 		if (temp == null)
 			return true;
 		return temp.getIsDeleted() == 1;
+	}
+
+	@Override
+	public boolean isExist(KhoaHoc khoaHoc) {
+		List<KhoaHoc> list = new ArrayList<>();
+		list = khoaHocRepository.checkExist(khoaHoc.getNamBatDau(), khoaHoc.getNganhHocId());
+		return list.size() != 0;
 	}
 
 }

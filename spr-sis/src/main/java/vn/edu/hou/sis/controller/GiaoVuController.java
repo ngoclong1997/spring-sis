@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import vn.edu.hou.sis.entities.KhoaHoc;
+import vn.edu.hou.sis.entities.LopHoc;
 import vn.edu.hou.sis.entities.NganhHoc;
 import vn.edu.hou.sis.exceptions.NganhHocNotFound;
 import vn.edu.hou.sis.services.KhoaHocService;
+import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
 
 @Controller
@@ -24,6 +27,8 @@ public class GiaoVuController {
 	private NganhHocService nganhHocService;
 	@Autowired
 	private KhoaHocService khoaHocServices;
+	@Autowired
+	private LopHocService lopHocService;
 	
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
 	public String giaoVuForm(Model model, Principal principal) {
@@ -39,6 +44,9 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc")
 	public String nghiepVuQuanLyLopHoc(Model model, Principal principal) {
+		model.addAttribute("listNganh", nganhHocService.findAll());
+		model.addAttribute("listKhoaHoc", khoaHocServices.findAll());
+		model.addAttribute("listLop", lopHocService.findAll());
 		return "QuanLyLopHocPage";
 	}
 
@@ -82,7 +90,63 @@ public class GiaoVuController {
 		return "redirect:/nghiep-vu/quan-ly-nganh-hoc"; 
 	}
 	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-khoa-hoc/add")
+	public String addKhoaHoc(Model model) {
+		KhoaHoc khoaHoc = new KhoaHoc();
+		model.addAttribute("khoaHoc", khoaHoc);
+		model.addAttribute("listNganh", nganhHocService.findAll());
+		return "addOrEditItem/AddOrEditKhoaHoc";
+	}
 	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-khoa-hoc/save", method = RequestMethod.POST)
+	public String saveNganhHoc(Model model, @ModelAttribute("khoaHoc") KhoaHoc khoaHoc) {
+		if(khoaHoc.getId() == null && khoaHocServices.isExist(khoaHoc)){
+			model.addAttribute("msg", "Khóa Học Đã Tồn Tại!");
+			return "ErrorDatabase";
+		}
+		khoaHocServices.save(khoaHoc);
+		return "redirect:/nghiep-vu/quan-ly-khoa-hoc"; 
+	}
 	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-khoa-hoc/edit", method = RequestMethod.GET)
+	public String editKhoaHoc(Model model, @RequestParam("id") String id) {
+		if(khoaHocServices.isDeleted(id)) return "404NotFoundPage";
+		KhoaHoc khoaHoc = khoaHocServices.findById(id);
+		model.addAttribute("khoaHoc", khoaHoc);
+		model.addAttribute("listNganh", nganhHocService.findAll());
+		return "addOrEditItem/AddOrEditKhoaHoc";
+	}
+	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc/add")
+	public String addLopHoc(Model model) {
+		LopHoc lopHoc = new LopHoc();
+		model.addAttribute("lopHoc", lopHoc);
+		model.addAttribute("listNganh", nganhHocService.findAll());
+		return "addOrEditItem/AddOrEditLopHoc";
+	}
+	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc/edit", method = RequestMethod.GET)
+	public String editLopHoc(Model model, @RequestParam("id") String id) {
+		if(lopHocService.isDeleted(id)) return "404NotFoundPage";
+		LopHoc lopHoc = lopHocService.findById(id);
+		model.addAttribute("lopHoc", lopHoc);
+		model.addAttribute("listNganh", nganhHocService.findAll());
+		return "addOrEditItem/AddOrEditLopHoc";
+	}
+	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc/save", method = RequestMethod.POST)
+	public String saveLopHoc(Model model, @ModelAttribute("lopHoc") LopHoc lopHoc) {
+		if(lopHoc.getId() == null && lopHocService.isExist(lopHoc)) {
+			model.addAttribute("msg", "Lớp Học Đã Tồn Tại!");
+			return "ErrorDatabase";
+		}
+		lopHocService.save(lopHoc);
+		return "redirect:/nghiep-vu/quan-ly-lop-hoc"; 
+	}
+	
+	private String genCode(LopHoc lopHoc) {
+		String code = "";
+		return code;
+	}
 	
 }
