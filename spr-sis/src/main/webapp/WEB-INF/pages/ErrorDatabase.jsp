@@ -14,7 +14,7 @@
 	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/styles/common.css">
-<title>No permission</title>
+<title>Lỗi</title>
 </head>
 <body>
 	<table width="80%" align="center">

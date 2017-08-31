@@ -39,9 +39,8 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 	}
 
 	@Override
-	public KhoaHoc findByTenKhoaHoc(String tenKhoa) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<KhoaHoc> findByTenKhoaHoc(String tenKhoa) {
+		return khoaHocRepository.findKhoaHocByTenKhoaHoc(tenKhoa);
 	}
 
 	@Override
@@ -85,6 +84,18 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 		List<KhoaHoc> list = new ArrayList<>();
 		list = khoaHocRepository.checkExist(khoaHoc.getNamBatDau(), khoaHoc.getNganhHocId());
 		return list.size() != 0;
+	}
+
+	@Override
+	public List<KhoaHoc> findKhoaHocByNganhHocId(String nganhHocId) {
+		List<KhoaHoc> list = null;
+		try {
+			int iId = Integer.parseInt(nganhHocId);
+			list = khoaHocRepository.findKhoaHocByNganhHocId(iId);
+		} catch (Exception e) {
+			return null;
+		}
+		return list;
 	}
 
 }

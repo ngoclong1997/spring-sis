@@ -25,3 +25,8 @@ insert into ho_so_sv(ho_ten, ngay_sinh, gioi_tinh, dia_chi, email, sdt, cmnd, no
 values('Nguyễn Văn D', '1997-12-20', 1, 'Thái Bình', 'nvd1997@gmail.com', '09039291823', '324521234567', 'Thái Bình', 'Kinh', 'Thanh Xuân', 'Không', 'ngoclong_1997', '4', '2017-08-28', 0, 'Trung Cấp', '2017', 'Thái Bình', 'Xây dựng');
 
 
+insert into khoa_hoc(nam_bat_dau, nam_ket_thuc, ten_khoa_hoc, nganh_hoc_id) values(2015, 2019, 'Kỹ Sư', 1);
+insert into khoa_hoc(nam_bat_dau, nam_ket_thuc, ten_khoa_hoc, nganh_hoc_id) values(2015, 2019, 'Hướng dẫn viên', 2);
+insert into khoa_hoc(nam_bat_dau, nam_ket_thuc, ten_khoa_hoc, nganh_hoc_id) values(2015, 2019, 'NTK', 3);
+insert into khoa_hoc(nam_bat_dau, nam_ket_thuc, ten_khoa_hoc, nganh_hoc_id) values(2015, 2019, 'Phiên Dịch viên', 4);
+insert into khoa_hoc(nam_bat_dau, nam_ket_thuc, ten_khoa_hoc, nganh_hoc_id) values(2015, 2019, 'Hiến Máu', 5);

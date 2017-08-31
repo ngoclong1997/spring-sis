@@ -15,14 +15,12 @@
 	href="${pageContext.request.contextPath}/styles/common.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/styles/table.css">
+<script 
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" 
+    th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
 <title>Trang chủ</title>
-<script type="text/javascript">
-	function loadKhoaHoc(){
-		var xmlhttp = new XMLHttpRequest();
-		xmlhttp.open("GET", "loadKhoaHoc", true);
-		
-	}
-</script>
+
+	
 </head>
 <body>
 	<table width="80%" align="center">
@@ -53,30 +51,63 @@
 				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-lop-hoc/save">
 				<input type="hidden" name="id" value="${lopHoc.id}">
 				<input type="hidden" name="isDeleted" value="${lopHoc.isDeleted}">
-				<input type="hidden" name="code" value="${lopHoc.code}">
 				<table style="width: 50%; border: 1px solid; margin: 0 auto;">
 					<tr>
 						<td>Ngành Học</td>
 						<td>
-						<select name="nganhHocId">
+						<select name="nganhHocId" id = "nganhHocId" onchange = "getKhoaHoc()">
 							<c:forEach items="${listNganh}" var = "temp">
 								<option value="${temp.id}">${temp.tenNganh}</option>
 							</c:forEach>
 						</select>
 						</td>
-						<td><errors path="kyHieu" class="error-message" /></td>
 					</tr>
 					<tr>
 						<td>Khóa Học</td>
 						<td>
-							<div id = "khoahoc"></div>
+						     <select id="khoaHocId" path="khoaHocId" name = khoaHocId>
+							</select>
+							<script type="text/javascript">
+								function getKhoaHoc(){
+									var idNganh = $("#nganhHocId").val(); 
+						// 			alert(idNganh);
+									$.ajax({
+										type:'GET',
+										data : {nganhHocId: idNganh},
+										url: '${pageContext.request.contextPath}/nghiep-vu/quan-ly-lop-hoc/khoa-hoc',
+										success: function(res){
+											var htm = "";
+											alert(idNganh);		
+											for(var i = 0; i < res.length; ++i){
+											htm += "<option value = \"" + res[i].id + "\">" + res[i].tenKhoaHoc + "</option>\"";
+											}
+																	
+											$('#khoaHocId').html(htm);
+										},
+										error: function(){
+											alert("???");
+										}
+									})
+								}
+							</script>
 						</td>
-						<td><errors path="kyHieu" class="error-message" /></td>
+					</tr>
+					<tr>
+						<td>Đối Tượng Sinh Viên</td>
+						<td>
+						<select name="code" id = "code">
+								<option value="1">THPT</option>
+								<option value="2">TC</option>
+								<option value="3">CĐ</option>
+								<option value="4">ĐH</option>
+						</select>
+						</td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
 						<td><input type="submit" value="Submit" /> <input
 							type="reset" value="Reset" /></td>
+					
 					</tr>
 				</table>
 

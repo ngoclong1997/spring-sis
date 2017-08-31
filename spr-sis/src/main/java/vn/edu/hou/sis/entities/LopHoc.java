@@ -15,12 +15,13 @@ public class LopHoc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String code;
 
 	@Column(name="is_deleted")
-	private Integer isDeleted;
+	private Integer isDeleted = 0;
 
 	@Column(name="khoa_hoc_id")
 	private Integer khoaHocId;

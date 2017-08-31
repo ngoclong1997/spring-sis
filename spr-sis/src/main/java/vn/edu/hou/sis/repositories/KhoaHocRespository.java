@@ -16,4 +16,10 @@ public interface KhoaHocRespository extends JpaRepository<KhoaHoc, Long>{
 	
 	@Query("select k from KhoaHoc k where k.namBatDau = ?1 and k.nganhHocId = ?2 and k.isDeleted = 0")
 	public List<KhoaHoc> checkExist(Integer namBatDau, Integer nganhHocId);
+	
+	@Query("select k from KhoaHoc k where k.nganhHocId = ?1 and k.isDeleted = 0")
+	public List<KhoaHoc> findKhoaHocByNganhHocId(Integer nganhHocId);
+	
+	@Query("select k from KhoaHoc k where k.tenKhoaHoc = ?1 and k.isDeleted = 0")
+	public List<KhoaHoc> findKhoaHocByTenKhoaHoc(String tenKhoaHoc);
 }
