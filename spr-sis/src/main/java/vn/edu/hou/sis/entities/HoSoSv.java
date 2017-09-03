@@ -1,6 +1,8 @@
 package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,11 +19,18 @@ public class HoSoSv implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private Integer id;
 
 	@Column(name="cb_tuyen_sinh_username")
 	private String cbTuyenSinhUsername;
+//<<<<<<< HEAD
 
+//=======
+	
+	@Column(name="cmnd")
+//>>>>>>> origin/longnn
 	private String cmnd;
 
 	@Column(name="dan_toc")
@@ -30,6 +39,7 @@ public class HoSoSv implements Serializable {
 	@Column(name="dia_chi")
 	private String diaChi;
 
+	@Column(name="email")
 	private String email;
 
 	@Column(name="gioi_tinh")
@@ -73,29 +83,29 @@ public class HoSoSv implements Serializable {
 	@Column(name="noi_sinh")
 	private String noiSinh;
 
+	@Column(name="sdt")
 	private String sdt;
 
-	public HoSoSv() {
-	}
+	
 
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getCbTuyenSinhId() {
-		return this.cbTuyenSinhUsername;
+	public String getCbTuyenSinhUsername() {
+		return cbTuyenSinhUsername;
 	}
 
-	public void setCbTuyenSinhId(String cbTuyenSinhUsername) {
+	public void setCbTuyenSinhUsername(String cbTuyenSinhUsername) {
 		this.cbTuyenSinhUsername = cbTuyenSinhUsername;
 	}
 
 	public String getCmnd() {
-		return this.cmnd;
+		return cmnd;
 	}
 
 	public void setCmnd(String cmnd) {
@@ -103,7 +113,7 @@ public class HoSoSv implements Serializable {
 	}
 
 	public String getDanToc() {
-		return this.danToc;
+		return danToc;
 	}
 
 	public void setDanToc(String danToc) {
@@ -111,7 +121,7 @@ public class HoSoSv implements Serializable {
 	}
 
 	public String getDiaChi() {
-		return this.diaChi;
+		return diaChi;
 	}
 
 	public void setDiaChi(String diaChi) {
@@ -119,7 +129,7 @@ public class HoSoSv implements Serializable {
 	}
 
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
 
 	public void setEmail(String email) {
@@ -127,95 +137,23 @@ public class HoSoSv implements Serializable {
 	}
 
 	public Integer getGioiTinh() {
-		return this.gioiTinh;
+		return gioiTinh;
 	}
 
 	public void setGioiTinh(Integer gioiTinh) {
 		this.gioiTinh = gioiTinh;
 	}
 
-	public String getHoKhauThuongTru() {
-		return this.hoKhauThuongTru;
-	}
-
-	public void setHoKhauThuongTru(String hoKhauThuongTru) {
-		this.hoKhauThuongTru = hoKhauThuongTru;
-	}
-
-	public String getHoTen() {
-		return this.hoTen;
-	}
-
-	public void setHoTen(String hoTen) {
-		this.hoTen = hoTen;
-	}
-
-	public Integer getNganhHocId() {
-		return this.nganhHocId;
-	}
-
-	public void setNganhHocId(Integer nganhHocId) {
-		this.nganhHocId = nganhHocId;
-	}
-
-	public Date getNgayLap() {
-		return this.ngayLap;
-	}
-
-	public void setNgayLap(Date ngayLap) {
-		this.ngayLap = ngayLap;
-	}
-
-	public Date getNgaySinh() {
-		return this.ngaySinh;
-	}
-
-	public void setNgaySinh(Date ngaySinh) {
-		this.ngaySinh = ngaySinh;
-	}
-
-	public String getNgoaiNgu() {
-		return this.ngoaiNgu;
-	}
-
-	public void setNgoaiNgu(String ngoaiNgu) {
-		this.ngoaiNgu = ngoaiNgu;
-	}
-
-	public String getNoiSinh() {
-		return this.noiSinh;
-	}
-
-	public void setNoiSinh(String noiSinh) {
-		this.noiSinh = noiSinh;
-	}
-
-	public String getSdt() {
-		return this.sdt;
-	}
-
-	public void setSdt(String sdt) {
-		this.sdt = sdt;
-	}
-	
 	public String getChuyenNganh() {
-		return this.chuyenNganh;
+		return chuyenNganh;
 	}
 
 	public void setChuyenNganh(String chuyenNganh) {
 		this.chuyenNganh = chuyenNganh;
 	}
 
-	public Integer getIsDeleted() {
-		return this.isDeleted;
-	}
-
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
 	public Integer getNamTotNghiep() {
-		return this.namTotNghiep;
+		return namTotNghiep;
 	}
 
 	public void setNamTotNghiep(Integer namTotNghiep) {
@@ -223,7 +161,7 @@ public class HoSoSv implements Serializable {
 	}
 
 	public String getNoiCap() {
-		return this.noiCap;
+		return noiCap;
 	}
 
 	public void setNoiCap(String noiCap) {
@@ -231,12 +169,107 @@ public class HoSoSv implements Serializable {
 	}
 
 	public String getTrinhDo() {
-		return this.trinhDo;
+		return trinhDo;
 	}
 
 	public void setTrinhDo(String trinhDo) {
 		this.trinhDo = trinhDo;
 	}
+
+	public String getHoKhauThuongTru() {
+		return hoKhauThuongTru;
+	}
+
+	public void setHoKhauThuongTru(String hoKhauThuongTru) {
+		this.hoKhauThuongTru = hoKhauThuongTru;
+	}
+
+	public String getHoTen() {
+		return hoTen;
+	}
+
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
+	}
+
+	public Integer getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Integer getNganhHocId() {
+		return nganhHocId;
+	}
+
+	public void setNganhHocId(Integer nganhHocId) {
+		this.nganhHocId = nganhHocId;
+	}
+
+	public Date getNgayLap() {
+		return ngayLap;
+	}
+
+	public void setNgayLap(Date ngayLap) {
+		this.ngayLap = ngayLap;
+	}
+
+	public String getNgoaiNgu() {
+		return ngoaiNgu;
+	}
+
+	public void setNgoaiNgu(String ngoaiNgu) {
+		this.ngoaiNgu = ngoaiNgu;
+	}
+
+	public String getNoiSinh() {
+		return noiSinh;
+	}
+
+	public void setNoiSinh(String noiSinh) {
+		this.noiSinh = noiSinh;
+	}
+
+	public String getSdt() {
+		return sdt;
+	}
+
+	public void setSdt(String sdt) {
+		this.sdt = sdt;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Date getNgaySinh() {
+		return ngaySinh;
+	}
+
+	public void setNgaySinh(String ngaySinh) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.ngaySinh = sdf.parse(ngaySinh);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "HoSoSv [id=" + id + ", cbTuyenSinhUsername=" + cbTuyenSinhUsername + ", cmnd=" + cmnd + ", danToc="
+				+ danToc + ", diaChi=" + diaChi + ", email=" + email + ", gioiTinh=" + gioiTinh + ", chuyenNganh="
+				+ chuyenNganh + ", namTotNghiep=" + namTotNghiep + ", noiCap=" + noiCap + ", trinhDo=" + trinhDo
+				+ ", hoKhauThuongTru=" + hoKhauThuongTru + ", hoTen=" + hoTen + ", isDeleted=" + isDeleted
+				+ ", nganhHocId=" + nganhHocId + ", ngayLap=" + ngayLap + ", ngaySinh=" + ngaySinh + ", ngoaiNgu="
+				+ ngoaiNgu + ", noiSinh=" + noiSinh + ", sdt=" + sdt + "]";
+//>>>>>>> origin/longnn
+	}
+	
+	
 
 
 }

@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	public List<String> getUserRoles(String username);
 	@Query("SELECT s from SinhVien s, User u where u.username = ?1 and u.id = s.userId and u.isDeleted = 0")
 	public SinhVien findSinhVienByUsername(String username);
+	@Query("UPDATE User u set u.isDeleted = 1 where u.username = ?1")
+	public User delete(String username);
 }
+

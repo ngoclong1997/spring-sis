@@ -1,14 +1,19 @@
 package vn.edu.hou.sis.initializer;
 
 import java.io.IOException;
+
 import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,6 +33,11 @@ import vn.edu.hou.sis.services.DBAuthenticationService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
+	
+	@Autowired
+	DataSource dataSource;
 
 	@Autowired
 	DBAuthenticationService myDBAauthenticationService;
@@ -39,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		http.csrf().disable();
 		
 		http.authorizeRequests().antMatchers("/", "/home", "/login", "/logout").permitAll();
@@ -63,6 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and().logout().logoutUrl("/log-out").logoutSuccessUrl("/login");
 	}
 	
+
+	
 	public AuthenticationSuccessHandler getAuthenticationSuccessHandler() {
 		AuthenticationSuccessHandler authenticationSuccessHandler = new AuthenticationSuccessHandler() {
 			
@@ -84,7 +97,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		        Set<String> authorities = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 		        String targetUrl = "";
 		        for (String s : authorities) {
-		        	System.out.println(s);
+		        	logger.debug(authUser.getUsername() + " logged in as role " + s);
 		        }
 		        if (authorities.contains("ROLE_GIAO_VU")) {
 		        	targetUrl = "/giao-vu";

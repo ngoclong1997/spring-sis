@@ -26,6 +26,7 @@ import vn.edu.hou.sis.services.NganhHocService;
 @Controller
 public class GiaoVuController {
 
+
 	@Autowired
 	private NganhHocService nganhHocService;
 	@Autowired

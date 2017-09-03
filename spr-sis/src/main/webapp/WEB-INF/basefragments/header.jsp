@@ -9,3 +9,12 @@
 		</div>
 	</td>
 </tr>
+<tr>
+	<td colspan="3" align="right">
+		Language : <a href="?lang=en"><spring:message
+					code="lang.en"></spring:message></a> | <a
+				href="?lang=vi"><spring:message
+					code="lang.vi"></spring:message></a> <br /> <br />
+	</td>
+	
+</tr>

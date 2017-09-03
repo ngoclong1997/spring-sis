@@ -29,7 +29,7 @@
 		<tr>
 			<td width="20%"></td>
 			<td width="60%">
-				<h1>403 Error, No Permission</h1>
+				<h1>Unknown Error</h1>
 
 			</td>
 			<td width="20%"></td>

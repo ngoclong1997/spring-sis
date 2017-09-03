@@ -28,6 +28,7 @@
 			</td>
 		</tr>
 		<tr id="space"></tr>
+		<tr id = "space"></tr>
 		<tr align="left">
 			<td width="10%"></td>
 			<td width="80%"><a href="quan-ly-lop-hoc/add">Thêm mới
@@ -35,6 +36,7 @@
 
 			<td width="10%"></td>
 		</tr>
+<!-- <<<<<<< HEAD -->
 		<tr id="space"></tr>
 		<table class="context" style="width: 80%">
 			<thead>
@@ -63,6 +65,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<tr id = "space"></tr>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>
 
