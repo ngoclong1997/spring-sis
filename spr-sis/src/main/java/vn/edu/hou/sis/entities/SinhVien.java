@@ -14,11 +14,12 @@ import javax.persistence.*;
 public class SinhVien implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Id
 	private Integer id;
 
-	@Column(name="giao_vu_id")
-	private Integer giaoVuId;
+	@Column(name="cbts_username")
+	private String canBoTuyenSinhUsername;
 
 	@Column(name="is_deleted")
 	private Integer isDeleted;
@@ -35,8 +36,8 @@ public class SinhVien implements Serializable {
 	@Column(name="trang_thai_id")
 	private Integer trangThaiId;
 
-	@Column(name="user_id")
-	private Integer userId;
+	@Column(name="username")
+	private String username;
 
 	public SinhVien() {
 	}
@@ -49,12 +50,12 @@ public class SinhVien implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getGiaoVuId() {
-		return this.giaoVuId;
+	public String getCanBoTuyenSinhUsername() {
+		return this.canBoTuyenSinhUsername;
 	}
 
-	public void setGiaoVuId(Integer giaoVuId) {
-		this.giaoVuId = giaoVuId;
+	public void setCanBoTuyenSinhUsername(String canBoTuyenSinhUsername) {
+		this.canBoTuyenSinhUsername = canBoTuyenSinhUsername;
 	}
 
 	public Integer getIsDeleted() {
@@ -97,12 +98,12 @@ public class SinhVien implements Serializable {
 		this.trangThaiId = trangThaiId;
 	}
 
-	public Integer getUserId() {
-		return this.userId;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

@@ -5,15 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/scripts/common.js"></script>
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/common.css">
-<title>Trang chủ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><jsp:include
+	page="/WEB-INF/resources/resource.jsp" /><title>Tạo sinh viên
+	bị lỗi</title>
 </head>
 <body>
 	<table width="80%" align="center">
@@ -25,16 +19,23 @@
 				</div>
 			</td>
 		</tr>
-		<tr id = "space"></tr>
-		<tr align="left">
-			<td width="10%"></td>
-			<td width="80%">
-				<button>Thêm mới khóa học</button>
+		<tr>
+			<td width="20%"></td>
+			<td width="60%" align="center">
+				<h2 style="color: red;">Tạo sinh viên bị lỗi</h2>
+				<p>
+					<b>Thông tin:</b> ${info }
+				</p> <c:forEach items="${nullProperties }" var="property"
+					varStatus="status">
+					${status.count } - ${property }
+					<br />
+				</c:forEach>
+				<div id="space"></div> <a class="btn btn-primary"
+				href="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen">
+					Quay lại</a>
 			</td>
-				
-			<td width="10%"></td>
+			<td width="20%"></td>
 		</tr>
-		<tr id = "space"></tr>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>
 

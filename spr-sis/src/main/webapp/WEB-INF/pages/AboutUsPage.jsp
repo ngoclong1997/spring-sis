@@ -6,15 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/scripts/common.js"></script>
-
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/common.css">
-<title>Trang chủ</title>
+<jsp:include page="/WEB-INF/resources/resource.jsp" />
+<title>About us</title>
 </head>
 <body>
 	<table width="80%" align="center">

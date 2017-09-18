@@ -6,15 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/scripts/common.js"></script>
-
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/common.css">
-<title>No permission</title>
+<jsp:include page="/WEB-INF/resources/resource.jsp" />
+<title>Unknow Error</title>
 </head>
 <body>
 	<table width="80%" align="center">

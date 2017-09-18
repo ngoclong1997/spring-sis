@@ -10,7 +10,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(name = "cmnd")
@@ -57,10 +57,9 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(int id, String cmnd, String diaChi, String email, int gioiTinh, String hoTen, int isDeleted,
+	public User(String cmnd, String diaChi, String email, int gioiTinh, String hoTen, int isDeleted,
 			Date ngaySinh, String noiLamViec, String password, String sdt1, String sdt2, String username) {
 		super();
-		this.id = id;
 		this.cmnd = cmnd;
 		this.diaChi = diaChi;
 		this.email = email;

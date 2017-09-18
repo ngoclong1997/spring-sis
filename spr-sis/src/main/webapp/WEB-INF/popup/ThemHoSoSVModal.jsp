@@ -83,15 +83,15 @@
 					<label for="trinhDo">Đã tốt nghiệp</label>
 					<div>
 						<label class="radio-inline"> <input type="radio"
-							name="trinhDo" value="THPT">THPT </label> <label
+							name="trinhDo" value="1">THPT </label> <label
 							class="radio-inline"> <input type="radio" name="trinhDo"
-							value="THBT">THBT </label> <label class="radio-inline"> <input
-							type="radio" name="trinhDo" value="TC Nghề">TC nghề </label> <label
+							value="2">THBT </label> <label class="radio-inline"> <input
+							type="radio" name="trinhDo" value="3">TC nghề </label> <label
 							class="radio-inline"> <input type="radio" name="trinhDo"
-							value="TC">TC </label> <label class="radio-inline"> <input
-							type="radio" name="trinhDo" value="CĐ">CĐ </label> <label
+							value="4">TC </label> <label class="radio-inline"> <input
+							type="radio" name="trinhDo" value="5">CĐ </label> <label
 							class="radio-inline"> <input type="radio" name="trinhDo"
-							value="ĐH">ĐH </label>
+							value="6">ĐH </label>
 					</div>
 				</div>
 				<div>
@@ -146,7 +146,6 @@
 					<input type="submit" id='insert' class="btn btn-primary"
 						value="Insert"></input>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
 				</div>
 			</form>
 		</div>
