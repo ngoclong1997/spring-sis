@@ -9,6 +9,7 @@
       <li><a href="${pageContext.request.contextPath }/nghiep-vu/quan-ly-nganh-hoc">Quản lý ngành học</a></li>
       <li><a href="${pageContext.request.contextPath }/nghiep-vu/quan-ly-khoa-hoc">Quản lý khóa học</a>
       <li><a href="${pageContext.request.contextPath }/nghiep-vu/quan-ly-lop-hoc">Quản lý lớp học</a>
+      <li><a href="${pageContext.request.contextPath }/nghiep-vu/quan-ly-sinh-vien">Quản lý sinh viên</a>
     </ul>
   </li>
   <li><a href="${pageContext.request.contextPath }/user-info">Thông tin cá nhân</a></li>

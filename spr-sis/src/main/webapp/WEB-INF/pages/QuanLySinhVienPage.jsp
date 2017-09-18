@@ -27,7 +27,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-<title>Quản Lý Khóa Học</title>
+<title>Quản Lý Sinh Viên</title>
 </head>
 <body>
 	<table width="80%" align="center">
@@ -43,50 +43,47 @@
 		<tr id = "space"></tr>
 		<tr align="left">
 			<td width="10%"></td>
-			<td width="80%"><a href="quan-ly-khoa-hoc/add">Thêm mới
-					khóa học</a></td>
-
+			<td width="80%"></td>
 			<td width="10%"></td>
 		</tr>
 		<tr id="space"></tr>
-		<table class="context" style="width: 80%">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Tên Khóa Học</th>
-					<th>Năm Bắt Đầu</th>
-					<th>Năm Kết Thúc</th>
-					<th>Ngành Học</th>
-					<th>Thao Tác</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${listKhoaHoc}" var="temp">
+		<table class = "context" style="width: 80%">
+				<thead>
 					<tr>
-						<td>${temp.id}</td>
-						<td>${temp.tenKhoaHoc}</td>
-						<td>${temp.namBatDau}</td>
-						<td>${temp.namKetThuc}</td>
-						<td><c:forEach items="${listNganhHoc}" var="nganh">
-							<c:if test="${nganh.id == temp.nganhHocId }">${nganh.tenNganh}</c:if>
-						</c:forEach></td>
-						<%-- 							<td>${temp.isDeleted}</td> --%>
-						<td>
-<!-- 						<span id="func_btn" data-placement="top" data-toggle="tooltip" title="Sửa hồ sơ"> -->
-							<a href="quan-ly-khoa-hoc/edit?id=${temp.id}"><span class="glyphicon glyphicon-pencil"></span></a>
-<!-- 							</span> -->
-						 
-<!-- 						<span id="func_btn" data-placement="top" data-toggle="tooltip" title="Sửa hồ sơ"> -->
-							<a	href="quan-ly-khoa-hoc/delete?id=${temp.id}"><span class="glyphicon glyphicon-trash"></span></a>
-<!-- 							</span> -->
-						 </td>
+						<th>Họ Tên</th>
+						<th>Ngày sinh</th>
+						<th>Giới tính</th>
+						<th>Địa chỉ</th>
+						<th>Email</th>
+						<th>Mã lớp</th>
+						<th>Tên ngành</th>
+						<th>Trạng thái</th>
+						<th>Thao tác</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach items="${listSinhVien}" var="temp">
+						<tr>
+							<td>${temp.hoTen}</td>
+							<td>${temp.ngaySinh}</td>
+							<c:choose>
+								<c:when test="${temp.gioiTinh == '0'}"><td>Nam</td></c:when>
+								<c:when test="${temp.gioiTinh == '1'}"><td>Nữ</td></c:when>
+							</c:choose>
+							<td>${temp.diaChi}</td>
+							<td>${temp.email}</td>
+							<td>${temp.code}</td>
+							<td>${temp.tenNganh}</td>
+							<td>${temp.trangThai}</td>
+							<td><a href="quan-ly-sinh-vien/edit?id=${temp.svid}">Sua</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		<tr id = "space"></tr>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>
-
+	
+	
 </body>
 </html>

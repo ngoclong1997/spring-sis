@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import vn.edu.hou.sis.entities.KhoaHoc;
 import vn.edu.hou.sis.entities.LopHoc;
 import vn.edu.hou.sis.entities.NganhHoc;
+import vn.edu.hou.sis.entities.SinhVien;
 import vn.edu.hou.sis.exceptions.KhoaHocNotFound;
 import vn.edu.hou.sis.exceptions.LopHocNotFound;
 import vn.edu.hou.sis.exceptions.NganhHocNotFound;
+import vn.edu.hou.sis.repositories.SinhVienRespoitory;
 import vn.edu.hou.sis.services.KhoaHocService;
 import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
+import vn.edu.hou.sis.services.SinhVienService;
 
 @Controller
 public class GiaoVuController {
@@ -33,6 +36,8 @@ public class GiaoVuController {
 	private KhoaHocService khoaHocServices;
 	@Autowired
 	private LopHocService lopHocService;
+	@Autowired 
+	SinhVienService sinhVienService;
 	
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
 	public String giaoVuForm(Model model, Principal principal) {
@@ -61,6 +66,12 @@ public class GiaoVuController {
 		return "QuanLyKhoaHocPage";
 	}
 
+	@RequestMapping(value = "/nghiep-vu/quan-ly-sinh-vien")
+	public String nghiepVuQuanLySinhVien(Model model, Principal principal) {
+		model.addAttribute("listSinhVien", sinhVienService.findAll());
+		System.out.println(sinhVienService.findAll().get(0).getHoTen());
+		return "QuanLySinhVienPage";
+	}
 	//Ngành Học
 	@RequestMapping("/nghiep-vu/quan-ly-nganh-hoc/delete")
 	public String deleteNganhHoc(Model model, @RequestParam("id") String id) {
@@ -193,12 +204,29 @@ public class GiaoVuController {
 	}
 	
 	private String genCode(LopHoc lopHoc) {
-		String code = lopHoc.getNganhHocId().toString();
 		KhoaHoc k= khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
+		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
+		String code = nganh.getKyHieu(); 
 		int namBatDau = k.getNamBatDau();
 		code += Integer.toString(namBatDau).substring(1, 4);
-		code += '0' + lopHoc.getCode();
 		return code;
 	}
+	
+	//Sinh Vien
+	@RequestMapping(value = "/nghiep-vu/quan-ly-sinh-vien/save", method = RequestMethod.POST)
+	public String saveSinhVien(Model model, @ModelAttribute("sinhVien") SinhVien sinhVien) {
+		sinhVienService.save(sinhVien);
+		return "redirect:/nghiep-vu/quan-ly-sinh-vien"; 
+	}
+	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-sinh-vien/edit", method = RequestMethod.GET)
+	public String editSinhVien(Model model, @RequestParam("id") String id) {
+		if(sinhVienService.isDeleted(id)) return "404NotFoundPage";
+		SinhVien sinhVien= sinhVienService.findSinhVienById(id);
+		model.addAttribute("sinhVien", sinhVien);
+		model.addAttribute("listTrangThai", sinhVienService.findAllTrangThaiSv());
+		return "addOrEditItem/EditSinhVien";
+	}
+	
 	
 }

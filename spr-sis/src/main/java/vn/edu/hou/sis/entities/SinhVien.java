@@ -15,10 +15,12 @@ public class SinhVien implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private Integer id;
 
-	@Column(name="giao_vu_id")
-	private Integer giaoVuId;
+	@Column(name="cbts_username")
+	private String cbtsUsername;
 
 	@Column(name="is_deleted")
 	private Integer isDeleted;
@@ -35,10 +37,11 @@ public class SinhVien implements Serializable {
 	@Column(name="trang_thai_id")
 	private Integer trangThaiId;
 
-	@Column(name="user_id")
-	private Integer userId;
+	@Column(name ="username")
+	private String username;
 
 	public SinhVien() {
+		this.isDeleted = 0;
 	}
 
 	public Integer getId() {
@@ -49,12 +52,12 @@ public class SinhVien implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getGiaoVuId() {
-		return this.giaoVuId;
+	public String getCbtsUsername() {
+		return this.cbtsUsername;
 	}
 
-	public void setGiaoVuId(Integer giaoVuId) {
-		this.giaoVuId = giaoVuId;
+	public void setCbtsUsername(String cbtsUsername) {
+		this.cbtsUsername = cbtsUsername;
 	}
 
 	public Integer getIsDeleted() {
@@ -97,12 +100,12 @@ public class SinhVien implements Serializable {
 		this.trangThaiId = trangThaiId;
 	}
 
-	public Integer getUserId() {
-		return this.userId;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

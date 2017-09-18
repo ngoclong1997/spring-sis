@@ -6,10 +6,14 @@
 		<class>vn.edu.hou.sis.entities.LichSuSv</class>
 		<class>vn.edu.hou.sis.entities.LopHoc</class>
 		<class>vn.edu.hou.sis.entities.NganhHoc</class>
-		<class>vn.edu.hou.sis.entities.Role</class>
 		<class>vn.edu.hou.sis.entities.SinhVien</class>
 		<class>vn.edu.hou.sis.entities.TrangThaiSv</class>
-		<class>vn.edu.hou.sis.entities.UserRole</class>
 		<class>vn.edu.hou.sis.entities.User</class>
+		<class>vn.edu.hou.sis.entities.Role</class>
+		<class>vn.edu.hou.sis.entities.UserRole</class>
+		<class>vn.edu.hou.sis.entities.VSinhVien</class>
+		<properties>         
+         <property name="hibernate.show_sql" value="true"/>
+         </properties>
 	</persistence-unit>
 </persistence>

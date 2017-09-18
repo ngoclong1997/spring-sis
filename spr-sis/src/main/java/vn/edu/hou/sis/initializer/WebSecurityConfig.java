@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests().antMatchers("/user-info").access("hasAnyRole('ROLE_SINH_VIEN', 'ROLE_CAN_BO_TUYEN_SINH', 'ROLE_GIAO_VU')");
 		
-		http.authorizeRequests().antMatchers("/giao-vu", "/nghiep-vu/quan-ly-nganh-hoc", "/nghiep-vu/quan-ly-lop-hoc",  "/nghiep-vu/quan-ly-khoa-hoc")
+		http.authorizeRequests().antMatchers("/giao-vu", "/nghiep-vu/quan-ly-nganh-hoc", "/nghiep-vu/quan-ly-lop-hoc",  "/nghiep-vu/quan-ly-khoa-hoc",  "/nghiep-vu/quan-ly-sinh-vien")
 			.access("hasRole('ROLE_GIAO_VU')");
 		
 		http.authorizeRequests().antMatchers("/can-bo-tuyen-sinh", "/nghiep-vu/quan-ly-ho-so-du-tuyen").access("hasRole('ROLE_CAN_BO_TUYEN_SINH')");

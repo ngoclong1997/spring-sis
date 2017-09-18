@@ -77,7 +77,7 @@
 										url: '${pageContext.request.contextPath}/nghiep-vu/quan-ly-lop-hoc/khoa-hoc',
 										success: function(res){
 											var htm = "";
-											alert(idNganh);		
+// 											alert(idNganh);		
 											for(var i = 0; i < res.length; ++i){
 											htm += "<option value = \"" + res[i].id + "\">" + res[i].tenKhoaHoc + "</option>\"";
 											}

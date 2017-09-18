@@ -15,17 +15,21 @@ public class UserRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private Integer id;
 
-	@Column(name="isdeleted")
+	@Column(name="is_deleted")
 	private Integer isDeleted;
 
 	@Column(name="user_role_id")
 	private Integer userRoleId;
 
+	@Column(name="username")
 	private String username;
 
 	public UserRole() {
+		this.isDeleted = 0;
 	}
 
 	public Integer getId() {
@@ -36,11 +40,11 @@ public class UserRole implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getIsdeleted() {
+	public Integer getIsDeleted() {
 		return this.isDeleted;
 	}
 
-	public void setIsdeleted(Integer isDeleted) {
+	public void setIsDeleted(Integer isDeleted) {
 		this.isDeleted = isDeleted;
 	}
 
