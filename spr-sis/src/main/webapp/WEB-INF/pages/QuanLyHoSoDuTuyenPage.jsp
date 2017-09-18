@@ -36,14 +36,10 @@
 					<button type="button" class="btn btn-default" data-toggle="modal"
 						data-target="#themHSSV">Thêm hồ sơ dự tuyển</button>
 				</div>
-				<div id="space"></div>
-				
-				<!-- Modal thêm hồ sơ sinh viên -->
+				<div id="space"></div> <!-- Modal thêm hồ sơ sinh viên -->
 				<div id="themHSSV" class="modal fade" role="dialog">
 					<jsp:include page="/WEB-INF/popup/ThemHoSoSVModal.jsp" />
-				</div>
-				
-				<!-- Bảng hiện danh sách hồ sơ -->
+				</div> <!-- Bảng hiện danh sách hồ sơ -->
 				<table id="table_hssv" class="table table-striped table-bordered">
 					<thead>
 						<tr>
@@ -65,7 +61,8 @@
 						<c:forEach items="${dsHoSoSV }" var="hssv" varStatus="status">
 							<tr>
 								<td>${status.count }</td>
-								<td><c:set var="trang_thai" value="${hssv.trangThaiHoSo }" /> <c:choose>
+								<td><c:set var="trang_thai" value="${hssv.trangThaiHoSo }" />
+									<c:choose>
 										<c:when test="${trang_thai == '1' }">
 											<span style="color: green">Đã tạo SV</span>
 										</c:when>
@@ -142,7 +139,7 @@
 										</button>
 								</span></td>
 							</tr>
-							
+
 							<!-- Modal sửa hồ sơ sinh viên -->
 							<div id="suaHSSV_${hssv.id }" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-lg">
@@ -296,7 +293,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 							<!-- Modal tạo sinh viên -->
 							<div id="taoSV_${hssv.id }" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-lg">
@@ -310,14 +307,15 @@
 										</div>
 										<div class="modal-footer">
 											<a type="submit" id='delete' class="btn btn-success"
-												href="${pageContext.request.contextPath }/nghiep-vu/quan-ly-ho-so-du-tuyen/create-student/${hssv.id} ">Xác nhận</a>
+												href="${pageContext.request.contextPath }/nghiep-vu/quan-ly-ho-so-du-tuyen/create-student/${hssv.id} ">Xác
+												nhận</a>
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Hủy bỏ</button>
 										</div>
 									</div>
 								</div>
 							</div>
-							
+
 							<!-- Modal xóa hồ sơ sinh viên -->
 							<div id="xoaHSSV_${hssv.id }" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-lg">
@@ -340,7 +338,7 @@
 									</div>
 								</div>
 							</div>
-						
+
 						</c:forEach>
 					</tbody>
 				</table>

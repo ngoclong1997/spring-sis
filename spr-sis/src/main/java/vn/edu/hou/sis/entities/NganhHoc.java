@@ -2,30 +2,32 @@ package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
+import javax.validation.constraints.Size;
 
 /**
  * The persistent class for the nganh_hoc database table.
  * 
  */
 @Entity
-@Table(name="nganh_hoc")
-@NamedQuery(name="NganhHoc.findAll", query="SELECT n FROM NganhHoc n")
+@Table(name = "nganh_hoc")
+@NamedQuery(name = "NganhHoc.findAll", query = "SELECT n FROM NganhHoc n")
 public class NganhHoc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 
-	@Column(name="is_deleted")
+	@Column(name = "is_deleted")
 	private Integer isDeleted;
 
-	@Column(name="ky_hieu")
+	@Column(name = "ky_hieu")
+	@Size(min = 2, max = 10)
 	private String kyHieu;
 
-	@Column(name="ten_nganh")
+	@Column(name = "ten_nganh")
+	@Size(min = 10, max = 30)
 	private String tenNganh;
 
 	public NganhHoc() {
