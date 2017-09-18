@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import vn.edu.hou.sis.entities.SinhVien;
 import vn.edu.hou.sis.entities.VSinhVien;
 
-public interface SinhVienRespoitory extends JpaRepository<SinhVien, Long>{
+public interface SinhVienRepository extends JpaRepository<SinhVien, Long> {
 
 	@Query(value ="select v from VSinhVien v")	
 	public List<VSinhVien> findAllViewSV();

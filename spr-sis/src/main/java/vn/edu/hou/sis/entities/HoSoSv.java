@@ -1,6 +1,10 @@
 package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,42 +19,67 @@ public class HoSoSv implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "cb_tuyen_sinh_username")
+	@Column(name = "cbts_username")
 	private String cbTuyenSinhUsername;
+	
+	@Column(name = "da_tao_sv")
+	private Integer trangThaiHoSo;
+
+	public Integer getTrangThaiHoSo() {
+		return trangThaiHoSo;
+	}
+
+	public void setTrangThaiHoSo(Integer trangThaiHoSo) {
+		this.trangThaiHoSo = trangThaiHoSo;
+	}
+
+	@Column(name = "cmnd")
+	private String cmnd;
+
+	
+	@Column(name = "dan_toc")
+	private String danToc;
+
+	
+	@Column(name = "dia_chi")
+	private String diaChi;
+
+	
+	@Column(name = "email")
+	private String email;
+
+	
+	@Column(name = "gioi_tinh")
+	private Integer gioiTinh;
 
 	@Column(name = "chuyen_nganh")
 	private String chuyenNganh;
 
-	@Column(name="cmnd")
-	private String cmnd;
+	
+	@Column(name = "nam_tot_nghiep")
+	private Integer namTotNghiep;
 
-	@Column(name = "dan_toc")
-	private String danToc;
+	
+	@Column(name = "noi_cap")
+	private String noiCap;
 
-	@Column(name = "dia_chi")
-	private String diaChi;
-
-	@Column(name="email")
-	private String email;
-
-	@Column(name = "gioi_tinh")
-	private Integer gioiTinh;
+	
+	@Column(name = "trinh_do")
+	private Integer trinhDo;
 
 	@Column(name = "ho_khau_thuong_tru")
 	private String hoKhauThuongTru;
 
+	
 	@Column(name = "ho_ten")
 	private String hoTen;
 
 	@Column(name = "is_deleted")
 	private Integer isDeleted;
-
-	@Column(name = "nam_tot_nghiep")
-	private String namTotNghiep;
 
 	@Column(name = "nganh_hoc_id")
 	private Integer nganhHocId;
@@ -59,27 +88,24 @@ public class HoSoSv implements Serializable {
 	@Column(name = "ngay_lap")
 	private Date ngayLap;
 
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_sinh")
 	private Date ngaySinh;
 
+	
 	@Column(name = "ngoai_ngu")
 	private String ngoaiNgu;
 
-	@Column(name = "noi_cap")
-	private String noiCap;
-
+	
 	@Column(name = "noi_sinh")
 	private String noiSinh;
 
+	
 	@Column(name = "sdt")
 	private String sdt;
 
-	@Column(name = "trinh_do")
-	private String trinhDo;
-
 	public HoSoSv() {
-		this.isDeleted = 0;
 	}
 
 	public Integer getId() {
@@ -96,14 +122,6 @@ public class HoSoSv implements Serializable {
 
 	public void setCbTuyenSinhUsername(String cbTuyenSinhUsername) {
 		this.cbTuyenSinhUsername = cbTuyenSinhUsername;
-	}
-
-	public String getChuyenNganh() {
-		return this.chuyenNganh;
-	}
-
-	public void setChuyenNganh(String chuyenNganh) {
-		this.chuyenNganh = chuyenNganh;
 	}
 
 	public String getCmnd() {
@@ -162,22 +180,6 @@ public class HoSoSv implements Serializable {
 		this.hoTen = hoTen;
 	}
 
-	public Integer getIsDeleted() {
-		return this.isDeleted;
-	}
-
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
-	public String getNamTotNghiep() {
-		return this.namTotNghiep;
-	}
-
-	public void setNamTotNghiep(String namTotNghiep) {
-		this.namTotNghiep = namTotNghiep;
-	}
-
 	public Integer getNganhHocId() {
 		return this.nganhHocId;
 	}
@@ -198,8 +200,14 @@ public class HoSoSv implements Serializable {
 		return this.ngaySinh;
 	}
 
-	public void setNgaySinh(Date ngaySinh) {
-		this.ngaySinh = ngaySinh;
+	public void setNgaySinh(String ngaySinh) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.ngaySinh = sdf.parse(ngaySinh);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getNgoaiNgu() {
@@ -208,14 +216,6 @@ public class HoSoSv implements Serializable {
 
 	public void setNgoaiNgu(String ngoaiNgu) {
 		this.ngoaiNgu = ngoaiNgu;
-	}
-
-	public String getNoiCap() {
-		return this.noiCap;
-	}
-
-	public void setNoiCap(String noiCap) {
-		this.noiCap = noiCap;
 	}
 
 	public String getNoiSinh() {
@@ -234,11 +234,43 @@ public class HoSoSv implements Serializable {
 		this.sdt = sdt;
 	}
 
-	public String getTrinhDo() {
+	public String getChuyenNganh() {
+		return this.chuyenNganh;
+	}
+
+	public void setChuyenNganh(String chuyenNganh) {
+		this.chuyenNganh = chuyenNganh;
+	}
+
+	public Integer getIsDeleted() {
+		return this.isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Integer getNamTotNghiep() {
+		return this.namTotNghiep;
+	}
+
+	public void setNamTotNghiep(Integer namTotNghiep) {
+		this.namTotNghiep = namTotNghiep;
+	}
+
+	public String getNoiCap() {
+		return this.noiCap;
+	}
+
+	public void setNoiCap(String noiCap) {
+		this.noiCap = noiCap;
+	}
+
+	public Integer getTrinhDo() {
 		return this.trinhDo;
 	}
 
-	public void setTrinhDo(String trinhDo) {
+	public void setTrinhDo(Integer trinhDo) {
 		this.trinhDo = trinhDo;
 	}
 
@@ -251,4 +283,20 @@ public class HoSoSv implements Serializable {
 				+ ", nganhHocId=" + nganhHocId + ", ngayLap=" + ngayLap + ", ngaySinh=" + ngaySinh + ", ngoaiNgu="
 				+ ngoaiNgu + ", noiSinh=" + noiSinh + ", sdt=" + sdt + "]";
 	}
+
+	public String nullProperties() {
+		String properties = "";
+		if (this.cmnd == null || this.cmnd.equals("")) properties += "CMND_";
+		if (this.diaChi == null || this.diaChi.equals("")) properties += "Địa chỉ_";
+		if (this.email == null || this.email.equals("")) properties += "Email_";
+		if (this.gioiTinh == null) properties += "Giới tính_";
+		if (this.namTotNghiep == null) properties += "Năm tốt nghiệp_";
+		if (this.trinhDo == null) properties += "Trình độ_";
+		if (this.hoTen == null || this.hoTen.equals("")) properties += "Họ tên_";
+		if (this.nganhHocId == null) properties += "Ngành học_";
+		if (this.ngaySinh == null) properties += "Ngày sinh_";
+		if (this.sdt == null || this.sdt.equals("")) properties += "Số điện thoại";
+		return properties;
+	}
+
 }

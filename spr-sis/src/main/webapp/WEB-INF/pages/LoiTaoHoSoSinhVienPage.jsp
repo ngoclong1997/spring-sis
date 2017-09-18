@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<<<<<<< HEAD:spr-sis/src/main/webapp/WEB-INF/pages/QuanLyKhoaHocPage.jsp
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/scripts/common.js"></script>
@@ -28,6 +29,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 <title>Quản Lý Khóa Học</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<jsp:include page="/WEB-INF/resources/resource.jsp" /><title>Tạo hồ sơ sinh viên lỗi</title>
 </head>
 <body>
 	<table width="80%" align="center">
@@ -85,6 +88,17 @@
 			</tbody>
 		</table>
 		<tr id = "space"></tr>
+		<tr>
+			<td width="20%"></td>
+			<td width="60%" align="center">
+				<h2 style="color:red;">Tạo hồ sơ bị lỗi</h2>
+				<p><b>Thông tin:</b> ${info }</p>
+				<a class="btn btn-primary"
+				href="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen">
+					Quay lại</a>
+			</td>
+			<td width="20%"></td>
+		</tr>
 		<jsp:include page="/WEB-INF/basefragments/footer.jsp" />
 	</table>
 

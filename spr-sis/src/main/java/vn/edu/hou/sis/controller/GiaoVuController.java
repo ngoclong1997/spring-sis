@@ -20,7 +20,6 @@ import vn.edu.hou.sis.entities.SinhVien;
 import vn.edu.hou.sis.exceptions.KhoaHocNotFound;
 import vn.edu.hou.sis.exceptions.LopHocNotFound;
 import vn.edu.hou.sis.exceptions.NganhHocNotFound;
-import vn.edu.hou.sis.repositories.SinhVienRespoitory;
 import vn.edu.hou.sis.services.KhoaHocService;
 import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
@@ -69,7 +68,7 @@ public class GiaoVuController {
 	@RequestMapping(value = "/nghiep-vu/quan-ly-sinh-vien")
 	public String nghiepVuQuanLySinhVien(Model model, Principal principal) {
 		model.addAttribute("listSinhVien", sinhVienService.findAll());
-		System.out.println(sinhVienService.findAll().get(0).getHoTen());
+//		System.out.println(sinhVienService.findAll().get(0).getHoTen());
 		return "QuanLySinhVienPage";
 	}
 	//Ngành Học

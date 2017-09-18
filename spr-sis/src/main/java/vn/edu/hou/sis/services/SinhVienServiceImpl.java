@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import vn.edu.hou.sis.entities.SinhVien;
 import vn.edu.hou.sis.entities.TrangThaiSv;
 import vn.edu.hou.sis.entities.VSinhVien;
-import vn.edu.hou.sis.repositories.SinhVienRespoitory;
+import vn.edu.hou.sis.repositories.SinhVienRepository;
 import vn.edu.hou.sis.repositories.TrangThaiSvRepository;
 
 @Service
 public class SinhVienServiceImpl implements SinhVienService{
 	
 	@Resource
-	private SinhVienRespoitory sinhVienRespoitory;
+	private SinhVienRepository  sinhVienRepository ;
 	
 	@Resource
 	private TrangThaiSvRepository trangThaiSvRepository;
@@ -28,7 +28,7 @@ public class SinhVienServiceImpl implements SinhVienService{
 
 	@Override
 	public List<VSinhVien> findAllViewSV() {
-		return sinhVienRespoitory.findAllViewSV();
+		return sinhVienRepository .findAllViewSV();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class SinhVienServiceImpl implements SinhVienService{
 		int iId;
 		try {
 			iId = Integer.parseInt(id);
-			return sinhVienRespoitory.findSinhVienById(iId);
+			return sinhVienRepository .findSinhVienById(iId);
 		} catch (Exception e) {
 		}
 		return null;
@@ -47,7 +47,7 @@ public class SinhVienServiceImpl implements SinhVienService{
 		SinhVien temp = null;
 		try {
 			int iId = Integer.parseInt(id);
-			temp = sinhVienRespoitory.findSinhVienById(iId);
+			temp = sinhVienRepository .findSinhVienById(iId);
 		} catch (Exception e) {
 			return true;
 		}
@@ -59,12 +59,18 @@ public class SinhVienServiceImpl implements SinhVienService{
 
 	@Override
 	public void save(SinhVien sinhVien) {
-		sinhVienRespoitory.save(sinhVien);
+		sinhVienRepository .save(sinhVien);
 	}
 
 	@Override
 	public List<VSinhVien> findAll() {
-		return sinhVienRespoitory.findAllViewSV();
+		return sinhVienRepository .findAllViewSV();
+	}
+	
+	@Override
+	public SinhVien create(SinhVien sinhVien) {
+		SinhVien created = sinhVien;
+		return sinhVienRepository .save(created);
 	}
 	
 }

@@ -17,4 +17,3 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Query("UPDATE User u set u.isDeleted = 1 where u.username = ?1")
 	public User delete(String username);
 }
-
