@@ -23,11 +23,9 @@ public class NganhHoc implements Serializable {
 	private Integer isDeleted;
 
 	@Column(name = "ky_hieu")
-	@Size(min = 2, max = 10)
 	private String kyHieu;
 
 	@Column(name = "ten_nganh")
-	@Size(min = 10, max = 30)
 	private String tenNganh;
 
 	public NganhHoc() {

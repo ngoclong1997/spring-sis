@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,8 @@ public class NganhHocServiceImpl implements NganhHocService {
 		return nganhHocRepository.save(nganh);
 	}
 
+	Logger logger = LoggerFactory.getLogger(NganhHocServiceImpl.class);
+	
 	@Override
 	@Transactional(rollbackFor = NganhHocNotFound.class)
 	public NganhHoc delete(String id) throws NganhHocNotFound {
@@ -84,6 +88,14 @@ public class NganhHocServiceImpl implements NganhHocService {
 		if (temp == null)
 			return true;
 		return temp.getIsDeleted() == 1;
+	}
+
+	@Override
+	public NganhHoc findByKyHieu(String kyHieu) {
+		NganhHoc found = null;
+		found = nganhHocRepository.findNganhHocByKyHieu(kyHieu);
+		System.out.println(found);
+		return found;
 	}
 
 }

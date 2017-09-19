@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/pages/_include.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/scripts/common.js"></script>
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/common.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/table.css">
-<title>Trang chủ</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><jsp:include
+	page="/WEB-INF/resources/resource.jsp" />
+<title>Thêm Ngành Học</title>
 </head>
 <body>
-	<table width="80%" align="center">
+	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
+
 		<tr style="background: aliceblue; height: 20px; padding: 5px;">
 			<td colspan="3">
 				<div class="menu" style="padding: 5px;">
@@ -42,33 +36,36 @@
 			<td width="10%"></td>
 		</tr>
 		<tr>
-			<form method="POST" modelAttribute="nganhHoc"
-				action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-nganh-hoc/save">
-				<input type="hidden" name="id" value="${nganhHoc.id}"><input
-					type="hidden" name="isDeleted" value="${nganhHoc.isDeleted}">
-				<table style="width: 50%; border: 1px solid; margin: 0 auto;">
-					<tr>
-						<td>Ten Nganh</td>
-						<td><input path="tenNganh" name="tenNganh"
-							value="${nganhHoc.tenNganh}" /></td>
-						<td><errors path="tenNganh" class="error-message" /></td>
-					</tr>
+			<td width="10%"></td>
+			<td><f:form method="POST" commandName="nganhHoc"
+					action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-nganh-hoc/save">
+					<f:input type="hidden" value="${nganhHoc.id}" path ="id" name="id"/>
+					<f:input type="hidden" value="${nganhHoc.isDeleted}" path = "isDeleted" naem="isDeleted"/>
+					<div class="form-group" style="padding-top: 20px;">
+						<label class="col-xs-3">Tên ngành</label>
+						<div class="col-xs-9 col-sm-9">
+							<f:input path="tenNganh" name="tenNganh"
+								value="${nganhHoc.tenNganh}" />
+							<f:errors path="tenNganh" class="has-error" style="color: red;"/>
+						</div>
 
-					<tr>
-						<td>Ky Hieu</td>
-						<td><input path="kyHieu" name="kyHieu"
-							value="${nganhHoc.kyHieu}" /></td>
-						<td><errors path="kyHieu" class="error-message" /></td>
-					</tr>
-
-					<tr>
-						<td>&nbsp;</td>
-						<td><input type="submit" value="Submit" /> <input
-							type="reset" value="Reset" /></td>
-					</tr>
-				</table>
-
-			</form>
+					</div>
+					<div class="form-group" style="padding-top: 20px;">
+						<label class="col-xs-3">Ký hiệu</label>
+						<div class="col-xs-9 col-sm-9">
+							<f:input path="kyHieu" name="kyHieu" value="${nganhHoc.kyHieu}" />
+							<f:errors path="kyHieu" class="has-error" style="color: red;"/>
+						</div>
+					</div>
+					</div>
+					<div class="form-group" style="padding-top: 20px;">
+						<div align="right">
+							<button  type="submit" class="btn btn-success">Submit</button>
+							<button  type="reset" class="btn btn-danger">Reset</button>
+						</div>
+					</div>
+				</f:form></td>
+			<td width="10%"></td>
 		</tr>
 		<tr id="space"></tr>
 

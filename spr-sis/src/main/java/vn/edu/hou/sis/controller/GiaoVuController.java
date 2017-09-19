@@ -28,6 +28,7 @@ import vn.edu.hou.sis.services.KhoaHocService;
 import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
 import vn.edu.hou.sis.services.SinhVienService;
+import vn.edu.hou.sis.validator.NganhHocValidation;
 
 @Controller
 public class GiaoVuController {
@@ -108,9 +109,10 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc/save", method = RequestMethod.POST)
 	public String saveNganhHoc(Model model,@Valid  @ModelAttribute("nganhHoc") NganhHoc nganhHoc, BindingResult result) {
+		new NganhHocValidation().validate(nganhHoc, result);
 		if (result.hasErrors()) {
 			logger.debug(result.getAllErrors().toString());
-			return "/nghiep-vu/quan-ly-nganh-hoc";
+			return "addOrEditItem/AddOrEditNganhHoc";
 		} else {
 			nganhHoc.setIsDeleted(0);
 			nganhHocService.save(nganhHoc);

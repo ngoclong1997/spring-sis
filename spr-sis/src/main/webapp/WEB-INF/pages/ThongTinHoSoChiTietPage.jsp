@@ -10,7 +10,7 @@
 <TITLE>Thông tin hồ sơ</TITLE>
 </head>
 <body>
-	<table width="80%" align="center">
+	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
 		<tr style="background: aliceblue; height: 20px; padding: 5px;">
 			<td colspan="3">

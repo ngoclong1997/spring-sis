@@ -28,8 +28,8 @@
 			<td width="0%"></td>
 			<td width="100%" align="left">
 				<div align="right">
-					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#themHSSV">Thêm Ngành Học</button>
+					<a href="quan-ly-nganh-hoc/add" class="btn btn-default">Thêm
+						ngành học</a>
 				</div>
 				<div id="space"></div> <!-- Modal thêm hồ sơ sinh viên -->
 				<div id="themHSSV" class="modal fade" role="dialog">
@@ -52,11 +52,10 @@
 								<td>${temp.id}</td>
 								<td>${temp.tenNganh}</td>
 								<td>${temp.kyHieu}</td>
-								<td>
-									<a href="quan-ly-nganh-hoc/edit?id=${temp.id}" class="btn btn-primary">
-										<span class="glyphicon glyphicon-pencil"></span></a> 
-									<span data-placement="top" data-toggle="modal"
-									title="Xóa ngành học">
+								<td><a href="quan-ly-nganh-hoc/edit?id=${temp.id}"
+									class="btn btn-primary"> <span
+										class="glyphicon glyphicon-pencil"></span></a> <span
+									data-placement="top" data-toggle="modal" title="Xóa ngành học">
 										<button id="func_btn" class="btn btn-danger"
 											data-id="${hssv.id }" data-title="Delete" data-toggle="modal"
 											href="#xoaNganhHoc_${temp.id}">
@@ -64,7 +63,7 @@
 										</button>
 								</span></td>
 							</tr>
-							
+
 							<!-- Modal xóa ngành học -->
 							<div id="xoaNganhHoc_${temp.id}" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-lg">
@@ -80,7 +79,7 @@
 										</div>
 										<div class="modal-footer">
 											<a type="submit" id='delete' class="btn btn-danger"
-												 href="quan-ly-nganh-hoc/delete?id=${temp.id}">Delete</a>
+												href="quan-ly-nganh-hoc/delete?id=${temp.id}">Delete</a>
 											<button type="button" class="btn btn-default"
 												data-dismiss="modal">Close</button>
 										</div>

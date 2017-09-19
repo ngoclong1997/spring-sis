@@ -11,7 +11,7 @@
 <jsp:include page="/WEB-INF/resources/resource.jsp" />
 </head>
 <body style="heigh: 100%; margin: 10 auto;">
-	<table width="80%" align="center">
+	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
 		<tr style="background: aliceblue; height: 20px; padding: 5px;">
 			<td colspan="3">

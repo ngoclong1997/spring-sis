@@ -12,15 +12,14 @@ public interface NganhHocRepository extends JpaRepository<NganhHoc, Long> {
 	@Query("select n from NganhHoc n where n.tenNganh = ?1 and n.isDeleted = 0")
 	public NganhHoc findNganhHocByTenNganh(String tenNganh);
 	
+	@Query("select n from NganhHoc n where n.kyHieu = ?1 and n.isDeleted = 0")
+	public NganhHoc findNganhHocByKyHieu(String kyHieu);
+	
 	@Query("select n from NganhHoc n where n.isDeleted = 0")
 	public List<NganhHoc> findNganhHocWithStartAndLimit(Pageable pageable);
 	
 	@Query("select n from NganhHoc n where n.id = ?1 and n.isDeleted = 0")
 	public NganhHoc findNganhHocById(Integer id);
-	
-	@Override
-	@Query("select n from NganhHoc n where n.isDeleted = 0")
-	public List<NganhHoc> findAll();
 
 	@Query("select n from NganhHoc n where n.isDeleted = 0")
 	public List<NganhHoc> findNganhHocByIsdeleted();

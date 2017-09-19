@@ -12,6 +12,8 @@ public interface NganhHocService {
 
 	public NganhHoc findByTenNganh(String tenNganh);
 	
+	public NganhHoc findByKyHieu(String kyHieu);
+	
 	public NganhHoc findById(String id);
 	
 	public List<NganhHoc> findAll();
