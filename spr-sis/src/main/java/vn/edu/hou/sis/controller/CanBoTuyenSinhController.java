@@ -168,7 +168,7 @@ public class CanBoTuyenSinhController {
 		sinhVien.setNganhHocId(hoSoSV.getNganhHocId());
 		sinhVien.setIsDeleted(0);
 
-		// Tạo mã phân đoạn
+		// Tạo mã phân đoạn cho sv
 		String maNganh = service.findKyHieuByNganhHocId(hoSoSV.getNganhHocId());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(hoSoSV.getNgayLap());
