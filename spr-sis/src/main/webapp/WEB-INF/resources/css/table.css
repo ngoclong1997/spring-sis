@@ -1,0 +1,14 @@
+.context{
+	width: 50%;
+    margin: 0 auto;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+.context td, th {
+    border: 1px solid black;
+}
+
+.context th {
+    height: 50px;
+}
