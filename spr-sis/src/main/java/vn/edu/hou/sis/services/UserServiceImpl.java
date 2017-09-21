@@ -1,6 +1,5 @@
 package vn.edu.hou.sis.services;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,8 +11,6 @@ import vn.edu.hou.sis.entities.SinhVien;
 import vn.edu.hou.sis.entities.User;
 import vn.edu.hou.sis.exceptions.UserNotFound;
 import vn.edu.hou.sis.repositories.UserRepository;
-
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional(rollbackFor=UserNotFound.class)
+	@Transactional(rollbackFor = UserNotFound.class)
 	public User delete(String username) throws UserNotFound {
 		User deletedUser = userRepository.findByUsername(username);
 		if (deletedUser == null)
@@ -45,8 +42,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Iterator<User> findAll() {
-		return (Iterator<User>) userRepository.findAll();
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 	@Override
@@ -58,6 +55,5 @@ public class UserServiceImpl implements UserService {
 	public SinhVien findSinhVienByUsername(String username) {
 		return userRepository.findSinhVienByUsername(username);
 	}
-	
-	
+
 }

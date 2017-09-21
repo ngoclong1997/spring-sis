@@ -2,69 +2,111 @@ package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import java.util.Date;
 
 /**
  * The persistent class for the ho_so_sv database table.
  * 
  */
 @Entity
-@Table(name="ho_so_sv")
-@NamedQuery(name="HoSoSv.findAll", query="SELECT h FROM HoSoSv h")
+@Table(name = "ho_so_sv")
+@NamedQuery(name = "HoSoSv.findAll", query = "SELECT h FROM HoSoSv h")
 public class HoSoSv implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 
-	@Column(name="cb_tuyen_sinh_id")
-	private Integer cbTuyenSinhId;
+	@Column(name = "cbts_username")
+	private String cbTuyenSinhUsername;
+	
+	@Column(name = "da_tao_sv")
+	private Integer trangThaiHoSo;
 
+	public Integer getTrangThaiHoSo() {
+		return trangThaiHoSo;
+	}
+
+	public void setTrangThaiHoSo(Integer trangThaiHoSo) {
+		this.trangThaiHoSo = trangThaiHoSo;
+	}
+
+	@Column(name = "cmnd")
 	private String cmnd;
 
-	@Column(name="dan_toc")
+	
+	@Column(name = "dan_toc")
 	private String danToc;
 
-	@Column(name="dia_chi")
+	
+	@Column(name = "dia_chi")
 	private String diaChi;
 
+	
+	@Column(name = "email")
 	private String email;
 
-	@Column(name="gioi_tinh")
+	
+	@Column(name = "gioi_tinh")
 	private Integer gioiTinh;
 
-	@Column(name="ho_khau_thuong_tru")
+	@Column(name = "chuyen_nganh")
+	private String chuyenNganh;
+
+	
+	@Column(name = "nam_tot_nghiep")
+	private Integer namTotNghiep;
+
+	
+	@Column(name = "noi_cap")
+	private String noiCap;
+
+	
+	@Column(name = "trinh_do")
+	private Integer trinhDo;
+
+	@Column(name = "ho_khau_thuong_tru")
 	private String hoKhauThuongTru;
 
-	@Column(name="ho_ten")
+	
+	@Column(name = "ho_ten")
 	private String hoTen;
 
-	@Column(name="is_deleted")
+	@Column(name = "is_deleted")
 	private Integer isDeleted;
 
-	@Column(name="nganh_hoc_id")
+	@Column(name = "nganh_hoc_id")
 	private Integer nganhHocId;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="ngay_lap")
+	@Column(name = "ngay_lap")
 	private Date ngayLap;
 
+	
 	@Temporal(TemporalType.DATE)
-	@Column(name="ngay_sinh")
+	@Column(name = "ngay_sinh")
 	private Date ngaySinh;
 
-	@Column(name="ngoai_ngu")
+	
+	@Column(name = "ngoai_ngu")
 	private String ngoaiNgu;
 
-	@Column(name="noi_sinh")
+	
+	@Column(name = "noi_sinh")
 	private String noiSinh;
 
+	
+	@Column(name = "sdt")
 	private String sdt;
-
-	@Column(name="trinh_do_id")
-	private Integer trinhDoId;
 
 	public HoSoSv() {
 	}
@@ -77,12 +119,12 @@ public class HoSoSv implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getCbTuyenSinhId() {
-		return this.cbTuyenSinhId;
+	public String getCbTuyenSinhUsername() {
+		return this.cbTuyenSinhUsername;
 	}
 
-	public void setCbTuyenSinhId(Integer cbTuyenSinhId) {
-		this.cbTuyenSinhId = cbTuyenSinhId;
+	public void setCbTuyenSinhUsername(String cbTuyenSinhUsername) {
+		this.cbTuyenSinhUsername = cbTuyenSinhUsername;
 	}
 
 	public String getCmnd() {
@@ -141,14 +183,6 @@ public class HoSoSv implements Serializable {
 		this.hoTen = hoTen;
 	}
 
-	public Integer getIsDeleted() {
-		return this.isDeleted;
-	}
-
-	public void setIsDeleted(Integer isDeleted) {
-		this.isDeleted = isDeleted;
-	}
-
 	public Integer getNganhHocId() {
 		return this.nganhHocId;
 	}
@@ -169,8 +203,14 @@ public class HoSoSv implements Serializable {
 		return this.ngaySinh;
 	}
 
-	public void setNgaySinh(Date ngaySinh) {
-		this.ngaySinh = ngaySinh;
+	public void setNgaySinh(String ngaySinh) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.ngaySinh = sdf.parse(ngaySinh);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getNgoaiNgu() {
@@ -197,12 +237,69 @@ public class HoSoSv implements Serializable {
 		this.sdt = sdt;
 	}
 
-	public Integer getTrinhDoId() {
-		return this.trinhDoId;
+	public String getChuyenNganh() {
+		return this.chuyenNganh;
 	}
 
-	public void setTrinhDoId(Integer trinhDoId) {
-		this.trinhDoId = trinhDoId;
+	public void setChuyenNganh(String chuyenNganh) {
+		this.chuyenNganh = chuyenNganh;
+	}
+
+	public Integer getIsDeleted() {
+		return this.isDeleted;
+	}
+
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public Integer getNamTotNghiep() {
+		return this.namTotNghiep;
+	}
+
+	public void setNamTotNghiep(Integer namTotNghiep) {
+		this.namTotNghiep = namTotNghiep;
+	}
+
+	public String getNoiCap() {
+		return this.noiCap;
+	}
+
+	public void setNoiCap(String noiCap) {
+		this.noiCap = noiCap;
+	}
+
+	public Integer getTrinhDo() {
+		return this.trinhDo;
+	}
+
+	public void setTrinhDo(Integer trinhDo) {
+		this.trinhDo = trinhDo;
+	}
+
+	@Override
+	public String toString() {
+		return "HoSoSv [id=" + id + ", cbTuyenSinhUsername=" + cbTuyenSinhUsername + ", cmnd=" + cmnd + ", danToc="
+				+ danToc + ", diaChi=" + diaChi + ", email=" + email + ", gioiTinh=" + gioiTinh + ", chuyenNganh="
+				+ chuyenNganh + ", namTotNghiep=" + namTotNghiep + ", noiCap=" + noiCap + ", trinhDo=" + trinhDo
+				+ ", hoKhauThuongTru=" + hoKhauThuongTru + ", hoTen=" + hoTen + ", isDeleted=" + isDeleted
+				+ ", nganhHocId=" + nganhHocId + ", ngayLap=" + ngayLap + ", ngaySinh=" + ngaySinh + ", ngoaiNgu="
+				+ ngoaiNgu + ", noiSinh=" + noiSinh + ", sdt=" + sdt + "]";
+	}
+
+	public String nullProperties() {
+		String properties = "";
+		if (this.cmnd == null || this.cmnd.equals("")) properties += "CMND_";
+		if (this.diaChi == null || this.diaChi.equals("")) properties += "Địa chỉ_";
+		if (this.email == null || this.email.equals("")) properties += "Email_";
+		if (this.gioiTinh == null) properties += "Giới tính_";
+		if (this.namTotNghiep == null) properties += "Năm tốt nghiệp_";
+		if (this.trinhDo == null) properties += "Trình độ_";
+		if (this.hoTen == null || this.hoTen.equals("")) properties += "Họ tên_";
+		if (this.nganhHocId == null) properties += "Ngành học_";
+		if (this.ngaySinh == null) properties += "Ngày sinh_";
+		if (this.sdt == null || this.sdt.equals("")) properties += "Số điện thoại";
+		return properties;
 	}
 
 }

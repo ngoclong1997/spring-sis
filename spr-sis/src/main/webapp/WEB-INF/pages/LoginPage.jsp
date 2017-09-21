@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="/WEB-INF/pages/_include.jsp" %>
+<%@include file="/WEB-INF/pages/_include.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Log in</title>
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
-	rel="stylesheet" />
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"
-	th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+<jsp:include page="/WEB-INF/resources/resource.jsp" />
 </head>
 <body>
 
@@ -35,7 +24,7 @@
 				<div style="color: red; margin: 10px 0px;">
 
 					Login Failed!!!<br />
-					<spring:message code = "error.login"></spring:message>
+					<spring:message code="error.login"></spring:message>
 
 				</div>
 			</c:if>
@@ -64,16 +53,11 @@
 							placeholder="<spring:message code ="label.password"/>"
 							name="password">
 					</div>
-					<div class="checkbox">
-						<label> <input type="checkbox"> Check me out </label>
-					</div>
-
 
 					<input type="submit" class="btn btn-default" value="Submit"></input>
 				</form>
 			</div>
 		</div>
-
 
 	</div>
 </body>

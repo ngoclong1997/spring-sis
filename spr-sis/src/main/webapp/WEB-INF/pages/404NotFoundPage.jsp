@@ -5,19 +5,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/scripts/common.js"></script>
-
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/menu-dropdown.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/styles/common.css">
-<title>No permission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<jsp:include page="/WEB-INF/resources/resource.jsp" />
+<title>404 Not Found</title>
 </head>
 <body>
-	<table width="80%" align="center">
+	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
 		<tr style="background: aliceblue; height: 20px; padding: 5px;">
 			<td colspan="3">

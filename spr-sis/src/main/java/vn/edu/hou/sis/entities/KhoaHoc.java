@@ -15,6 +15,8 @@ public class KhoaHoc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	private Integer id;
 
 	@Column(name="is_deleted")
@@ -33,6 +35,7 @@ public class KhoaHoc implements Serializable {
 	private String tenKhoaHoc;
 
 	public KhoaHoc() {
+		this.isDeleted = 0;
 	}
 
 	public Integer getId() {
