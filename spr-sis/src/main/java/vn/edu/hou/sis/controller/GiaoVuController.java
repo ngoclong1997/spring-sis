@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +44,8 @@ public class GiaoVuController {
 	@Autowired
 	private SinhVienService sinhVienService;
 	
+	@Autowired
+	NganhHocValidation nganhHocValidatior;
 	private Logger logger = LoggerFactory.getLogger(GiaoVuController.class);
 
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
@@ -79,6 +83,7 @@ public class GiaoVuController {
 	}
 
 	// Ngành Học
+	
 	@RequestMapping("/nghiep-vu/quan-ly-nganh-hoc/delete")
 	public String deleteNganhHoc(Model model, @RequestParam("id") String id) {
 		if (id != null) {
@@ -109,7 +114,7 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc/save", method = RequestMethod.POST)
 	public String saveNganhHoc(Model model,@Valid  @ModelAttribute("nganhHoc") NganhHoc nganhHoc, BindingResult result) {
-		new NganhHocValidation().validate(nganhHoc, result);
+		nganhHocValidatior.validate(nganhHoc, result);
 		if (result.hasErrors()) {
 			logger.debug(result.getAllErrors().toString());
 			return "addOrEditItem/AddOrEditNganhHoc";

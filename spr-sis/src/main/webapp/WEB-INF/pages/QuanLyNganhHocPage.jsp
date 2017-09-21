@@ -7,6 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><jsp:include
 	page="/WEB-INF/resources/resource.jsp" />
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$('#table_nganhHoc').DataTable();
+	});
+</script>
 <title>Quản Lý Ngành Học</title>
 </head>
 <body>
@@ -31,11 +36,8 @@
 					<a href="quan-ly-nganh-hoc/add" class="btn btn-default">Thêm
 						ngành học</a>
 				</div>
-				<div id="space"></div> <!-- Modal thêm hồ sơ sinh viên -->
-				<div id="themHSSV" class="modal fade" role="dialog">
-					<jsp:include page="/WEB-INF/popup/AddOrEditNganhHoc.jsp" />
-				</div> <!-- Bảng hiện danh sách hồ sơ -->
-				<table id="table_hssv" class="table table-striped table-bordered">
+				<div id="space"></div>
+				<table id="table_nganhHoc" class="table table-striped table-bordered">
 					<thead>
 						<tr>
 							<th>STT</th>

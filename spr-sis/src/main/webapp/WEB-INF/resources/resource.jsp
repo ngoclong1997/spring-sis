@@ -1,6 +1,6 @@
-<script type="text/javascript" 
-	src="${pageContext.request.contextPath}/resources/js/common.js" ></script>
-	
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/common.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/menu-dropdown.css">
 <link rel="stylesheet" type="text/css"
@@ -18,5 +18,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="#"
+	th:src="@{/webjars/datatables/1.10.12/css/dataTables.bootstrap.min.css}" />
+<script type="text/javascript"
+	src="#"
+	th:src="@{/webjars/datatables/1.10.12/js/dataTables.bootstrap.min.js}" ></script>

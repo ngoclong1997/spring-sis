@@ -94,7 +94,6 @@ public class NganhHocServiceImpl implements NganhHocService {
 	public NganhHoc findByKyHieu(String kyHieu) {
 		NganhHoc found = null;
 		found = nganhHocRepository.findNganhHocByKyHieu(kyHieu);
-		System.out.println(found);
 		return found;
 	}
 
