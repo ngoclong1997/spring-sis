@@ -11,9 +11,14 @@ import javax.validation.Valid;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +36,7 @@ import vn.edu.hou.sis.services.CanBoTuyenSinhService;
 import vn.edu.hou.sis.services.SinhVienService;
 import vn.edu.hou.sis.services.UserRoleService;
 import vn.edu.hou.sis.services.UserService;
+import vn.edu.hou.sis.validator.HoSoSVFormValidator;
 
 @Controller
 public class CanBoTuyenSinhController {
@@ -45,6 +51,14 @@ public class CanBoTuyenSinhController {
 	private SinhVienService sinhVienService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	@Qualifier("hoSoSVFormValidator")
+	private HoSoSVFormValidator validator;
+	
+	@InitBinder
+	private void initBinder(WebDataBinder binder) {
+		binder.setValidator(validator);
+	}
 
 	@RequestMapping(value = "/can-bo-tuyen-sinh", method = RequestMethod.GET)
 	public String canBoTuyenSinhForm(Model model, Principal principal) {
@@ -74,8 +88,10 @@ public class CanBoTuyenSinhController {
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so", method = RequestMethod.POST)
-	public String xuLyThemHoSo(@ModelAttribute @Valid HoSoSv hoSoSV, BindingResult result, Model model, Principal principal) {
+	public String xuLyThemHoSo( @Valid @ModelAttribute("hoSoSV") HoSoSv hoSoSV, BindingResult result, Model model, Principal principal) {
+		validator.validate(hoSoSV, result);
 		if (result.hasErrors()) {
+			System.out.println(result.toString());
 			return "UnknownError";
 		}
 		hoSoSV.setNgayLap(new Date());
@@ -146,11 +162,11 @@ public class CanBoTuyenSinhController {
 		hoSoSV.setIsDeleted(0);
 		hoSoSV.setCbTuyenSinhUsername(principal.getName());
 		if (hoSoSV.getTrangThaiHoSo() == 1) {
-			model.addAttribute("info", "Sinh viên đã được tạo!!");
+			model.addAttribute("info", "Sinh viÃªn Ä‘Ã£ Ä‘Æ°á»£c táº¡o!!");
 			return "LoiTaoSinhVienPage";
 		}
 		if (hoSoSV.nullProperties() != "") {
-			model.addAttribute("info", "Các trường bị thiếu");
+			model.addAttribute("info", "CÃ¡c trÆ°á»�ng bá»‹ thiáº¿u");
 			String nullProperties[] = hoSoSV.nullProperties().split("_");
 			model.addAttribute("nullProperties", nullProperties);
 			return "LoiTaoSinhVienPage";
@@ -169,7 +185,7 @@ public class CanBoTuyenSinhController {
 		sinhVien.setNganhHocId(hoSoSV.getNganhHocId());
 		sinhVien.setIsDeleted(0);
 
-		// Tạo mã phân đoạn
+		// Táº¡o mÃ£ phÃ¢n Ä‘oáº¡n
 		String maNganh = service.findKyHieuByNganhHocId(hoSoSV.getNganhHocId());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(hoSoSV.getNgayLap());
@@ -188,7 +204,7 @@ public class CanBoTuyenSinhController {
 		userRoleService.create(userRole);
 
 		service.updateTrangThaiHoSo(id);
-		logger.debug(principal.getName() + " đã tạo sinh viên " + hoSoSV.getHoTen());
+		logger.debug(principal.getName() + " Ä‘Ã£ táº¡o sinh viÃªn " + hoSoSV.getHoTen());
 		return "redirect:/nghiep-vu/quan-ly-ho-so-du-tuyen";
 	}
 

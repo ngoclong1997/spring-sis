@@ -20,6 +20,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -28,6 +29,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import vn.edu.hou.sis.validator.HoSoSVFormValidator;
 
 @EnableWebMvc
 @Configuration
@@ -79,6 +82,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
 		properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
 		return properties;
+	}
+	
+	@Bean(name="hoSoSVFormValidator")
+	public HoSoSVFormValidator getValidator() {
+		return new HoSoSVFormValidator();
 	}
 
 	@Bean(name = "transactionManager")
@@ -138,6 +146,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		localeResolver.setCookieMaxAge(60*60*24*31);
 		return localeResolver;
 	}
+	
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {

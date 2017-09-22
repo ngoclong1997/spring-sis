@@ -7,7 +7,11 @@ import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -41,6 +45,7 @@ public class HoSoSv implements Serializable {
 	}
 
 	@Column(name = "cmnd")
+	@NotNull
 	private String cmnd;
 
 	
@@ -49,10 +54,12 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "dia_chi")
+	@NotNull
 	private String diaChi;
 
 	
 	@Column(name = "email")
+	@NotNull @Email
 	private String email;
 
 	
@@ -79,6 +86,7 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "ho_ten")
+	@NotNull
 	private String hoTen;
 
 	@Column(name = "is_deleted")
@@ -87,13 +95,12 @@ public class HoSoSv implements Serializable {
 	@Column(name = "nganh_hoc_id")
 	private Integer nganhHocId;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_lap")
 	private Date ngayLap;
 
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_sinh")
+	@NotNull @Past
 	private Date ngaySinh;
 
 	
@@ -106,6 +113,7 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "sdt")
+	@NotNull
 	private String sdt;
 
 	public HoSoSv() {
@@ -290,15 +298,15 @@ public class HoSoSv implements Serializable {
 	public String nullProperties() {
 		String properties = "";
 		if (this.cmnd == null || this.cmnd.equals("")) properties += "CMND_";
-		if (this.diaChi == null || this.diaChi.equals("")) properties += "Địa chỉ_";
+		if (this.diaChi == null || this.diaChi.equals("")) properties += "Ä�á»‹a chá»‰_";
 		if (this.email == null || this.email.equals("")) properties += "Email_";
-		if (this.gioiTinh == null) properties += "Giới tính_";
-		if (this.namTotNghiep == null) properties += "Năm tốt nghiệp_";
-		if (this.trinhDo == null) properties += "Trình độ_";
-		if (this.hoTen == null || this.hoTen.equals("")) properties += "Họ tên_";
-		if (this.nganhHocId == null) properties += "Ngành học_";
-		if (this.ngaySinh == null) properties += "Ngày sinh_";
-		if (this.sdt == null || this.sdt.equals("")) properties += "Số điện thoại";
+		if (this.gioiTinh == null) properties += "Giá»›i tÃ­nh_";
+		if (this.namTotNghiep == null) properties += "NÄƒm tá»‘t nghiá»‡p_";
+		if (this.trinhDo == null) properties += "TrÃ¬nh Ä‘á»™_";
+		if (this.hoTen == null || this.hoTen.equals("")) properties += "Há»� tÃªn_";
+		if (this.nganhHocId == null) properties += "NgÃ nh há»�c_";
+		if (this.ngaySinh == null) properties += "NgÃ y sinh_";
+		if (this.sdt == null || this.sdt.equals("")) properties += "Sá»‘ Ä‘iá»‡n thoáº¡i";
 		return properties;
 	}
 

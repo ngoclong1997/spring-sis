@@ -18,9 +18,3 @@ a {
 tr td {
 	padding : 5px;
 }
-
-.error {
-	color: #ff0000;
-	font-style: italic;
-	font-weight: bold;
-}

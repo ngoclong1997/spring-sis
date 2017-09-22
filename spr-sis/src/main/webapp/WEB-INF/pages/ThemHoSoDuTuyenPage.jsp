@@ -8,6 +8,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="/WEB-INF/resources/resource.jsp" />
 <title>Thêm hồ sơ</title>
+<style>
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 	<table width="90%" align="center">
@@ -21,20 +28,20 @@
 		</tr>
 		<tr>
 			<td width="10%"></td>
-			<td width="80%">
+			<td width="80%" align="center">
 				<h1>THÊM HỒ SƠ SINH VIÊN</h1>
 				<form:form method="post" action = "${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so"
-				command = "hoSoSV">
+				commandName = "hoSoSV">
 					<TABLE>
 						<TR>
 							<TD>Ngành: </TD>
 							<td>
-								<form:select path="nganhHoc">
+								<form:select path="nganhHocId">
 								   <form:option value="NONE" label="--- Select ---"/>
 								   <form:options items="${dsNganhHoc}" />
 								</form:select>
 							</td>
-							<form:errors path="nganhHoc" cssClass="error" />
+							<td><form:errors path="nganhHocId" cssClass="error" /></td>
 						</TR>
 						<tr>
 							<td>Họ tên: </td>
@@ -51,7 +58,7 @@
 						</tr>
 						<tr>
 							<td>Ngày sinh: </td>
-							<td><form:input path="ngaySinh" cssClass="date-picker" /></td>
+							<td><form:input path="ngaySinh" type="date" pattern="dd/MM/yyyy"/></td>
 							<td><form:errors path="ngaySinh" cssClass="error"></form:errors></td>
 						</tr>
 						<tr>
@@ -104,12 +111,12 @@
 						<tr>
 							<td>Ngoại ngữ: </td>
 							<td><form:select path="ngoaiNgu">
-								<form:option value="1" label="Tiếng Anh"></form:option>
-								<form:option value="2" label="Tiếng Nga"></form:option>
-								<form:option value="3" label="Tiếng Trung"></form:option>
-								<form:option value="4" label="Tiếng Pháp"></form:option>
+								<form:option value="Tiếng Anh" label="Tiếng Anh"></form:option>
+								<form:option value="Tiếng Nga" label="Tiếng Nga"></form:option>
+								<form:option value="Tiếng Trung" label="Tiếng Trung"></form:option>
+								<form:option value="Tiếng Pháp" label="Tiếng Pháp"></form:option>
 							</form:select></td>
-							<td><td><form:errors path="ngoaiNgu" cssClass="error" /></td></td>
+							<td><form:errors path="ngoaiNgu" cssClass="error" /></td>
 						</tr>
 						<tr>
 							<td>Email: </td>
@@ -124,13 +131,13 @@
 						
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Thêm hồ sơ" class="btn btn-success"></input></td>
-							<td><a href = "${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen" class="btn btn-default">Quay lại</a></td>
+							<td><input type="submit" value="Thêm hồ sơ" class="btn btn-success"></input>
+							<a href = "${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen" class="btn btn-default">Quay lại</a></td>
+							<td></td>
 						</tr>
 						
 					</TABLE>
-				</form:form>
-				
+				</form:form>	
 			</td>
 			<td width="10%"></td>
 		</tr>

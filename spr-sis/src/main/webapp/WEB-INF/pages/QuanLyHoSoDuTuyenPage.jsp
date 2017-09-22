@@ -26,27 +26,17 @@
 				</div>
 			</td>
 		</tr>
-<<<<<<< HEAD
-		<tr id = "space"></tr>
-		<tr id="space"></tr>
 
-=======
 		
 		<tr id="space"></tr>
->>>>>>> longnn
 		<tr align="left">
 			<td width="0%"></td>
 			<td width="100%" align="left">
 				<div align="right">
-					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#themHSSV">Thêm hồ sơ dự tuyển</button>
+					<a href = "${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so" class="btn btn-default">Thêm hồ sơ dự tuyển</a>
+					
 				</div>
-<<<<<<< HEAD
-				<div id="space"></div> <!-- Modal thêm hồ sơ sinh viên -->
-				<div id="themHSSV" class="modal fade" role="dialog">
-					<jsp:include page="/WEB-INF/popup/ThemHoSoSVModal.jsp" />
-				</div> <!-- Bảng hiện danh sách hồ sơ -->
-=======
+
 				<div id="space"></div>
 				
 				<!-- Modal thêm hồ sơ sinh viên -->
@@ -55,7 +45,6 @@
 				</div>
 				
 				<!-- Bảng hiện danh sách hồ sơ -->
->>>>>>> longnn
 				<table id="table_hssv" class="table table-striped table-bordered">
 					<thead>
 						<tr>
@@ -154,11 +143,7 @@
 										</button>
 								</span></td>
 							</tr>
-<<<<<<< HEAD
 
-=======
-							
->>>>>>> longnn
 							<!-- Modal sửa hồ sơ sinh viên -->
 							<div id="suaHSSV_${hssv.id }" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-lg">
@@ -332,11 +317,7 @@
 									</div>
 								</div>
 							</div>
-<<<<<<< HEAD
 
-=======
-							
->>>>>>> longnn
 							<!-- Modal xóa hồ sơ sinh viên -->
 							<div id="xoaHSSV_${hssv.id }" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-lg">
