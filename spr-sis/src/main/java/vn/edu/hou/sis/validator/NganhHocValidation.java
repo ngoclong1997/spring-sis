@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import vn.edu.hou.sis.entities.NganhHoc;
@@ -17,6 +16,7 @@ public class NganhHocValidation implements Validator {
 	@Autowired
 	private NganhHocService nganhHocService;
 	
+	@SuppressWarnings("unused")
 	private Logger logger = LoggerFactory.getLogger(NganhHocValidation.class);
 
 	@Override
@@ -40,14 +40,12 @@ public class NganhHocValidation implements Validator {
 
 		if (kyHieu.length() > 10 || kyHieu.length() < 2) {
 			errors.rejectValue("kyHieu", "error.nganhHoc.kyHieu.size");
-//			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "kyHieu", "error.nganhHoc.kyHieu.size");
 			return;
 		}
 
 		NganhHoc temp = nganhHocService.findByKyHieu(kyHieu);
 		if (temp != null && nganhHoc.getId() != temp.getId()) {
 			errors.rejectValue("kyHieu", "error.nganhHoc.kyHieu.conflict");
-//			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "kyHieu", "error.nganhHoc.kyHieu.conflict");
 			return;
 		}
 	}

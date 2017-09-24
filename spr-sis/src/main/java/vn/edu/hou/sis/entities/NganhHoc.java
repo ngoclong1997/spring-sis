@@ -2,7 +2,6 @@ package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 /**
  * The persistent class for the nganh_hoc database table.

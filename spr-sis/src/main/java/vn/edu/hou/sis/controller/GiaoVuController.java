@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +28,7 @@ import vn.edu.hou.sis.services.KhoaHocService;
 import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
 import vn.edu.hou.sis.services.SinhVienService;
+import vn.edu.hou.sis.validator.KhoaHocValidation;
 import vn.edu.hou.sis.validator.NganhHocValidation;
 
 @Controller
@@ -46,6 +45,10 @@ public class GiaoVuController {
 	
 	@Autowired
 	NganhHocValidation nganhHocValidatior;
+	@Autowired
+	KhoaHocValidation khoaHocValidation;
+	
+	
 	private Logger logger = LoggerFactory.getLogger(GiaoVuController.class);
 
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
@@ -56,7 +59,10 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc")
 	public String nghiepVuQuanLyNganhHoc(Model model, Principal principal) {
+
+		logger.debug("first!");
 		model.addAttribute("list", nganhHocService.findAll());
+		logger.debug("pass!");
 		return "QuanLyNganhHocPage";
 	}
 
