@@ -30,7 +30,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import vn.edu.hou.sis.validator.HoSoSVFormValidator;
+import vn.edu.hou.sis.validator.HoSoSvValidation;
 
 @EnableWebMvc
 @Configuration
@@ -82,11 +82,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
 		properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
 		return properties;
-	}
-	
-	@Bean(name="hoSoSVFormValidator")
-	public HoSoSVFormValidator getValidator() {
-		return new HoSoSVFormValidator();
 	}
 
 	@Bean(name = "transactionManager")

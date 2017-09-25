@@ -45,7 +45,6 @@ public class HoSoSv implements Serializable {
 	}
 
 	@Column(name = "cmnd")
-	@NotNull
 	private String cmnd;
 
 	
@@ -54,12 +53,11 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "dia_chi")
-	@NotNull
 	private String diaChi;
 
 	
 	@Column(name = "email")
-	@NotNull @Email
+	@Email
 	private String email;
 
 	
@@ -86,7 +84,6 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "ho_ten")
-	@NotNull
 	private String hoTen;
 
 	@Column(name = "is_deleted")
@@ -100,7 +97,6 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "ngay_sinh")
-	@NotNull @Past
 	private Date ngaySinh;
 
 	
@@ -113,7 +109,6 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "sdt")
-	@NotNull
 	private String sdt;
 
 	public HoSoSv() {
@@ -212,9 +207,16 @@ public class HoSoSv implements Serializable {
 	}
 
 	public void setNgaySinh(String ngaySinh) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			this.ngaySinh = sdf.parse(ngaySinh);
+			System.out.println(ngaySinh);
+			if (ngaySinh != null) {
+				if (ngaySinh.length() > 0) {
+					this.ngaySinh = sdf.parse(ngaySinh);
+				} else {
+					this.ngaySinh = null;
+				}
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

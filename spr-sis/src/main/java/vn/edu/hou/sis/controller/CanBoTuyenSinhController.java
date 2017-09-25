@@ -11,14 +11,12 @@ import javax.validation.Valid;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.InitBinder; 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +34,7 @@ import vn.edu.hou.sis.services.CanBoTuyenSinhService;
 import vn.edu.hou.sis.services.SinhVienService;
 import vn.edu.hou.sis.services.UserRoleService;
 import vn.edu.hou.sis.services.UserService;
-import vn.edu.hou.sis.validator.HoSoSVFormValidator;
+import vn.edu.hou.sis.validator.HoSoSvValidation;
 
 @Controller
 public class CanBoTuyenSinhController {
@@ -51,15 +49,10 @@ public class CanBoTuyenSinhController {
 	private SinhVienService sinhVienService;
 	@Autowired
 	private UserService userService;
-	@Autowired
-	@Qualifier("hoSoSVFormValidator")
-	private HoSoSVFormValidator validator;
 	
-	@InitBinder
-	private void initBinder(WebDataBinder binder) {
-		binder.setValidator(validator);
-	}
-
+	@Autowired
+	HoSoSvValidation hoSoSVFormValidator;
+	
 	@RequestMapping(value = "/can-bo-tuyen-sinh", method = RequestMethod.GET)
 	public String canBoTuyenSinhForm(Model model, Principal principal) {
 		model.addAttribute("username", principal.getName());
@@ -77,22 +70,25 @@ public class CanBoTuyenSinhController {
 	
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so", method = RequestMethod.GET)
 	public String themHoSo(Model model, Principal principal) {
-		Map<Integer, String> dsNganhHoc = new LinkedHashMap<Integer, String>();
-		List<NganhHoc> lstNganhHoc = service.findAllNganhHoc();
-		for (NganhHoc nh : lstNganhHoc) {
-			dsNganhHoc.put(nh.getId(), nh.getTenNganh());
-		}
+		List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+//		for (NganhHoc nh : lstNganhHoc) {
+//			dsNganhHoc.put(nh.getId(), nh.getTenNganh());
+//		}
+		
 		model.addAttribute("dsNganhHoc", dsNganhHoc);
 		model.addAttribute("hoSoSV", new HoSoSv());
 		return "ThemHoSoDuTuyenPage";
 	}
 
-	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so", method = RequestMethod.POST)
-	public String xuLyThemHoSo( @Valid @ModelAttribute("hoSoSV") HoSoSv hoSoSV, BindingResult result, Model model, Principal principal) {
-		validator.validate(hoSoSV, result);
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-them-ho-so", method = RequestMethod.POST)
+	public String xuLyThemHoSo(Model model, @Valid @ModelAttribute("hoSoSV") HoSoSv hoSoSV, BindingResult result, Principal principal) {
+		hoSoSVFormValidator.validate(hoSoSV, result);
 		if (result.hasErrors()) {
-			System.out.println(result.toString());
-			return "UnknownError";
+			logger.debug(result.getAllErrors().toString());
+			List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+			model.addAttribute("dsNganhHoc", dsNganhHoc);
+			model.addAttribute("hoSoSV", hoSoSV);
+			return "ThemHoSoDuTuyenPage";
 		}
 		hoSoSV.setNgayLap(new Date());
 		hoSoSV.setHoKhauThuongTru(hoSoSV.getDiaChi());

@@ -19,13 +19,13 @@ public interface HoSoSVRepository extends JpaRepository<HoSoSv, Long> {
 	void deleteHoSoById(Integer id);
 
 	@Query("Select hs from HoSoSv hs where hs.cmnd = ?1 and hs.isDeleted = 0")
-	public HoSoSv findByCmnd(String cmnd);
+	public List<HoSoSv> findByCmnd(String cmnd);
 
 	@Query("Select hs from HoSoSv hs where hs.email = ?1 and hs.isDeleted = 0")
-	public HoSoSv findByEmail(String email);
+	public List<HoSoSv> findByEmail(String email);
 
 	@Query("Select hs from HoSoSv hs where hs.sdt = ?1 and hs.isDeleted = 0")
-	public HoSoSv findBySDT(String sdt);
+	public List<HoSoSv> findBySDT(String sdt);
 
 	@Query("Select n from NganhHoc n where n.isDeleted = 0")
 	public List<NganhHoc> findAllNganhHoc();

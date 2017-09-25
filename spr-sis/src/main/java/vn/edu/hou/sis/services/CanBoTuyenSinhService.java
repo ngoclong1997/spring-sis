@@ -16,9 +16,9 @@ public interface CanBoTuyenSinhService {
 	public HoSoSv findById(Integer id);
 	public void updateHoSoSV(HoSoSv hoSoSV) throws HoSoSVNotFound;
 	public NganhHoc findNganhHocById(Integer id) throws NganhHocNotFound;
-	public HoSoSv findByCmnd(String cmnd);
-	public HoSoSv findBySDT(String sdt);
-	public HoSoSv findByEmail(String email);
+	public List<HoSoSv> findByCmnd(String cmnd);
+	public List<HoSoSv> findBySDT(String sdt);
+	public List<HoSoSv> findByEmail(String email);
 	public void updateTrangThaiHoSo(Integer id);
 	public String findKyHieuByNganhHocId(Integer nganhHocId);
 	public Integer findLopIdByCode(String code);

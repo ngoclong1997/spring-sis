@@ -83,17 +83,17 @@ public class CanBoTuyenSinhServiceImpl implements CanBoTuyenSinhService {
 	}
 
 	@Override
-	public HoSoSv findByCmnd(String cmnd) {
+	public List<HoSoSv> findByCmnd(String cmnd) {
 		return hoSoSVRepository.findByCmnd(cmnd);
 	}
 
 	@Override
-	public HoSoSv findBySDT(String sdt) {
+	public List<HoSoSv> findBySDT(String sdt) {
 		return hoSoSVRepository.findBySDT(sdt);
 	}
 
 	@Override
-	public HoSoSv findByEmail(String email) {
+	public List<HoSoSv> findByEmail(String email) {
 		return hoSoSVRepository.findByEmail(email);
 	}
 

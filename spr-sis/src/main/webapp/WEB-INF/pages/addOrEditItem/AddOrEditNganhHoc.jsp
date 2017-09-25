@@ -57,7 +57,6 @@
 							<f:errors path="kyHieu" class="has-error" style="color: red;"/>
 						</div>
 					</div>
-					</div>
 					<div class="form-group" style="padding-top: 20px;">
 						<div align="right">
 							<button  type="submit" class="btn btn-success">Submit</button>
