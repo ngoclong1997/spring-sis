@@ -150,7 +150,6 @@ public class CanBoTuyenSinhController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/create-student/{id}", method = RequestMethod.GET)
 	public String taoSinhVien(@PathVariable("id") Integer id, Principal principal, Model model) {
-
 		HoSoSv hoSoSV = service.findById(id);
 		hoSoSV.setId(id);
 		hoSoSV.setNgayLap(new Date());

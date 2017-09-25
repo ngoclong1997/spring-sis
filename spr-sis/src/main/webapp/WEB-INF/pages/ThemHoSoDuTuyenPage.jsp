@@ -27,7 +27,7 @@
 					action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-them-ho-so"
 					commandName="hoSoSV">
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Ngành</label>
+						<label class="col-xs-3"><span style="color:red">*</span>Ngành: </label>
 						<div class="col-xs-9 col-sm-9">
 							<form:select path="nganhHocId" name="nganhHocId">
 								<form:option value="-1" label="--- Select ---" />
@@ -39,26 +39,28 @@
 						</div>
 					</div>
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Họ tên:</label>
+						<label class="col-xs-3"><span style="color:red">*</span>Họ tên:</label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="hoTen" name="hoTen"></form:input>
+							<form:input value="${not empty hoSoSV.hoTen ? hoSoSV.hoTen : '' }" path="hoTen" name="hoTen"></form:input>
 							<form:errors path="hoTen" class="error" />
 						</div>
 					</div>
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Giới tính:</label>
+						<label class="col-xs-3"><span style="color:red">*</span>Giới tính:</label>
 						<div class="col-xs-9 col-sm-9">
 							<form:select path="gioiTinh" name="gioiTinh">
-								<form:option ${not empty hoSoSV.gioiTinh && hoSoSV.gioiTinh == '1' ? 'selected' : ''} value="1" label="Nam"></form:option>
-								<form:option ${not empty hoSoSV.gioiTinh && hoSoSV.gioiTinh == '0' ? 'selected' : ''} value="0" label="Nữ"></form:option>
+								<option value = "-1" label = "--- Select ---"></option>
+								<option ${not empty hoSoSV.gioiTinh && hoSoSV.gioiTinh == '1' ? 'selected' : ''} value="1" label="Nam"></option>
+								<option ${not empty hoSoSV.gioiTinh && hoSoSV.gioiTinh == '0' ? 'selected' : ''} value="0" label="Nữ"></option>
+								<option ${not empty hoSoSV.gioiTinh && hoSoSV.gioiTinh == '2' ? 'selected' : ''} value ="2" label = "Khác"></option>
 							</form:select>
 							<form:errors path="gioiTinh" class="error"></form:errors>
 						</div>
 					</div>
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Ngày sinh: </label>
+						<label class="col-xs-3"><span style="color:red">*</span>Ngày sinh: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="ngaySinh" type = "date" pattern = "dd/MM/yyyy"
+							<form:input value="${not empty hoSoSV.ngaySinh ? hoSoSV.ngaySinh : '' }" path="ngaySinh" type = "date" pattern = "dd/MM/yyyy"
 								name="ngaySinh" />
 							<form:errors path="ngaySinh" class="error"></form:errors>
 						</div>
@@ -66,43 +68,44 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Nơi sinh: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="noiSinh" name="noiSinh"></form:input>
+							<form:input value="${not empty hoSoSV.noiSinh ? hoSoSV.noiSinh : '' }" path="noiSinh" name="noiSinh"></form:input>
 							<form:errors path="noiSinh" class="error" />
 						</div>
 					</div>
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Số CMND: </label>
+						<label class="col-xs-3"><span style="color:red">*</span>Số CMND: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="cmnd" name="cmnd"></form:input>
+							<form:input value="${not empty hoSoSV.cmnd ? hoSoSV.cmnd : '' }" path="cmnd" name="cmnd"></form:input>
 							<form:errors path="cmnd" class="error" />
 						</div>
 					</div>
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Dân tộc: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="danToc" name="danToc"></form:input>
+							<form:input value="${not empty hoSoSV.danToc ? hoSoSV.danToc : '' }" path="danToc" name="danToc"></form:input>
 							<form:errors path="danToc" class="error" />
 						</div>
 					</div>
 
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Địa chỉ: </label>
+						<label class="col-xs-3"><span style="color:red">*</span>Địa chỉ: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="diaChi" name="diaChi"></form:input>
+							<form:input value="${not empty hoSoSV.diaChi ? hoSoSV.diaChi : '' }" path="diaChi" name="diaChi"></form:input>
 							<form:errors path="diaChi" class="error" />
 						</div>
 					</div>
 
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Trình độ: </label>
+						<label class="col-xs-3"><span style="color:red">*</span>Trình độ: </label>
 						<div class="col-xs-9 col-sm-9">
 							<form:select path="trinhDo" name="trinhDo">
-								<form:option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '1' ? 'selected' : ''} value="1" label="THPT"></form:option>
-								<form:option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '2' ? 'selected' : ''} value="2" label="THBT"></form:option>
-								<form:option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '3' ? 'selected' : ''} value="3" label="TC Nghề"></form:option>
-								<form:option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '4' ? 'selected' : ''} value="4" label="TC"></form:option>
-								<form:option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '5' ? 'selected' : ''} value="5" label="CĐ"></form:option>
-								<form:option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '6' ? 'selected' : ''} value="6" label="ĐH"></form:option>
+								<option value = "-1" label = "--- Select ---"></option>
+								<option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '1' ? 'selected' : ''} value="1" label="THPT"></option>
+								<option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '2' ? 'selected' : ''} value="2" label="THBT"></option>
+								<option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '3' ? 'selected' : ''} value="3" label="TC Nghề"></option>
+								<option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '4' ? 'selected' : ''} value="4" label="TC"></option>
+								<option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '5' ? 'selected' : ''} value="5" label="CĐ"></option>
+								<option ${not empty hoSoSV.trinhDo && hoSoSV.trinhDo == '6' ? 'selected' : ''} value="6" label="ĐH"></option>
 							</form:select>
 							<form:errors path="trinhDo" class="error" />
 						</div>
@@ -111,7 +114,7 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Năm tốt nghiệp </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="namTotNghiep" name="namTotNghiep"></form:input>
+							<form:input value="${not empty hoSoSV.namTotNghiep ? hoSoSV.namTotNghiep : '' }" path="namTotNghiep" name="namTotNghiep"></form:input>
 							<form:errors path="namTotNghiep" class="error" />
 						</div>
 					</div>
@@ -119,7 +122,7 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Nơi cấp: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="noiCap" name="noiCap"></form:input>
+							<form:input value="${not empty hoSoSV.noiCap ? hoSoSV.noiCap : '' }" path="noiCap" name="noiCap"></form:input>
 							<form:errors path="noiCap" class="error" />
 						</div>
 					</div>
@@ -127,19 +130,21 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Chuyên ngành: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="chuyenNganh" name="chuyenNganh"></form:input>
+							<form:input value="${not empty hoSoSV.chuyenNganh ? hoSoSV.chuyenNganh : '' }" path="chuyenNganh" name="chuyenNganh"></form:input>
 							<form:errors path="chuyenNganh" class="error" />
 						</div>
 					</div>
 
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Ngoại ngữ: </label>
+						<label class="col-xs-3"><span style="color:red">*</span>Ngoại ngữ: </label>
 						<div class="col-xs-9 col-sm-9">
 							<form:select path="ngoaiNgu" name="ngoaiNgu">
-								<form:option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Anh' ? 'selected' : ''} value="Tiếng Anh" label="Tiếng Anh"></form:option>
-								<form:option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Nga' ? 'selected' : ''} value="Tiếng Nga" label="Tiếng Nga"></form:option>
-								<form:option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Trung' ? 'selected' : ''} value="Tiếng Trung" label="Tiếng Trung"></form:option>
-								<form:option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Pháp' ? 'selected' : ''} value="Tiếng Pháp" label="Tiếng Pháp"></form:option>
+								<option value = "NONE" label = "--- Select ---"></option>
+								<option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Anh' ? 'selected' : ''} value="Tiếng Anh" label="Tiếng Anh"></option>
+								<option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Nga' ? 'selected' : ''} value="Tiếng Nga" label="Tiếng Nga"></option>
+								<option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Trung' ? 'selected' : ''} value="Tiếng Trung" label="Tiếng Trung"></option>
+								<option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Tiếng Pháp' ? 'selected' : ''} value="Tiếng Pháp" label="Tiếng Pháp"></option>
+								<option ${not empty hoSoSV.ngoaiNgu && hoSoSV.ngoaiNgu == 'Khác' ? 'selected' : '' } value = "Khác" label  ="Khác"></option>
 							</form:select>
 							<form:errors path="ngoaiNgu" class="error" />
 						</div>
@@ -148,15 +153,15 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Email:</label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="email" name="email"></form:input>
+							<form:input value="${not empty hoSoSV.email ? hoSoSV.email : '' }" path="email" name="email"></form:input>
 							<form:errors path="email" class="error" />
 						</div>
 					</div>
 
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Số điện thoại</label>
+						<label class="col-xs-3"><span style="color:red">*</span>Số điện thoại</label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input path="sdt" name="sdt"></form:input>
+							<form:input value="${not empty hoSoSV.sdt ? hoSoSV.sdt : '' }" path="sdt" name="sdt"></form:input>
 							<form:errors path="sdt" class="error" />
 						</div>
 					</div>

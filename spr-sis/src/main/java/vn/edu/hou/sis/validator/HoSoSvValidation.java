@@ -58,6 +58,18 @@ public class HoSoSvValidation implements Validator{
 			errors.rejectValue("nganhHocId", "error.hoSoSV.nganhHoc.required");
 		}
 		
+		if (creating.getGioiTinh() == -1) {
+			errors.rejectValue("gioiTinh", "error.hoSoSV.gioiTinh.required");
+		}
+		
+		if (creating.getTrinhDo() == -1) {
+			errors.rejectValue("trinhDo", "error.hoSoSV.trinhDo.required");
+		}
+		
+		if (creating.getNgoaiNgu().equals("NONE")) {
+			errors.rejectValue("ngoaiNgu", "error.hoSoSV.ngoaiNgu.required");
+		}
+		
 		List<HoSoSv> hoSoSVByEmail = service.findByEmail(creating.getEmail());
 		if (hoSoSVByEmail != null) if (hoSoSVByEmail.size() > 0) if (hoSoSVByEmail.get(0).getEmail().equals(creating.getEmail())) {
 			errors.rejectValue("email", "error.hoSoSV.email.conflict");
@@ -81,7 +93,6 @@ public class HoSoSvValidation implements Validator{
 		if (!matcher.matches()) {
 			errors.rejectValue("cmnd", "error.hoSoSV.cmnd.invalid");
 		}
-		
 	}
 
 }
