@@ -58,7 +58,7 @@ public class NganhHocValidation implements Validator {
 			return;
 		}
 
-		if (tenNganh.length() > 30 || tenNganh.length() < 10) {
+		if (tenNganh.length() > 30 || tenNganh.length() < 5) {
 			errors.rejectValue("tenNganh", "error.nganhHoc.tenNganh.size");
 //			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "tenNganh", "error.nganhHoc.tenNganh.size");
 			return;

@@ -24,7 +24,7 @@ public class KhoaHocValidation implements Validator {
 
 	private void checkTenKhoaHoc(KhoaHoc temp, Errors error) {
 		String tenKhoaHoc = temp.getTenKhoaHoc();
-		if (tenKhoaHoc.trim().isEmpty() || tenKhoaHoc.trim().length() < 10 || tenKhoaHoc.trim().length() > 30) {
+		if (tenKhoaHoc.trim().isEmpty() || tenKhoaHoc.trim().length() < 5 || tenKhoaHoc.trim().length() > 30) {
 			error.rejectValue("tenKhoaHoc", "error.khoaHoc.tenKhoaHoc.size");
 			return;
 		}

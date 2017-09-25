@@ -1,6 +1,5 @@
 package vn.edu.hou.sis.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -81,9 +80,9 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 
 	@Override
 	public boolean isExist(KhoaHoc khoaHoc) {
-		List<KhoaHoc> list = new ArrayList<>();
-		list = khoaHocRepository.checkExist(khoaHoc.getNamBatDau(), khoaHoc.getNganhHocId());
-		return list.size() != 0;
+		KhoaHoc temp= khoaHocRepository.findByNamBatDauAndNganhHocId(khoaHoc.getNamBatDau(), khoaHoc.getNganhHocId());
+		if(temp != null && khoaHoc.getId() != temp.getId()) return true;
+		return false;
 	}
 
 	@Override

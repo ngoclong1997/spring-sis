@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/vn/edu/hou/sis/controller/GiaoVuController.java=UTF-8
+encoding//src/main/java/vn/edu/hou/sis/entities/HoSoSv.java=UTF-8
 encoding//src/main/webapp/WEB-INF/basefragments/footer.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/menu/sinh-vien_menu.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/pages/QuanLySinhVienPage.jsp=UTF-8

@@ -49,6 +49,7 @@
 							<div class="col-xs-5 col-sm-5" style="padding: 0px;">
 								<f:select class="form-control select2" name="nganhHocId"
 									path="nganhHocId" onchange="getKhoaHoc()">
+									<option value="-1">---	Select	---</option>
 									<c:forEach items="${listNganh}" var="temp">
 										<f:option value="${temp.id}">${temp.tenNganh}</f:option>
 									</c:forEach>
@@ -71,9 +72,16 @@
 												success : function(res) {
 													var htm = "";
 													for (var i = 0; i < res.length; ++i) {
-														htm += "<option value = \"" + res[i].id + "\">"
+														htm += "<option value = \""
+																+ res[i].id
+																+ "\"";
+														if ($(
+																"lopHoc.khoaHocId")
+																.val() == res[i].id)
+															htm += "selected";
+														htm += " >"
 																+ res[i].tenKhoaHoc
-																+ "</option>\"";
+																+ "</option>";
 													}
 
 													$('#khoaHocId').html(htm);
@@ -94,6 +102,9 @@
 								<f:select class="form-control select2" id="khoaHocId"
 									path="khoaHocId" name="khoaHocId">
 									<option value="-1">---	Select	---</option>
+									<c:forEach items="${listKhoaHoc}" var="temp">
+										<f:option value="${temp.id}">${temp.tenKhoaHoc}</f:option>
+									</c:forEach>
 								</f:select>
 							</div>
 							<f:errors path="khoaHocId" class="has-error" style="color: red;" />
@@ -105,9 +116,11 @@
 						<div class="col-xs-9 col-sm-9">
 							<f:select name="code" id="code" path="code">
 								<option value="1">THPT</option>
-								<option value="2">TC</option>
-								<option value="3">CĐ</option>
-								<option value="4">ĐH</option>
+								<option value="2">THBT</option>
+								<option value="3">TC Nghề</option>
+								<option value="4">TC</option>
+								<option value="5">CĐ</option>
+								<option value="6">ĐH</option>
 							</f:select>
 							<f:errors path="code" class="has-error" style="color: red;" />
 						</div>

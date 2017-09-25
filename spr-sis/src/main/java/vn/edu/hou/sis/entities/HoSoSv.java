@@ -6,8 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import java.util.Date;
 
@@ -290,15 +288,15 @@ public class HoSoSv implements Serializable {
 	public String nullProperties() {
 		String properties = "";
 		if (this.cmnd == null || this.cmnd.equals("")) properties += "CMND_";
-		if (this.diaChi == null || this.diaChi.equals("")) properties += "Địa chỉ_";
+		if (this.diaChi == null || this.diaChi.equals("")) properties += "Ä�á»‹a chá»‰_";
 		if (this.email == null || this.email.equals("")) properties += "Email_";
-		if (this.gioiTinh == null) properties += "Giới tính_";
-		if (this.namTotNghiep == null) properties += "Năm tốt nghiệp_";
-		if (this.trinhDo == null) properties += "Trình độ_";
-		if (this.hoTen == null || this.hoTen.equals("")) properties += "Họ tên_";
-		if (this.nganhHocId == null) properties += "Ngành học_";
-		if (this.ngaySinh == null) properties += "Ngày sinh_";
-		if (this.sdt == null || this.sdt.equals("")) properties += "Số điện thoại";
+		if (this.gioiTinh == null) properties += "Giá»›i tĂ­nh_";
+		if (this.namTotNghiep == null) properties += "NÄƒm tá»‘t nghiá»‡p_";
+		if (this.trinhDo == null) properties += "TrĂ¬nh Ä‘á»™_";
+		if (this.hoTen == null || this.hoTen.equals("")) properties += "Há»� tĂªn_";
+		if (this.nganhHocId == null) properties += "NgĂ nh há»�c_";
+		if (this.ngaySinh == null) properties += "NgĂ y sinh_";
+		if (this.sdt == null || this.sdt.equals("")) properties += "Sá»‘ Ä‘iá»‡n thoáº¡i";
 		return properties;
 	}
 

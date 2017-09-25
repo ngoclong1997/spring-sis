@@ -52,7 +52,7 @@
 	href="${pageContext.request.contextPath}/static/Bootstrap-3.3.7/css/bootstrap.min.css" />
 
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+	src="${pageContext.request.contextPath}/static/Bootstrap-3.3.7/js/bootstrap.min.js"></script>
 
 <!--  	data table -->
 <link rel="stylesheet" type="text/css"

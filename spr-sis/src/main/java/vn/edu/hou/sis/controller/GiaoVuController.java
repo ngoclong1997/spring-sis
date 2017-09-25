@@ -29,6 +29,7 @@ import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
 import vn.edu.hou.sis.services.SinhVienService;
 import vn.edu.hou.sis.validator.KhoaHocValidation;
+import vn.edu.hou.sis.validator.LopHocValidation;
 import vn.edu.hou.sis.validator.NganhHocValidation;
 
 @Controller
@@ -45,10 +46,14 @@ public class GiaoVuController {
 
 	@Autowired
 	NganhHocValidation nganhHocValidatior;
-	
+
 	@Autowired
 	KhoaHocValidation khoaHocValidation;
 
+	@Autowired
+	LopHocValidation lopHocValidation;
+
+	@SuppressWarnings("unused")
 	private Logger logger = LoggerFactory.getLogger(GiaoVuController.class);
 
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
@@ -120,7 +125,7 @@ public class GiaoVuController {
 			BindingResult result) {
 		nganhHocValidatior.validate(nganhHoc, result);
 		if (result.hasErrors()) {
-			logger.debug(result.getAllErrors().toString());
+			model.addAttribute("nganhHoc", nganhHoc);
 			return "addOrEditItem/AddOrEditNganhHoc";
 		} else {
 			nganhHoc.setIsDeleted(0);
@@ -180,6 +185,7 @@ public class GiaoVuController {
 		LopHoc lopHoc = lopHocService.findById(id);
 		model.addAttribute("lopHoc", lopHoc);
 		model.addAttribute("listNganh", nganhHocService.findAll());
+		model.addAttribute("listKhoaHoc", khoaHocServices.findKhoaHocByNganhHocId(lopHoc.getNganhHocId().toString()));
 		return "addOrEditItem/AddOrEditLopHoc";
 	}
 
@@ -201,18 +207,17 @@ public class GiaoVuController {
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc/save", method = RequestMethod.POST)
-	public String saveLopHoc(Model model, @ModelAttribute("lopHoc") LopHoc lopHoc) {
-		if (lopHoc.getKhoaHocId() == null) {
-			model.addAttribute("msg", "Không được bỏ trống KHÓA HỌC!");
-			return "ErrorDatabase";
-		} else if (lopHoc.getNganhHocId() == null) {
-			model.addAttribute("msg", "Không được bỏ trống NGÀNH HỌC!");
-			return "ErrorDatabase";
-		}
-		lopHoc.setCode(genCode(lopHoc));
-		if (lopHoc.getId() == null && lopHocService.isExist(lopHoc)) {
-			model.addAttribute("msg", "Lớp Học Đã Tồn Tại!");
-			return "ErrorDatabase";
+	public String saveLopHoc(Model model, @Valid @ModelAttribute("lopHoc") LopHoc lopHoc, BindingResult result) {
+		KhoaHoc k = khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
+		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
+		lopHoc.setCode(lopHocService.genCode(lopHoc, k, nganh));
+		lopHocValidation.validate(lopHoc, result);
+		if (result.hasErrors()) {
+			model.addAttribute("lopHoc", lopHoc);
+			model.addAttribute("listNganh", nganhHocService.findAll());
+			model.addAttribute("listKhoaHoc",
+					khoaHocServices.findKhoaHocByNganhHocId(lopHoc.getNganhHocId().toString()));
+			return "addOrEditItem/AddOrEditLopHoc";
 		}
 		lopHocService.save(lopHoc);
 		return "redirect:/nghiep-vu/quan-ly-lop-hoc";
@@ -228,15 +233,6 @@ public class GiaoVuController {
 			}
 		}
 		return "redirect:/nghiep-vu/quan-ly-lop-hoc";
-	}
-
-	private String genCode(LopHoc lopHoc) {
-		KhoaHoc k = khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
-		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
-		String code = nganh.getKyHieu();
-		int namBatDau = k.getNamBatDau();
-		code += Integer.toString(namBatDau).substring(1, 4);
-		return code;
 	}
 
 	// Sinh Vien
