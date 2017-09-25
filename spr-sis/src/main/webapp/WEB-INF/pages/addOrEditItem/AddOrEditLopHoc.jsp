@@ -14,9 +14,9 @@
 	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
 
-		<tr style="background: aliceblue; height: 20px; padding: 5px;">
-			<td colspan="3">
-				<div class="menu" style="padding: 5px;">
+		<tr style="background: aliceblue; height: 20px; margin: 5px;">
+			<td colspan="3" style="background: #1bc2a2; border-radius: 5px;">
+				<div class="menu">
 					<jsp:include page="/WEB-INF/basefragments/menu.jsp" />
 				</div>
 			</td>
@@ -46,12 +46,14 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Ngành Học</label>
 						<div class="col-xs-9 col-sm-9">
-							<f:select class="form-control select2" name="nganhHocId"
-								path="nganhHocId" onchange="getKhoaHoc()">
-								<c:forEach items="${listNganh}" var="temp">
-									<f:option value="${temp.id}">${temp.tenNganh}</f:option>
-								</c:forEach>
-							</f:select>
+							<div class="col-xs-5 col-sm-5" style="padding: 0px;">
+								<f:select class="form-control select2" name="nganhHocId"
+									path="nganhHocId" onchange="getKhoaHoc()">
+									<c:forEach items="${listNganh}" var="temp">
+										<f:option value="${temp.id}">${temp.tenNganh}</f:option>
+									</c:forEach>
+								</f:select>
+							</div>
 							<f:errors path="nganhHocId" class="has-error" style="color: red;" />
 							<script type="text/javascript">
 								$(function() {
@@ -59,7 +61,6 @@
 								})
 								function getKhoaHoc() {
 									var idNganh = $("#nganhHocId").val();
-									// 			alert(idNganh);
 									$
 											.ajax({
 												type : 'GET',
@@ -69,7 +70,6 @@
 												url : '${pageContext.request.contextPath}/nghiep-vu/quan-ly-lop-hoc/khoa-hoc',
 												success : function(res) {
 													var htm = "";
-													// 											alert(idNganh);		
 													for (var i = 0; i < res.length; ++i) {
 														htm += "<option value = \"" + res[i].id + "\">"
 																+ res[i].tenKhoaHoc
@@ -90,10 +90,12 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Khóa Học</label>
 						<div class="col-xs-9 col-sm-9">
-							<f:select class="form-control select2" id="khoaHocId"
-								path="khoaHocId" name="khoaHocId">
-								<option value="-1">---	Select	---</option>
-							</f:select>
+							<div class="col-xs-5 col-sm-5" style="padding: 0px;">
+								<f:select class="form-control select2" id="khoaHocId"
+									path="khoaHocId" name="khoaHocId">
+									<option value="-1">---	Select	---</option>
+								</f:select>
+							</div>
 							<f:errors path="khoaHocId" class="has-error" style="color: red;" />
 						</div>
 					</div>

@@ -10,7 +10,7 @@ public interface KhoaHocService {
 
 	public KhoaHoc delete(String id) throws KhoaHocNotFound;
 
-	public List<KhoaHoc> findByTenKhoaHoc(String tenKhoa);
+	public KhoaHoc findByTenKhoaHoc(String tenKhoa);
 	
 	public KhoaHoc findById(String id);
 	

@@ -13,9 +13,9 @@
 <body style="heigh: 100%; margin: 10 auto;">
 	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
-		<tr style="background: aliceblue; height: 20px; padding: 5px;">
-			<td colspan="3">
-				<div class="menu" style="padding: 5px;">
+		<tr style="background: aliceblue; height: 20px; margin: 5px;">
+			<td colspan="3" style="background: #1bc2a2; border-radius: 5px;">
+				<div class="menu">
 					<jsp:include page="/WEB-INF/basefragments/menu.jsp" />
 				</div>
 			</td>

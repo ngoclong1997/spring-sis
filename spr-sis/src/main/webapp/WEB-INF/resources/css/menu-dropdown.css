@@ -1,20 +1,20 @@
-.main-navigation {
+#menu {
   list-style: none;
   padding: 0;
   margin: 0;
   background: #1bc2a2;
 }
 
-.main-navigation li {
+#menu li {
   display: block;
   position: relative;
   float: left;
   background: #1bc2a2;
 }
 
-.main-navigation li ul { display: none; }
+#menu li ul { display: none; }
 
-.main-navigation li a {
+#menu li a {
   display: block;
   padding: 1em;
   text-decoration: none;
@@ -22,30 +22,30 @@
   color: #fff;
 }
 
-.main-navigation li a:hover { background: #2c3e50; color: white; text-decoration: none;}
+#menu li a:hover { background: #2c3e50; color: white; text-decoration: none;}
 
-.main-navigation li:hover > ul {
+#menu li:hover > ul {
   display: block;
   position: absolute;
 }
 
-.main-navigation li:hover li { float: none; }
+#menu li:hover li { float: none; }
 
-.main-navigation li:hover a { background: #1bc2a2; }
+#menu li:hover a { background: #1bc2a2; }
 
-.main-navigation li:hover li a:hover { background: #2c3e50; }
+#menu li:hover li a:hover { background: #2c3e50; }
 
 .main-navigation li ul li { border-top: 0; }
 
-.main-navigation ul ul {
+#menu ul ul {
   left: 100%;
   top: 0;
 }
 
-.main-navigation ul:before,
-.main-navigation ul:after {
+#menu ul:before,
+#menu ul:after {
   content: " "; /* 1 */
   display: table; /* 2 */
 }
 
-.main-navigation ul:after { clear: both; }
+#menu ul:after { clear: both; }

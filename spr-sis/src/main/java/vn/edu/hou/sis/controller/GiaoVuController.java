@@ -42,13 +42,13 @@ public class GiaoVuController {
 	private LopHocService lopHocService;
 	@Autowired
 	private SinhVienService sinhVienService;
-	
+
 	@Autowired
 	NganhHocValidation nganhHocValidatior;
+	
 	@Autowired
 	KhoaHocValidation khoaHocValidation;
-	
-	
+
 	private Logger logger = LoggerFactory.getLogger(GiaoVuController.class);
 
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
@@ -59,10 +59,7 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc")
 	public String nghiepVuQuanLyNganhHoc(Model model, Principal principal) {
-
-		logger.debug("first!");
 		model.addAttribute("list", nganhHocService.findAll());
-		logger.debug("pass!");
 		return "QuanLyNganhHocPage";
 	}
 
@@ -89,7 +86,7 @@ public class GiaoVuController {
 	}
 
 	// Ngành Học
-	
+
 	@RequestMapping("/nghiep-vu/quan-ly-nganh-hoc/delete")
 	public String deleteNganhHoc(Model model, @RequestParam("id") String id) {
 		if (id != null) {
@@ -119,7 +116,8 @@ public class GiaoVuController {
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc/save", method = RequestMethod.POST)
-	public String saveNganhHoc(Model model,@Valid  @ModelAttribute("nganhHoc") NganhHoc nganhHoc, BindingResult result) {
+	public String saveNganhHoc(Model model, @Valid @ModelAttribute("nganhHoc") NganhHoc nganhHoc,
+			BindingResult result) {
 		nganhHocValidatior.validate(nganhHoc, result);
 		if (result.hasErrors()) {
 			logger.debug(result.getAllErrors().toString());
@@ -141,10 +139,12 @@ public class GiaoVuController {
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-khoa-hoc/save", method = RequestMethod.POST)
-	public String saveKhoaHoc(Model model, @ModelAttribute("khoaHoc") KhoaHoc khoaHoc) {
-		if (khoaHoc.getId() == null && khoaHocServices.isExist(khoaHoc)) {
-			model.addAttribute("msg", "Khóa Học Đã Tồn Tại!");
-			return "ErrorDatabase";
+	public String saveKhoaHoc(Model model, @Valid @ModelAttribute("khoaHoc") KhoaHoc khoaHoc, BindingResult result) {
+		khoaHocValidation.validate(khoaHoc, result);
+		if (result.hasErrors()) {
+			model.addAttribute("khoaHoc", khoaHoc);
+			model.addAttribute("listNganh", nganhHocService.findAll());
+			return "addOrEditItem/AddOrEditKhoaHoc";
 		}
 		khoaHocServices.save(khoaHoc);
 		return "redirect:/nghiep-vu/quan-ly-khoa-hoc";

@@ -7,7 +7,7 @@
 	color: white;
 }
 </style>
-<ul class="main-navigation">
+<ul class="main-navigation" id = "menu">
 	<li><a href="${pageContext.request.contextPath }/home"
 		id="labelMenu"><spring:message code="label.menu.HomePage"></spring:message></a></li>
 	<li><a href="#"><spring:message code="label.menu.major"></spring:message></a>

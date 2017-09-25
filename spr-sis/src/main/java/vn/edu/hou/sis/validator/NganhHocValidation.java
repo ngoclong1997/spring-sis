@@ -10,6 +10,7 @@ import org.springframework.validation.Validator;
 import vn.edu.hou.sis.entities.NganhHoc;
 import vn.edu.hou.sis.services.NganhHocService;
 
+
 @Component
 public class NganhHocValidation implements Validator {
 
@@ -27,11 +28,11 @@ public class NganhHocValidation implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		NganhHoc nganhHoc = (NganhHoc) target;
-		tenNganhValidaton(nganhHoc, errors);
-		kyHieuValidaton(nganhHoc, errors);
+		checkTenNganh(nganhHoc, errors);
+		checkKyHieu(nganhHoc, errors);
 	}
 
-	private void kyHieuValidaton(NganhHoc nganhHoc, Errors errors) {
+	private void checkKyHieu(NganhHoc nganhHoc, Errors errors) {
 		String kyHieu = nganhHoc.getKyHieu();
 
 		if (errors.hasFieldErrors("kyHieu")) {
@@ -50,7 +51,7 @@ public class NganhHocValidation implements Validator {
 		}
 	}
 
-	private void tenNganhValidaton(NganhHoc nganhHoc, Errors errors) {
+	private void checkTenNganh(NganhHoc nganhHoc, Errors errors) {
 		String tenNganh = nganhHoc.getTenNganh();
 
 		if (errors.hasFieldErrors("tenNganh")) {

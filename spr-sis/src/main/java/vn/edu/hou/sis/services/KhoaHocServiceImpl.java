@@ -39,7 +39,7 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 	}
 
 	@Override
-	public List<KhoaHoc> findByTenKhoaHoc(String tenKhoa) {
+	public KhoaHoc findByTenKhoaHoc(String tenKhoa) {
 		return khoaHocRepository.findKhoaHocByTenKhoaHoc(tenKhoa);
 	}
 

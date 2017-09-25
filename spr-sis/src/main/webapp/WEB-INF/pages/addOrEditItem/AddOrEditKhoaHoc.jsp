@@ -17,9 +17,9 @@
 	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
 
-		<tr style="background: aliceblue; height: 20px; padding: 5px;">
-			<td colspan="3">
-				<div class="menu" style="padding: 5px;">
+		<tr style="background: aliceblue; height: 20px; margin: 5px;">
+			<td colspan="3" style="background: #1bc2a2; border-radius: 5px;">
+				<div class="menu">
 					<jsp:include page="/WEB-INF/basefragments/menu.jsp" />
 				</div>
 			</td>
@@ -37,6 +37,8 @@
 						<h2>
 				</c:if></td>
 			<td width="10%"></td>
+		</tr>
+		<tr>
 		</tr>
 		<tr>
 			<td width="10%"></td>
@@ -59,16 +61,18 @@
 						<label class="col-xs-3">Năm Bắt Đầu</label>
 						<div class="col-xs-9 col-sm-9">
 							<f:input path="namBatDau" name="namBatDau" class="col-sm-5"
-								value="${khoaHoc.namBatDau}" />
+								type="number" min="2017"
+								value="${khoaHoc.namBatDau != null ? khoaHoc.namBatDau : 2017}" />
 							<f:errors path="namBatDau" class="has-error col-sm-4"
 								style="color: red;" />
 						</div>
 					</div>
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Năm Bắt Đầu</label>
+						<label class="col-xs-3">Năm Kết Thúc</label>
 						<div class="col-xs-9 col-sm-9">
 							<f:input path="namKetThuc" name="namKetThuc" class="col-sm-5"
-								value="${khoaHoc.namKetThuc}" />
+								type="number" min="2018"
+								value="${khoaHoc.namKetThuc != null ? khoaHoc.namKetThuc : 2018}" />
 							<f:errors path="namKetThuc" class="has-error col-sm-4"
 								style="color: red;" />
 						</div>
@@ -76,11 +80,11 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Ngành Học</label>
 						<div class="col-xs-9 col-sm-9">
-							<div class="col-xs-5 col-sm-5" style="padding:0px;">
+							<div class="col-xs-5 col-sm-5" style="padding: 0px;">
 								<f:select class="form-control select2" name="nganhHocId"
 									path="nganhHocId">
 									<c:forEach items="${listNganh}" var="temp">
-										<f:option value="${temp.id}" >${temp.tenNganh}</f:option>
+										<f:option value="${temp.id}">${temp.tenNganh}</f:option>
 									</c:forEach>
 								</f:select>
 								<script>
