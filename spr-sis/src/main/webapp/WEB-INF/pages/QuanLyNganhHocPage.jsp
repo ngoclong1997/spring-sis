@@ -27,7 +27,20 @@
 			</td>
 		</tr>
 		<tr id="space"></tr>
-		<tr id="space"></tr>
+		<tr align="left">
+			<c:if test="${success eq true }">
+				<div class="alert alert-warning alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.success.msg"></spring:message></strong>
+				</div>
+			</c:if>
+			<c:if test="${success eq false }">
+				<div class="alert alert-success alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.warning.msg"></spring:message></strong>
+				</div>
+			</c:if>
+		</tr>
 
 		<tr align="left">
 			<td width="0%"></td>
@@ -59,7 +72,7 @@
 									class="btn btn-primary"> <span
 										class="glyphicon glyphicon-pencil"></span></a> <span
 									data-placement="top" data-toggle="modal" title="Xóa ngành học"><button
-											id="func_btn" class="btn btn-danger" data-id="${hssv.id }"
+											id="func_btn" class="btn btn-danger" data-id="${temp.id }"
 											data-title="Delete" data-toggle="modal"
 											href="#xoaNganhHoc_${temp.id}">
 											<span class="glyphicon glyphicon-trash"></span>

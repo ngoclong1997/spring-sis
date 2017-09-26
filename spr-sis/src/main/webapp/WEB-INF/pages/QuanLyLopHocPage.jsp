@@ -62,14 +62,14 @@
 									</c:forEach></td>
 								<td><a href="quan-ly-lop-hoc/edit?id=${temp.id}"
 									class="btn btn-primary"> <span
-										class="glyphicon glyphicon-pencil" title="Sửa lớp học"></span></a> <span
-									data-placement="top" data-toggle="modal" title="Xóa lớp học">
-										<button id="func_btn" class="btn btn-danger"
-											data-id="${temp.id }" data-title="Delete" data-toggle="modal"
+										class="glyphicon glyphicon-pencil" title="Sửa lớp học"></span></a>
+									<span data-placement="top" data-toggle="modal"
+									title="Xóa lớp học"><button id="func_btn"
+											class="btn btn-danger" data-id="${temp.id }"
+											data-title="Delete" data-toggle="modal"
 											href="#xoaLopHoc_${temp.id}">
 											<span class="glyphicon glyphicon-trash"></span>
-										</button>
-								</span></td>
+										</button> </span></td>
 
 
 							</tr>

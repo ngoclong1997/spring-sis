@@ -97,4 +97,16 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 		return list;
 	}
 
+	@Override
+	public boolean isDeleteNganhHoc(String nganhHocId) {
+		List<KhoaHoc> list = null;
+		try {
+			int iId = Integer.parseInt(nganhHocId);
+			list = khoaHocRepository.findKhoaHocByNganhHocId(iId);
+		} catch (Exception e) {
+			return false;
+		}
+		return list == null;
+	}
+
 }

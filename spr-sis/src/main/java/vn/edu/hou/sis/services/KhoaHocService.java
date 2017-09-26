@@ -23,4 +23,6 @@ public interface KhoaHocService {
 	public boolean isExist(KhoaHoc khoaHoc);
 	
 	public List<KhoaHoc> findKhoaHocByNganhHocId(String nganhHocId);
+	
+	public boolean isDeleteNganhHoc(String nganhHocId);
 }

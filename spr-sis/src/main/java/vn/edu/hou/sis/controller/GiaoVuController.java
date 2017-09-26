@@ -53,6 +53,8 @@ public class GiaoVuController {
 	@Autowired
 	LopHocValidation lopHocValidation;
 
+	private int status = 0;
+
 	@SuppressWarnings("unused")
 	private Logger logger = LoggerFactory.getLogger(GiaoVuController.class);
 
@@ -65,6 +67,12 @@ public class GiaoVuController {
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc")
 	public String nghiepVuQuanLyNganhHoc(Model model, Principal principal) {
 		model.addAttribute("list", nganhHocService.findAll());
+		if (this.status == 1) {
+			model.addAttribute("success", true);
+		} else if (this.status == 2) {
+			model.addAttribute("success", false);
+		}
+		this.status = 0;
 		return "QuanLyNganhHocPage";
 	}
 
@@ -73,6 +81,12 @@ public class GiaoVuController {
 		model.addAttribute("listNganh", nganhHocService.findAll());
 		model.addAttribute("listKhoaHoc", khoaHocServices.findAll());
 		model.addAttribute("listLop", lopHocService.findAll());
+		if (this.status == 1) {
+			model.addAttribute("success", true);
+		} else if (this.status == 2) {
+			model.addAttribute("success", false);
+		}
+		this.status = 0;
 		return "QuanLyLopHocPage";
 	}
 
@@ -80,6 +94,12 @@ public class GiaoVuController {
 	public String nghiepVuQuanLyKhoaHoc(Model model, Principal principal) {
 		model.addAttribute("listKhoaHoc", khoaHocServices.findAll());
 		model.addAttribute("listNganhHoc", nganhHocService.findAll());
+		if (this.status == 1) {
+			model.addAttribute("success", true);
+		} else if (this.status == 2) {
+			model.addAttribute("success", false);
+		}
+		this.status = 0;
 		return "QuanLyKhoaHocPage";
 	}
 
@@ -94,11 +114,19 @@ public class GiaoVuController {
 
 	@RequestMapping("/nghiep-vu/quan-ly-nganh-hoc/delete")
 	public String deleteNganhHoc(Model model, @RequestParam("id") String id) {
-		if (id != null) {
+		if (id.trim().length() > 0) {
 			try {
-				nganhHocService.delete(id);
+				if (khoaHocServices.isDeleteNganhHoc(id)) {
+					nganhHocService.delete(id);
+					this.status = 1;
+					return "redirect:/nghiep-vu/quan-ly-nganh- hoc";
+				} else {
+					this.status = 2;
+					return "redirect:/nghiep-vu/quan-ly-nganh-hoc";
+				}
 			} catch (NganhHocNotFound e) {
-				e.printStackTrace();
+				this.status = 2;
+				return "redirect:/nghiep-vu/quan-ly-nganh-hoc";
 			}
 		}
 		return "redirect:/nghiep-vu/quan-ly-nganh-hoc";
@@ -167,11 +195,19 @@ public class GiaoVuController {
 
 	@RequestMapping("/nghiep-vu/quan-ly-khoa-hoc/delete")
 	public String deleteKhoaHoc(Model model, @RequestParam("id") String id) {
-		if (id != null) {
+		if (id.trim().length() > 0) {
 			try {
-				khoaHocServices.delete(id);
+				if (lopHocService.isDeleteKhoaHoc(id)) {
+					khoaHocServices.delete(id);
+					this.status = 1;
+					return "redirect:/nghiep-vu/quan-ly-khoa- hoc";
+				} else {
+					this.status = 2;
+					return "redirect:/nghiep-vu/quan-ly-khoa-hoc";
+				}
 			} catch (KhoaHocNotFound e) {
-				e.printStackTrace();
+				this.status = 2;
+				return "redirect:/nghiep-vu/quan-ly-khoa-hoc";
 			}
 		}
 		return "redirect:/nghiep-vu/quan-ly-khoa-hoc";

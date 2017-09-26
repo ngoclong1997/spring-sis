@@ -27,7 +27,20 @@
 			</td>
 		</tr>
 		<tr id="space"></tr>
-		<tr id="space"></tr>
+		<tr>
+			<c:if test="${success eq true }">
+				<div class="alert alert-warning alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.success.msg"></spring:message></strong>
+				</div>
+			</c:if>
+			<c:if test="${success eq false }">
+				<div class="alert alert-success alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.warning.msg"></spring:message></strong>
+				</div>
+			</c:if>
+		</tr>
 
 		<tr align="left">
 			<td width="0%"></td>
@@ -63,13 +76,12 @@
 								<td><a href="quan-ly-khoa-hoc/edit?id=${temp.id}"
 									class="btn btn-primary"> <span
 										class="glyphicon glyphicon-pencil"></span></a> <span
-									data-placement="top" data-toggle="modal" title="Xóa khóa học">
-										<button id="func_btn" class="btn btn-danger"
-											data-id="${temp.id }" data-title="Delete" data-toggle="modal"
+									data-placement="top" data-toggle="modal" title="Xóa khóa học"><button
+											id="func_btn" class="btn btn-danger" data-id="${temp.id }"
+											data-title="Delete" data-toggle="modal"
 											href="#xoaKhoaHoc_${temp.id}">
 											<span class="glyphicon glyphicon-trash"></span>
-										</button>
-								</span></td>
+										</button> </span></td>
 							</tr>
 
 							<!-- Modal xóa khóa học -->
@@ -79,7 +91,7 @@
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h4 class="modal-title">Xóa khóa học</h4>
+											<h4 class="modal-title">Xóa ngành học</h4>
 										</div>
 										<div class="modal-body">
 											<h3>Bạn có chắc muốn xóa khóa học ${temp.tenKhoaHoc}

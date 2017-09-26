@@ -99,4 +99,16 @@ public class LopHocServiceImpl implements LopHocService {
 		return code;
 	}
 
+	@Override
+	public boolean isDeleteKhoaHoc(String nganhHocId) {
+		List<LopHoc> lopHoc = null;
+		try {
+			int iId = Integer.parseInt(nganhHocId);
+			lopHoc = lopHocRespository.findLopHocByKhoaHocId(iId);
+		} catch (Exception e) {
+			return false;
+		}
+		return lopHoc == null;
+	}
+
 }
