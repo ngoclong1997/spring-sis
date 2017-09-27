@@ -83,6 +83,7 @@
 							<div class="col-xs-5 col-sm-5" style="padding: 0px;">
 								<f:select class="form-control select2" name="nganhHocId"
 									path="nganhHocId">
+									<f:option value="-1">--- Select ---</f:option>
 									<c:forEach items="${listNganh}" var="temp">
 										<f:option value="${temp.id}">${temp.tenNganh}</f:option>
 									</c:forEach>

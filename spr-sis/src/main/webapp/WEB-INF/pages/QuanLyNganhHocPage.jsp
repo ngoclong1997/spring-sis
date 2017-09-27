@@ -29,13 +29,13 @@
 		<tr id="space"></tr>
 		<tr align="left">
 			<c:if test="${success eq true }">
-				<div class="alert alert-warning alert-dismissible">
+				<div class="alert alert-success alert-dismissible">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong><spring:message code="laben.delete.success.msg"></spring:message></strong>
 				</div>
 			</c:if>
 			<c:if test="${success eq false }">
-				<div class="alert alert-success alert-dismissible">
+				<div class="alert alert-warning alert-dismissible">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong><spring:message code="laben.delete.warning.msg"></spring:message></strong>
 				</div>

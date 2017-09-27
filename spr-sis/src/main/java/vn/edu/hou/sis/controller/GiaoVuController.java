@@ -244,9 +244,6 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc/save", method = RequestMethod.POST)
 	public String saveLopHoc(Model model, @Valid @ModelAttribute("lopHoc") LopHoc lopHoc, BindingResult result) {
-		KhoaHoc k = khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
-		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
-		lopHoc.setCode(lopHocService.genCode(lopHoc, k, nganh));
 		lopHocValidation.validate(lopHoc, result);
 		if (result.hasErrors()) {
 			model.addAttribute("lopHoc", lopHoc);

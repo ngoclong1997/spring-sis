@@ -90,8 +90,6 @@ public class LopHocServiceImpl implements LopHocService {
 
 	@Override
 	public String genCode(LopHoc lopHoc, KhoaHoc k, NganhHoc nganh) {
-//		KhoaHoc k = khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
-//		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
 		String code = nganh.getKyHieu();
 		int namBatDau = k.getNamBatDau();
 		code += Integer.toString(namBatDau).substring(1, 4);
@@ -100,10 +98,10 @@ public class LopHocServiceImpl implements LopHocService {
 	}
 
 	@Override
-	public boolean isDeleteKhoaHoc(String nganhHocId) {
+	public boolean isDeleteKhoaHoc(String khoaHocId) {
 		List<LopHoc> lopHoc = null;
 		try {
-			int iId = Integer.parseInt(nganhHocId);
+			int iId = Integer.parseInt(khoaHocId);
 			lopHoc = lopHocRespository.findLopHocByKhoaHocId(iId);
 		} catch (Exception e) {
 			return false;
