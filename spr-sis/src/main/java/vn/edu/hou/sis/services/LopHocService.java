@@ -23,8 +23,8 @@ public interface LopHocService {
 	public boolean isDeleted(String id);
 
 	public boolean isExist(LopHoc lopHoc);
-	
+
 	public String genCode(LopHoc lopHoc, KhoaHoc k, NganhHoc nganh);
-	
+
 	public boolean isDeleteKhoaHoc(String nganhHocId);
 }

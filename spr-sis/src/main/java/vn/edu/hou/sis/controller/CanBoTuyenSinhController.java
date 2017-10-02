@@ -1,19 +1,30 @@
 package vn.edu.hou.sis.controller;
 
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.qos.logback.classic.Logger;
 import vn.edu.hou.sis.entities.HoSoSv;
@@ -24,9 +35,11 @@ import vn.edu.hou.sis.entities.UserRole;
 import vn.edu.hou.sis.exceptions.HoSoSVNotFound;
 import vn.edu.hou.sis.exceptions.NganhHocNotFound;
 import vn.edu.hou.sis.services.CanBoTuyenSinhService;
+import vn.edu.hou.sis.services.NganhHocService;
 import vn.edu.hou.sis.services.SinhVienService;
 import vn.edu.hou.sis.services.UserRoleService;
 import vn.edu.hou.sis.services.UserService;
+import vn.edu.hou.sis.validator.HoSoSvValidation;
 
 @Controller
 public class CanBoTuyenSinhController {
@@ -41,11 +54,25 @@ public class CanBoTuyenSinhController {
 	private SinhVienService sinhVienService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private NganhHocService nganhHocService;
+
+	@Autowired
+	HoSoSvValidation hoSoSVFormValidator;
 
 	@RequestMapping(value = "/can-bo-tuyen-sinh", method = RequestMethod.GET)
 	public String canBoTuyenSinhForm(Model model, Principal principal) {
 		model.addAttribute("username", principal.getName());
 		return "redirect:home";
+	}
+	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/get-nganh-hoc", method = RequestMethod.GET)
+	@ResponseBody
+	public String getNganhHoc(HttpServletRequest request) {
+		String nganhHocId = request.getParameter("nganhHocId");
+		System.out.println(nganhHocId);
+		NganhHoc nganhHoc = nganhHocService.findById(nganhHocId);
+		return nganhHoc.getTenNganh();
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen", method = RequestMethod.GET)
@@ -57,40 +84,59 @@ public class CanBoTuyenSinhController {
 		return "QuanLyHoSoDuTuyenPage";
 	}
 
-	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so", method = RequestMethod.POST)
-	public String xuLyThemHoSo(@ModelAttribute HoSoSv hoSoSV, BindingResult result, Model model, Principal principal) {
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so", method = RequestMethod.GET)
+	public String themHoSo(Model model, Principal principal) {
+		List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+		model.addAttribute("job", "insert");
+		model.addAttribute("dsNganhHoc", dsNganhHoc);
+		model.addAttribute("hoSoSV", new HoSoSv());
+		return "NghiepVuQuanLyHoSoDuTuyenPage";
+	}
+
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-them-ho-so", method = RequestMethod.POST)
+	public String xuLyThemHoSo(Model model, @Valid @ModelAttribute("hoSoSV") HoSoSv hoSoSV, BindingResult result,
+			Principal principal) {
+		hoSoSVFormValidator.validate(hoSoSV, result);
 		if (result.hasErrors()) {
-			return "UnknownError";
+			logger.debug(result.getAllErrors().toString());
+			List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+			model.addAttribute("job", "insert");
+			model.addAttribute("dsNganhHoc", dsNganhHoc);
+			model.addAttribute("hoSoSV", hoSoSV);
+			return "NghiepVuQuanLyHoSoDuTuyenPage";
 		}
 		hoSoSV.setNgayLap(new Date());
 		hoSoSV.setHoKhauThuongTru(hoSoSV.getDiaChi());
 		hoSoSV.setIsDeleted(0);
 		hoSoSV.setCbTuyenSinhUsername(principal.getName());
 		hoSoSV.setTrangThaiHoSo(0);
-		List<HoSoSv> hssvEmail = service.findByEmail(hoSoSV.getEmail());
-		List<HoSoSv> hssvSDT = service.findBySDT(hoSoSV.getSdt());
-		List<HoSoSv> hssvCmnd = service.findByCmnd(hoSoSV.getCmnd());
-		if (hssvEmail.size() != 0) {
-			model.addAttribute("info", "Không thể thêm sinh viên, Email bị trùng");
-			return "CreateStudentRecordFailedPage";
-		}
-		if (hssvSDT.size() != 0) {
-			model.addAttribute("info", "Không thể thêm sinh viên, Số điện thoại bị trùng");
-			return "CreateStudentRecordFailedPage";
-		}
-		if (hssvCmnd.size() != 0) {
-			model.addAttribute("info", "Không thể thêm sinh viên, CMND bị trùng");
-			return "CreateStudentRecordFailedPage";
-		}
 		service.create(hoSoSV);
 		return "redirect:/nghiep-vu/quan-ly-ho-so-du-tuyen";
 	}
 
-	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/update/{id}", method = RequestMethod.POST)
-	public String xuLyCapNhatHoSo(@ModelAttribute("hoSoSVUpdated") HoSoSv hoSoSV, @PathVariable("id") Integer id,
-			BindingResult result, Principal principal) {
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/sua-ho-so/{id}", method = RequestMethod.GET)
+	public String suaHoSo(@PathVariable("id") Integer id, Model model, Principal principal) {
+		List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+
+		HoSoSv hoSoSV = service.findById(id);
+		System.out.println("Updating:  " + hoSoSV);
+		model.addAttribute("job", "update");
+		model.addAttribute("dsNganhHoc", dsNganhHoc);
+		model.addAttribute("hoSoSV", hoSoSV);
+		return "NghiepVuQuanLyHoSoDuTuyenPage";
+	}
+
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-sua-ho-so/{id}", method = RequestMethod.POST)
+	public String xuLyCapNhatHoSo(@ModelAttribute("hoSoSV") HoSoSv hoSoSV, @PathVariable("id") Integer id,
+			BindingResult result, Principal principal, Model model) {
+		//hoSoSVFormValidator.validate(hoSoSV, result);
 		if (result.hasErrors()) {
-			return "UnknownError";
+			logger.debug(result.getAllErrors().toString());
+			List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+			model.addAttribute("job", "update");
+			model.addAttribute("dsNganhHoc", dsNganhHoc);
+			model.addAttribute("hoSoSV", hoSoSV);
+			return "NghiepVuQuanLyHoSoDuTuyenPage";
 		}
 		hoSoSV.setId(id);
 		hoSoSV.setNgayLap(new Date());
@@ -137,7 +183,6 @@ public class CanBoTuyenSinhController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/create-student/{id}", method = RequestMethod.GET)
 	public String taoSinhVien(@PathVariable("id") Integer id, Principal principal, Model model) {
-
 		HoSoSv hoSoSV = service.findById(id);
 		hoSoSV.setId(id);
 		hoSoSV.setNgayLap(new Date());
@@ -145,19 +190,21 @@ public class CanBoTuyenSinhController {
 		hoSoSV.setIsDeleted(0);
 		hoSoSV.setCbTuyenSinhUsername(principal.getName());
 		if (hoSoSV.getTrangThaiHoSo() == 1) {
-			model.addAttribute("info", "Sinh viên đã được tạo!!");
+			model.addAttribute("info", "Sinh viÃªn Ä‘Ã£ Ä‘Æ°á»£c táº¡o!!");
 			return "LoiTaoSinhVienPage";
 		}
 		if (hoSoSV.nullProperties() != "") {
-			model.addAttribute("info", "Các trường bị thiếu");
+			model.addAttribute("info", "CÃ¡c trÆ°á»�ng bá»‹ thiáº¿u");
 			String nullProperties[] = hoSoSV.nullProperties().split("_");
 			model.addAttribute("nullProperties", nullProperties);
 			return "LoiTaoSinhVienPage";
 		}
+		User user = null;
 
-		User user = new User(hoSoSV.getCmnd(), hoSoSV.getDiaChi(), hoSoSV.getEmail(), hoSoSV.getGioiTinh(),
+		user = new User(hoSoSV.getCmnd(), hoSoSV.getDiaChi(), hoSoSV.getEmail(), hoSoSV.getGioiTinh(),
 				hoSoSV.getHoTen(), 0, hoSoSV.getNgaySinh(), "", hoSoSV.getCmnd(), hoSoSV.getSdt(), "",
 				hoSoSV.getEmail());
+
 		user.setIsDeleted(0);
 		userService.create(user);
 
@@ -168,7 +215,7 @@ public class CanBoTuyenSinhController {
 		sinhVien.setNganhHocId(hoSoSV.getNganhHocId());
 		sinhVien.setIsDeleted(0);
 
-		// Tạo mã phân đoạn
+		// Táº¡o mÃ£ phÃ¢n Ä‘oáº¡n
 		String maNganh = service.findKyHieuByNganhHocId(hoSoSV.getNganhHocId());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(hoSoSV.getNgayLap());
@@ -187,7 +234,7 @@ public class CanBoTuyenSinhController {
 		userRoleService.create(userRole);
 
 		service.updateTrangThaiHoSo(id);
-		logger.debug(principal.getName() + " đã tạo sinh viên " + hoSoSV.getHoTen());
+		logger.debug(principal.getName() + " Ä‘Ã£ táº¡o sinh viÃªn " + hoSoSV.getHoTen());
 		return "redirect:/nghiep-vu/quan-ly-ho-so-du-tuyen";
 	}
 

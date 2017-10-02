@@ -27,7 +27,20 @@
 			</td>
 		</tr>
 		<tr id="space"></tr>
-		<tr id="space"></tr>
+		<tr>
+			<c:if test="${success eq true }">
+				<div class="alert alert-success alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.success.msg"></spring:message></strong>
+				</div>
+			</c:if>
+			<c:if test="${success eq false }">
+				<div class="alert alert-warning alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.warning.msg"></spring:message></strong>
+				</div>
+			</c:if>
+		</tr>
 		<tr align="left">
 			<td width="100%" align="left">
 				<table id="table_nganhHoc"

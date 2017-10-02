@@ -70,7 +70,7 @@
 												},
 												url : '${pageContext.request.contextPath}/nghiep-vu/quan-ly-lop-hoc/khoa-hoc',
 												success : function(res) {
-													var htm = "";
+													var htm = "<option value=\"-1\">---	Select	---</option>";
 													for (var i = 0; i < res.length; ++i) {
 														htm += "<option value = \""
 																+ res[i].id

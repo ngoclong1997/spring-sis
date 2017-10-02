@@ -7,19 +7,23 @@ import org.springframework.data.jpa.repository.Query;
 
 import vn.edu.hou.sis.entities.KhoaHoc;
 
-public interface KhoaHocRespository extends JpaRepository<KhoaHoc, Long>{
+public interface KhoaHocRespository extends JpaRepository<KhoaHoc, Long> {
 	@Query("select k from KhoaHoc k where k.isDeleted = 0")
 	public List<KhoaHoc> findKhoaHocByIsdeleted();
-	
+
 	@Query("select k from KhoaHoc k where k.id = ?1 and k.isDeleted = 0")
 	public KhoaHoc findKhoaHocById(Integer id);
-	
+
 	@Query("select k from KhoaHoc k where k.namBatDau = ?1 and k.nganhHocId = ?2 and k.isDeleted = 0")
-	public KhoaHoc findByNamBatDauAndNganhHocId(Integer namBatDau, Integer nganhHocId);
-	
+	public List<KhoaHoc> checkExist(Integer namBatDau, Integer nganhHocId);
+
 	@Query("select k from KhoaHoc k where k.nganhHocId = ?1 and k.isDeleted = 0")
 	public List<KhoaHoc> findKhoaHocByNganhHocId(Integer nganhHocId);
-	
+
 	@Query("select k from KhoaHoc k where k.tenKhoaHoc = ?1 and k.isDeleted = 0")
-	public KhoaHoc findKhoaHocByTenKhoaHoc(String tenKhoaHoc);
+	public List<KhoaHoc> findKhoaHocByTenKhoaHoc(String tenKhoaHoc);
+
+	@Query("select k from KhoaHoc k where k.namBatDau = ?1 and k.nganhHocId = ?2 and k.isDeleted = 0")
+	public KhoaHoc findByNamBatDauAndNganhHocId(Integer namBatDau, Integer nganhHocId);
+
 }
