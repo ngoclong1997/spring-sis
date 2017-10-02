@@ -2,7 +2,9 @@ package vn.edu.hou.sis.services;
 
 import java.util.List;
 
+import vn.edu.hou.sis.entities.KhoaHoc;
 import vn.edu.hou.sis.entities.LopHoc;
+import vn.edu.hou.sis.entities.NganhHoc;
 import vn.edu.hou.sis.exceptions.LopHocNotFound;
 
 public interface LopHocService {
@@ -21,4 +23,8 @@ public interface LopHocService {
 	public boolean isDeleted(String id);
 
 	public boolean isExist(LopHoc lopHoc);
+	
+	public String genCode(LopHoc lopHoc, KhoaHoc k, NganhHoc nganh);
+	
+	public boolean isDeleteKhoaHoc(String nganhHocId);
 }

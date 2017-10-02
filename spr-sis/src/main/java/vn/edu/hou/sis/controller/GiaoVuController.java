@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +28,8 @@ import vn.edu.hou.sis.services.KhoaHocService;
 import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
 import vn.edu.hou.sis.services.SinhVienService;
+import vn.edu.hou.sis.validator.KhoaHocValidation;
+import vn.edu.hou.sis.validator.LopHocValidation;
 import vn.edu.hou.sis.validator.NganhHocValidation;
 
 @Controller
@@ -43,9 +43,19 @@ public class GiaoVuController {
 	private LopHocService lopHocService;
 	@Autowired
 	private SinhVienService sinhVienService;
-	
+
 	@Autowired
 	NganhHocValidation nganhHocValidatior;
+
+	@Autowired
+	KhoaHocValidation khoaHocValidation;
+
+	@Autowired
+	LopHocValidation lopHocValidation;
+
+	private int status = 0;
+
+	@SuppressWarnings("unused")
 	private Logger logger = LoggerFactory.getLogger(GiaoVuController.class);
 
 	@RequestMapping(value = "/giao-vu", method = RequestMethod.GET)
@@ -57,6 +67,12 @@ public class GiaoVuController {
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc")
 	public String nghiepVuQuanLyNganhHoc(Model model, Principal principal) {
 		model.addAttribute("list", nganhHocService.findAll());
+		if (this.status == 1) {
+			model.addAttribute("success", true);
+		} else if (this.status == 2) {
+			model.addAttribute("success", false);
+		}
+		this.status = 0;
 		return "QuanLyNganhHocPage";
 	}
 
@@ -65,6 +81,12 @@ public class GiaoVuController {
 		model.addAttribute("listNganh", nganhHocService.findAll());
 		model.addAttribute("listKhoaHoc", khoaHocServices.findAll());
 		model.addAttribute("listLop", lopHocService.findAll());
+		if (this.status == 1) {
+			model.addAttribute("success", true);
+		} else if (this.status == 2) {
+			model.addAttribute("success", false);
+		}
+		this.status = 0;
 		return "QuanLyLopHocPage";
 	}
 
@@ -72,6 +94,12 @@ public class GiaoVuController {
 	public String nghiepVuQuanLyKhoaHoc(Model model, Principal principal) {
 		model.addAttribute("listKhoaHoc", khoaHocServices.findAll());
 		model.addAttribute("listNganhHoc", nganhHocService.findAll());
+		if (this.status == 1) {
+			model.addAttribute("success", true);
+		} else if (this.status == 2) {
+			model.addAttribute("success", false);
+		}
+		this.status = 0;
 		return "QuanLyKhoaHocPage";
 	}
 
@@ -83,14 +111,22 @@ public class GiaoVuController {
 	}
 
 	// Ngành Học
-	
+
 	@RequestMapping("/nghiep-vu/quan-ly-nganh-hoc/delete")
 	public String deleteNganhHoc(Model model, @RequestParam("id") String id) {
-		if (id != null) {
+		if (id.trim().length() > 0) {
 			try {
-				nganhHocService.delete(id);
+				if (khoaHocServices.isDeleteNganhHoc(id)) {
+					nganhHocService.delete(id);
+					this.status = 1;
+					return "redirect:/nghiep-vu/quan-ly-nganh- hoc";
+				} else {
+					this.status = 2;
+					return "redirect:/nghiep-vu/quan-ly-nganh-hoc";
+				}
 			} catch (NganhHocNotFound e) {
-				e.printStackTrace();
+				this.status = 2;
+				return "redirect:/nghiep-vu/quan-ly-nganh-hoc";
 			}
 		}
 		return "redirect:/nghiep-vu/quan-ly-nganh-hoc";
@@ -113,10 +149,11 @@ public class GiaoVuController {
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-nganh-hoc/save", method = RequestMethod.POST)
-	public String saveNganhHoc(Model model,@Valid  @ModelAttribute("nganhHoc") NganhHoc nganhHoc, BindingResult result) {
+	public String saveNganhHoc(Model model, @Valid @ModelAttribute("nganhHoc") NganhHoc nganhHoc,
+			BindingResult result) {
 		nganhHocValidatior.validate(nganhHoc, result);
 		if (result.hasErrors()) {
-			logger.debug(result.getAllErrors().toString());
+			model.addAttribute("nganhHoc", nganhHoc);
 			return "addOrEditItem/AddOrEditNganhHoc";
 		} else {
 			nganhHoc.setIsDeleted(0);
@@ -135,10 +172,12 @@ public class GiaoVuController {
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-khoa-hoc/save", method = RequestMethod.POST)
-	public String saveKhoaHoc(Model model, @ModelAttribute("khoaHoc") KhoaHoc khoaHoc) {
-		if (khoaHoc.getId() == null && khoaHocServices.isExist(khoaHoc)) {
-			model.addAttribute("msg", "Khóa Học Đã Tồn Tại!");
-			return "ErrorDatabase";
+	public String saveKhoaHoc(Model model, @Valid @ModelAttribute("khoaHoc") KhoaHoc khoaHoc, BindingResult result) {
+		khoaHocValidation.validate(khoaHoc, result);
+		if (result.hasErrors()) {
+			model.addAttribute("khoaHoc", khoaHoc);
+			model.addAttribute("listNganh", nganhHocService.findAll());
+			return "addOrEditItem/AddOrEditKhoaHoc";
 		}
 		khoaHocServices.save(khoaHoc);
 		return "redirect:/nghiep-vu/quan-ly-khoa-hoc";
@@ -156,11 +195,19 @@ public class GiaoVuController {
 
 	@RequestMapping("/nghiep-vu/quan-ly-khoa-hoc/delete")
 	public String deleteKhoaHoc(Model model, @RequestParam("id") String id) {
-		if (id != null) {
+		if (id.trim().length() > 0) {
 			try {
-				khoaHocServices.delete(id);
+				if (lopHocService.isDeleteKhoaHoc(id)) {
+					khoaHocServices.delete(id);
+					this.status = 1;
+					return "redirect:/nghiep-vu/quan-ly-khoa- hoc";
+				} else {
+					this.status = 2;
+					return "redirect:/nghiep-vu/quan-ly-khoa-hoc";
+				}
 			} catch (KhoaHocNotFound e) {
-				e.printStackTrace();
+				this.status = 2;
+				return "redirect:/nghiep-vu/quan-ly-khoa-hoc";
 			}
 		}
 		return "redirect:/nghiep-vu/quan-ly-khoa-hoc";
@@ -174,6 +221,7 @@ public class GiaoVuController {
 		LopHoc lopHoc = lopHocService.findById(id);
 		model.addAttribute("lopHoc", lopHoc);
 		model.addAttribute("listNganh", nganhHocService.findAll());
+		model.addAttribute("listKhoaHoc", khoaHocServices.findKhoaHocByNganhHocId(lopHoc.getNganhHocId().toString()));
 		return "addOrEditItem/AddOrEditLopHoc";
 	}
 
@@ -195,18 +243,17 @@ public class GiaoVuController {
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc/save", method = RequestMethod.POST)
-	public String saveLopHoc(Model model, @ModelAttribute("lopHoc") LopHoc lopHoc) {
-		if (lopHoc.getKhoaHocId() == null) {
-			model.addAttribute("msg", "Không được bỏ trống KHÓA HỌC!");
-			return "ErrorDatabase";
-		} else if (lopHoc.getNganhHocId() == null) {
-			model.addAttribute("msg", "Không được bỏ trống NGÀNH HỌC!");
-			return "ErrorDatabase";
-		}
-		lopHoc.setCode(genCode(lopHoc));
-		if (lopHoc.getId() == null && lopHocService.isExist(lopHoc)) {
-			model.addAttribute("msg", "Lớp Học Đã Tồn Tại!");
-			return "ErrorDatabase";
+	public String saveLopHoc(Model model, @Valid @ModelAttribute("lopHoc") LopHoc lopHoc, BindingResult result) {
+		KhoaHoc k = khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
+		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
+		lopHoc.setCode(lopHocService.genCode(lopHoc, k, nganh));
+		lopHocValidation.validate(lopHoc, result);
+		if (result.hasErrors()) {
+			model.addAttribute("lopHoc", lopHoc);
+			model.addAttribute("listNganh", nganhHocService.findAll());
+			model.addAttribute("listKhoaHoc",
+					khoaHocServices.findKhoaHocByNganhHocId(lopHoc.getNganhHocId().toString()));
+			return "addOrEditItem/AddOrEditLopHoc";
 		}
 		lopHocService.save(lopHoc);
 		return "redirect:/nghiep-vu/quan-ly-lop-hoc";
@@ -222,15 +269,6 @@ public class GiaoVuController {
 			}
 		}
 		return "redirect:/nghiep-vu/quan-ly-lop-hoc";
-	}
-
-	private String genCode(LopHoc lopHoc) {
-		KhoaHoc k = khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
-		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
-		String code = nganh.getKyHieu();
-		int namBatDau = k.getNamBatDau();
-		code += Integer.toString(namBatDau).substring(1, 4);
-		return code;
 	}
 
 	// Sinh Vien

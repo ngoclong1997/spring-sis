@@ -102,6 +102,8 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**")
         .addResourceLocations("/WEB-INF/resources/");
+		registry.addResourceHandler("/static/**")
+        .addResourceLocations("/WEB-INF/static/");
 	}
 	
 	// @Bean

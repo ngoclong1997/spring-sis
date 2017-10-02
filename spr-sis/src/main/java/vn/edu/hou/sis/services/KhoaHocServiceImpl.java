@@ -1,6 +1,5 @@
 package vn.edu.hou.sis.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,7 +38,7 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 	}
 
 	@Override
-	public List<KhoaHoc> findByTenKhoaHoc(String tenKhoa) {
+	public KhoaHoc findByTenKhoaHoc(String tenKhoa) {
 		return khoaHocRepository.findKhoaHocByTenKhoaHoc(tenKhoa);
 	}
 
@@ -81,9 +80,9 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 
 	@Override
 	public boolean isExist(KhoaHoc khoaHoc) {
-		List<KhoaHoc> list = new ArrayList<>();
-		list = khoaHocRepository.checkExist(khoaHoc.getNamBatDau(), khoaHoc.getNganhHocId());
-		return list.size() != 0;
+		KhoaHoc temp= khoaHocRepository.findByNamBatDauAndNganhHocId(khoaHoc.getNamBatDau(), khoaHoc.getNganhHocId());
+		if(temp != null && khoaHoc.getId() != temp.getId()) return true;
+		return false;
 	}
 
 	@Override
@@ -96,6 +95,18 @@ public class KhoaHocServiceImpl implements KhoaHocService {
 			return null;
 		}
 		return list;
+	}
+
+	@Override
+	public boolean isDeleteNganhHoc(String nganhHocId) {
+		List<KhoaHoc> list = null;
+		try {
+			int iId = Integer.parseInt(nganhHocId);
+			list = khoaHocRepository.findKhoaHocByNganhHocId(iId);
+		} catch (Exception e) {
+			return false;
+		}
+		return list == null;
 	}
 
 }

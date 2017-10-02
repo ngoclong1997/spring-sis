@@ -5,7 +5,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<<<<<<< HEAD:spr-sis/src/main/webapp/WEB-INF/pages/QuanLyLopHocPage.jsp
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/scripts/common.js"></script>
@@ -24,9 +23,9 @@
 <body>
 	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
-		<tr style="background: aliceblue; height: 20px; padding: 5px;">
-			<td colspan="3">
-				<div class="menu" style="padding: 5px;">
+		<tr style="background: aliceblue; height: 20px; margin: 5px;">
+			<td colspan="3" style="background: #1bc2a2; border-radius: 5px;">
+				<div class="menu">
 					<jsp:include page="/WEB-INF/basefragments/menu.jsp" />
 				</div>
 			</td>

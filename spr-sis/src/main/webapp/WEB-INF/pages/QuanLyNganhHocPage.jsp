@@ -19,15 +19,28 @@
 	<table width="90%" align="center">
 		<jsp:include page="/WEB-INF/basefragments/header.jsp" />
 
-		<tr style="background: aliceblue; height: 20px; padding: 5px;">
-			<td colspan="3">
-				<div class="menu" style="padding: 5px;">
+		<tr style="background: aliceblue; height: 20px; margin: 5px;">
+			<td colspan="3" style="background: #1bc2a2; border-radius: 5px;">
+				<div class="menu">
 					<jsp:include page="/WEB-INF/basefragments/menu.jsp" />
 				</div>
 			</td>
 		</tr>
 		<tr id="space"></tr>
-		<tr id="space"></tr>
+		<tr align="left">
+			<c:if test="${success eq true }">
+				<div class="alert alert-warning alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.success.msg"></spring:message></strong>
+				</div>
+			</c:if>
+			<c:if test="${success eq false }">
+				<div class="alert alert-success alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong><spring:message code="laben.delete.warning.msg"></spring:message></strong>
+				</div>
+			</c:if>
+		</tr>
 
 		<tr align="left">
 			<td width="0%"></td>
@@ -37,7 +50,8 @@
 						ngành học</a>
 				</div>
 				<div id="space"></div>
-				<table id="table_nganhHoc" class="table table-striped table-bordered">
+				<table id="table_nganhHoc"
+					class="table table-striped table-bordered">
 					<thead>
 						<tr>
 							<th>STT</th>
@@ -57,13 +71,12 @@
 								<td><a href="quan-ly-nganh-hoc/edit?id=${temp.id}"
 									class="btn btn-primary"> <span
 										class="glyphicon glyphicon-pencil"></span></a> <span
-									data-placement="top" data-toggle="modal" title="Xóa ngành học">
-										<button id="func_btn" class="btn btn-danger"
-											data-id="${hssv.id }" data-title="Delete" data-toggle="modal"
+									data-placement="top" data-toggle="modal" title="Xóa ngành học"><button
+											id="func_btn" class="btn btn-danger" data-id="${temp.id }"
+											data-title="Delete" data-toggle="modal"
 											href="#xoaNganhHoc_${temp.id}">
 											<span class="glyphicon glyphicon-trash"></span>
-										</button>
-								</span></td>
+										</button> </span></td>
 							</tr>
 
 							<!-- Modal xóa ngành học -->

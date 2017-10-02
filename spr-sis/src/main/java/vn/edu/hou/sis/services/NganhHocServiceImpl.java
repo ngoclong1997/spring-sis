@@ -69,8 +69,6 @@ public class NganhHocServiceImpl implements NganhHocService {
 
 	@Override
 	public NganhHoc save(NganhHoc nganhHoc) {
-		// System.out.println(nganhHoc.getTenNganh() + nganhHoc.getId() +
-		// nganhHoc.getKyHieu());
 		nganhHocRepository.save(nganhHoc);
 		return null;
 	}
