@@ -1,12 +1,15 @@
 package vn.edu.hou.sis.controller;
 
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.slf4j.LoggerFactory;
@@ -16,11 +19,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder; 
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.qos.logback.classic.Logger;
 import vn.edu.hou.sis.entities.HoSoSv;
@@ -31,6 +35,7 @@ import vn.edu.hou.sis.entities.UserRole;
 import vn.edu.hou.sis.exceptions.HoSoSVNotFound;
 import vn.edu.hou.sis.exceptions.NganhHocNotFound;
 import vn.edu.hou.sis.services.CanBoTuyenSinhService;
+import vn.edu.hou.sis.services.NganhHocService;
 import vn.edu.hou.sis.services.SinhVienService;
 import vn.edu.hou.sis.services.UserRoleService;
 import vn.edu.hou.sis.services.UserService;
@@ -49,14 +54,25 @@ public class CanBoTuyenSinhController {
 	private SinhVienService sinhVienService;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private NganhHocService nganhHocService;
+
 	@Autowired
 	HoSoSvValidation hoSoSVFormValidator;
-	
+
 	@RequestMapping(value = "/can-bo-tuyen-sinh", method = RequestMethod.GET)
 	public String canBoTuyenSinhForm(Model model, Principal principal) {
 		model.addAttribute("username", principal.getName());
 		return "redirect:home";
+	}
+	
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/get-nganh-hoc", method = RequestMethod.GET)
+	@ResponseBody
+	public String getNganhHoc(HttpServletRequest request) {
+		String nganhHocId = request.getParameter("nganhHocId");
+		System.out.println(nganhHocId);
+		NganhHoc nganhHoc = nganhHocService.findById(nganhHocId);
+		return nganhHoc.getTenNganh();
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen", method = RequestMethod.GET)
@@ -67,28 +83,27 @@ public class CanBoTuyenSinhController {
 		model.addAttribute("dsNganhHoc", service.findAllNganhHoc());
 		return "QuanLyHoSoDuTuyenPage";
 	}
-	
+
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/them-ho-so", method = RequestMethod.GET)
 	public String themHoSo(Model model, Principal principal) {
 		List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
-//		for (NganhHoc nh : lstNganhHoc) {
-//			dsNganhHoc.put(nh.getId(), nh.getTenNganh());
-//		}
-		
+		model.addAttribute("job", "insert");
 		model.addAttribute("dsNganhHoc", dsNganhHoc);
 		model.addAttribute("hoSoSV", new HoSoSv());
-		return "ThemHoSoDuTuyenPage";
+		return "NghiepVuQuanLyHoSoDuTuyenPage";
 	}
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-them-ho-so", method = RequestMethod.POST)
-	public String xuLyThemHoSo(Model model, @Valid @ModelAttribute("hoSoSV") HoSoSv hoSoSV, BindingResult result, Principal principal) {
+	public String xuLyThemHoSo(Model model, @Valid @ModelAttribute("hoSoSV") HoSoSv hoSoSV, BindingResult result,
+			Principal principal) {
 		hoSoSVFormValidator.validate(hoSoSV, result);
 		if (result.hasErrors()) {
 			logger.debug(result.getAllErrors().toString());
 			List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+			model.addAttribute("job", "insert");
 			model.addAttribute("dsNganhHoc", dsNganhHoc);
 			model.addAttribute("hoSoSV", hoSoSV);
-			return "ThemHoSoDuTuyenPage";
+			return "NghiepVuQuanLyHoSoDuTuyenPage";
 		}
 		hoSoSV.setNgayLap(new Date());
 		hoSoSV.setHoKhauThuongTru(hoSoSV.getDiaChi());
@@ -99,11 +114,29 @@ public class CanBoTuyenSinhController {
 		return "redirect:/nghiep-vu/quan-ly-ho-so-du-tuyen";
 	}
 
-	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/update/{id}", method = RequestMethod.POST)
-	public String xuLyCapNhatHoSo(@ModelAttribute("hoSoSVUpdated") HoSoSv hoSoSV, @PathVariable("id") Integer id,
-			BindingResult result, Principal principal) {
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/sua-ho-so/{id}", method = RequestMethod.GET)
+	public String suaHoSo(@PathVariable("id") Integer id, Model model, Principal principal) {
+		List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+
+		HoSoSv hoSoSV = service.findById(id);
+		System.out.println("Updating:  " + hoSoSV);
+		model.addAttribute("job", "update");
+		model.addAttribute("dsNganhHoc", dsNganhHoc);
+		model.addAttribute("hoSoSV", hoSoSV);
+		return "NghiepVuQuanLyHoSoDuTuyenPage";
+	}
+
+	@RequestMapping(value = "/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-sua-ho-so/{id}", method = RequestMethod.POST)
+	public String xuLyCapNhatHoSo(@ModelAttribute("hoSoSV") HoSoSv hoSoSV, @PathVariable("id") Integer id,
+			BindingResult result, Principal principal, Model model) {
+		//hoSoSVFormValidator.validate(hoSoSV, result);
 		if (result.hasErrors()) {
-			return "UnknownError";
+			logger.debug(result.getAllErrors().toString());
+			List<NganhHoc> dsNganhHoc = service.findAllNganhHoc();
+			model.addAttribute("job", "update");
+			model.addAttribute("dsNganhHoc", dsNganhHoc);
+			model.addAttribute("hoSoSV", hoSoSV);
+			return "NghiepVuQuanLyHoSoDuTuyenPage";
 		}
 		hoSoSV.setId(id);
 		hoSoSV.setNgayLap(new Date());
@@ -166,10 +199,12 @@ public class CanBoTuyenSinhController {
 			model.addAttribute("nullProperties", nullProperties);
 			return "LoiTaoSinhVienPage";
 		}
+		User user = null;
 
-		User user = new User(hoSoSV.getCmnd(), hoSoSV.getDiaChi(), hoSoSV.getEmail(), hoSoSV.getGioiTinh(),
+		user = new User(hoSoSV.getCmnd(), hoSoSV.getDiaChi(), hoSoSV.getEmail(), hoSoSV.getGioiTinh(),
 				hoSoSV.getHoTen(), 0, hoSoSV.getNgaySinh(), "", hoSoSV.getCmnd(), hoSoSV.getSdt(), "",
 				hoSoSV.getEmail());
+
 		user.setIsDeleted(0);
 		userService.create(user);
 

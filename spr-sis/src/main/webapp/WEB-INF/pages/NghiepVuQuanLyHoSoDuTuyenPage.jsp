@@ -8,7 +8,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><jsp:include
 	page="/WEB-INF/resources/resource.jsp" />
-<title>Thêm hồ sơ</title>
+
+<title>${job == 'insert' ? 'THÊM HỒ SƠ SINH VIÊN' : 'SỬA HỒ SƠ SINH VIÊN'}</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+  <script>
+  $( function() {
+    $( "#datetime" ).datepicker({
+    	dateFormat: 'dd/mm/yy',
+    	changeMonth: true,
+    	changeYear: true,
+    	yearRange: '-100:+0'
+    });
+  } );
+  </script>
 </head>
 <body>
 	<table width="90%" align="center">
@@ -23,8 +37,17 @@
 		<tr>
 			<td width="10%"></td>
 			<td width="80%">
-				<h1>THÊM HỒ SƠ SINH VIÊN</h1> <form:form method="POST"
-					action="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-them-ho-so"
+				<c:choose>
+					<c:when test="${job == 'insert' }">
+						<c:set var="action" value="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-them-ho-so"/>
+					</c:when>
+					<c:otherwise>
+						<c:set var="action" value="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen/xu-ly-sua-ho-so/${hoSoSV.id }"/>
+					</c:otherwise>
+				</c:choose>
+				
+				<h1>${job == 'insert' ? 'THÊM HỒ SƠ SINH VIÊN' : 'SỬA HỒ SƠ SINH VIÊN'}</h1> <form:form method="POST"
+					action="${action }"
 					commandName="hoSoSV">
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3"><span style="color:red">*</span>Ngành: </label>
@@ -60,10 +83,10 @@
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3"><span style="color:red">*</span>Ngày sinh: </label>
 						<div class="col-xs-9 col-sm-9">
-							<form:input value="${not empty hoSoSV.ngaySinh ? hoSoSV.ngaySinh : '' }" path="ngaySinh" type = "date" pattern = "dd/MM/yyyy"
-								name="ngaySinh" />
+							<form:input id = "datetime" path="ngaySinh" type = "text" />
 							<form:errors path="ngaySinh" class="error"></form:errors>
 						</div>
+						
 					</div>
 					<div class="form-group" style="padding-top: 20px;">
 						<label class="col-xs-3">Nơi sinh: </label>
@@ -151,7 +174,7 @@
 					</div>
 
 					<div class="form-group" style="padding-top: 20px;">
-						<label class="col-xs-3">Email:</label>
+						<label class="col-xs-3"><span style="color:red">*</span>Email:</label>
 						<div class="col-xs-9 col-sm-9">
 							<form:input value="${not empty hoSoSV.email ? hoSoSV.email : '' }" path="email" name="email"></form:input>
 							<form:errors path="email" class="error" />
@@ -168,7 +191,7 @@
 
 					<div class="form-group" style="padding-top: 20px;">
 						<div align="right">
-							<button type="submit" class="btn btn-success">Thêm hồ sơ</button>
+							<button type="submit" class="btn btn-success">${job == 'insert' ? 'Thêm hồ sơ' : 'Sửa hồ sơ'}</button>
 							<a
 								href="${pageContext.request.contextPath}/nghiep-vu/quan-ly-ho-so-du-tuyen"
 								class="btn btn-default">Quay lại</a>

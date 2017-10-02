@@ -42,11 +42,15 @@ public class HoSoSvValidation implements Validator{
 		System.out.println("creating " + creating.getNgaySinh());
 		List<HoSoSv> hoSoSVByCMND = service.findByCmnd(creating.getCmnd());
 		
-		if (creating.getDiaChi().length() == 0 || creating.getDiaChi().trim() == "") {
+		if (creating.getDiaChi().length() == 0) {
 			errors.rejectValue("diaChi", "error.hoSoSV.diaChi.required");
 		}
 		
-		if (creating.getHoTen().length() == 0 || creating.getHoTen().trim() == "") {
+		if (creating.getEmail().length() == 0) {
+			errors.rejectValue("email", "error.hoSoSV.email.required");
+		}
+		
+		if (creating.getHoTen().length() == 0) {
 			errors.rejectValue("hoTen", "error.hoSoSV.hoTen.required");
 		}
 		
@@ -70,7 +74,9 @@ public class HoSoSvValidation implements Validator{
 			errors.rejectValue("ngoaiNgu", "error.hoSoSV.ngoaiNgu.required");
 		}
 		
-		List<HoSoSv> hoSoSVByEmail = service.findByEmail(creating.getEmail());
+		
+		
+		List<HoSoSv> hoSoSVByEmail = service.findByEmail(creating.getEmail().trim());
 		if (hoSoSVByEmail != null) if (hoSoSVByEmail.size() > 0) if (hoSoSVByEmail.get(0).getEmail().equals(creating.getEmail())) {
 			errors.rejectValue("email", "error.hoSoSV.email.conflict");
 		}

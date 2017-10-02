@@ -2,21 +2,17 @@ package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import java.util.Date;
 /**
  * The persistent class for the ho_so_sv database table.
  * 
@@ -94,11 +90,12 @@ public class HoSoSv implements Serializable {
 	@Column(name = "nganh_hoc_id")
 	private Integer nganhHocId;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_lap")
 	private Date ngayLap;
-
 	
 	@Column(name = "ngay_sinh")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date ngaySinh;
 
 	
@@ -112,6 +109,9 @@ public class HoSoSv implements Serializable {
 	
 	@Column(name = "sdt")
 	private String sdt;
+	
+	@Transient
+	private String tenNganh; 
 
 	public HoSoSv() {
 	}
@@ -211,7 +211,6 @@ public class HoSoSv implements Serializable {
 	public void setNgaySinh(String ngaySinh) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			System.out.println(ngaySinh);
 			if (ngaySinh != null) {
 				if (ngaySinh.length() > 0) {
 					this.ngaySinh = sdf.parse(ngaySinh);
@@ -223,6 +222,11 @@ public class HoSoSv implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setNgaySinh(Date ngaySinh) {
+		this.ngaySinh = ngaySinh;
+		System.out.println(ngaySinh);
 	}
 
 	public String getNgoaiNgu() {

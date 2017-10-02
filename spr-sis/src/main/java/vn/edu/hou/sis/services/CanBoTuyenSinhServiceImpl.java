@@ -1,5 +1,8 @@
 package vn.edu.hou.sis.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -62,9 +65,11 @@ public class CanBoTuyenSinhServiceImpl implements CanBoTuyenSinhService {
 	@Transactional(rollbackFor = HoSoSVNotFound.class)
 	public void updateHoSoSV(HoSoSv hoSoSV) throws HoSoSVNotFound {
 		HoSoSv hssv = null;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		hssv = hoSoSVRepository.findById(hoSoSV.getId());
 		if (hssv == null)
 			throw new HoSoSVNotFound();
+
 		hoSoSVRepository.updateHoSoById(hoSoSV.getCbTuyenSinhUsername(), hoSoSV.getChuyenNganh(), hoSoSV.getCmnd(),
 				hoSoSV.getDanToc(), hoSoSV.getDiaChi(), hoSoSV.getEmail(), hoSoSV.getGioiTinh(),
 				hoSoSV.getHoKhauThuongTru(), hoSoSV.getHoTen(), hoSoSV.getIsDeleted(), hoSoSV.getNamTotNghiep(),
