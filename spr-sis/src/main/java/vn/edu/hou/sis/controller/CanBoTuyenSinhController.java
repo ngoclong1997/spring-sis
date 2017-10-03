@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import ch.qos.logback.classic.Logger;
 import vn.edu.hou.sis.entities.HoSoSv;
+import vn.edu.hou.sis.entities.LopHoc;
 import vn.edu.hou.sis.entities.NganhHoc;
 import vn.edu.hou.sis.entities.SinhVien;
 import vn.edu.hou.sis.entities.User;
@@ -35,6 +36,7 @@ import vn.edu.hou.sis.entities.UserRole;
 import vn.edu.hou.sis.exceptions.HoSoSVNotFound;
 import vn.edu.hou.sis.exceptions.NganhHocNotFound;
 import vn.edu.hou.sis.services.CanBoTuyenSinhService;
+import vn.edu.hou.sis.services.LopHocService;
 import vn.edu.hou.sis.services.NganhHocService;
 import vn.edu.hou.sis.services.SinhVienService;
 import vn.edu.hou.sis.services.UserRoleService;
@@ -56,6 +58,8 @@ public class CanBoTuyenSinhController {
 	private UserService userService;
 	@Autowired
 	private NganhHocService nganhHocService;
+	@Autowired
+	private LopHocService lopHocService;
 
 	@Autowired
 	HoSoSvValidation hoSoSVFormValidator;
@@ -189,10 +193,7 @@ public class CanBoTuyenSinhController {
 		hoSoSV.setHoKhauThuongTru(hoSoSV.getDiaChi());
 		hoSoSV.setIsDeleted(0);
 		hoSoSV.setCbTuyenSinhUsername(principal.getName());
-		if (hoSoSV.getTrangThaiHoSo() == 1) {
-			model.addAttribute("info", "Sinh viÃªn Ä‘Ã£ Ä‘Æ°á»£c táº¡o!!");
-			return "LoiTaoSinhVienPage";
-		}
+
 		if (hoSoSV.nullProperties() != "") {
 			model.addAttribute("info", "CÃ¡c trÆ°á»�ng bá»‹ thiáº¿u");
 			String nullProperties[] = hoSoSV.nullProperties().split("_");
@@ -222,6 +223,14 @@ public class CanBoTuyenSinhController {
 		String year = String.valueOf(cal.get(Calendar.YEAR)).substring(2, 4);
 		Integer trinhDo = hoSoSV.getTrinhDo();
 		String code = maNganh + year + trinhDo;
+		LopHoc temp= new LopHoc();
+		temp.setCode(code);
+		if(!lopHocService.isExist(temp)) {
+			model.addAttribute("info", "Không tồn tại lớp học phù hợp!");
+			String nullProperties[] = hoSoSV.nullProperties().split("_");
+			model.addAttribute("nullProperties", nullProperties);
+			return "LoiTaoSinhVienPage";
+		}
 		logger.debug(code);
 		sinhVien.setLopId(service.findLopIdByCode(code));
 		sinhVienService.create(sinhVien);

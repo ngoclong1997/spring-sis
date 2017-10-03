@@ -81,8 +81,7 @@ public class LopHocServiceImpl implements LopHocService {
 
 	@Override
 	public boolean isExist(LopHoc lopHoc) {
-		String trinhDo = lopHoc.getCode().substring(lopHoc.getCode().length() - 2, lopHoc.getCode().length());
-		LopHoc temp = lopHocRespository.findLopHocByKhoaHocIdAndTrinhDo(lopHoc.getKhoaHocId(), trinhDo);
+		LopHoc temp = lopHocRespository.findLopHocByCode(lopHoc.getCode());
 		if (temp != null && lopHoc.getId() != temp.getId())
 			return true;
 		return false;
@@ -94,7 +93,7 @@ public class LopHocServiceImpl implements LopHocService {
 //		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
 		String code = nganh.getKyHieu();
 		int namBatDau = k.getNamBatDau();
-		code += Integer.toString(namBatDau).substring(1, 4);
+		code += Integer.toString(namBatDau).substring(2, 4);
 		code += lopHoc.getCode();
 		return code;
 	}
