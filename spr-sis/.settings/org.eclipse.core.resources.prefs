@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+=======
+encoding//src/main/java/vn/edu/hou/sis/controller/CanBoTuyenSinhController.java=UTF-8
+>>>>>>> origin/longnn
 encoding//src/main/java/vn/edu/hou/sis/controller/GiaoVuController.java=UTF-8
 encoding//src/main/java/vn/edu/hou/sis/entities/HoSoSv.java=UTF-8
 encoding//src/main/webapp/WEB-INF/basefragments/footer.jsp=UTF-8

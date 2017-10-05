@@ -2,13 +2,17 @@ package vn.edu.hou.sis.entities;
 
 import java.io.Serializable;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.persistence.*;
 
-import java.util.Date;
+import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
 
+
+import java.util.Date;
 /**
  * The persistent class for the ho_so_sv database table.
  * 
@@ -51,6 +55,7 @@ public class HoSoSv implements Serializable {
 
 	
 	@Column(name = "email")
+	@Email
 	private String email;
 
 	
@@ -88,10 +93,9 @@ public class HoSoSv implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_lap")
 	private Date ngayLap;
-
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_sinh")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date ngaySinh;
 
 	
@@ -105,6 +109,9 @@ public class HoSoSv implements Serializable {
 	
 	@Column(name = "sdt")
 	private String sdt;
+	
+	@Transient
+	private String tenNganh; 
 
 	public HoSoSv() {
 	}
@@ -202,13 +209,24 @@ public class HoSoSv implements Serializable {
 	}
 
 	public void setNgaySinh(String ngaySinh) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			this.ngaySinh = sdf.parse(ngaySinh);
+			if (ngaySinh != null) {
+				if (ngaySinh.length() > 0) {
+					this.ngaySinh = sdf.parse(ngaySinh);
+				} else {
+					this.ngaySinh = null;
+				}
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setNgaySinh(Date ngaySinh) {
+		this.ngaySinh = ngaySinh;
+		System.out.println(ngaySinh);
 	}
 
 	public String getNgoaiNgu() {
@@ -290,12 +308,12 @@ public class HoSoSv implements Serializable {
 		if (this.cmnd == null || this.cmnd.equals("")) properties += "CMND_";
 		if (this.diaChi == null || this.diaChi.equals("")) properties += "Ä�á»‹a chá»‰_";
 		if (this.email == null || this.email.equals("")) properties += "Email_";
-		if (this.gioiTinh == null) properties += "Giá»›i tĂ­nh_";
+		if (this.gioiTinh == null) properties += "Giá»›i tÃ­nh_";
 		if (this.namTotNghiep == null) properties += "NÄƒm tá»‘t nghiá»‡p_";
-		if (this.trinhDo == null) properties += "TrĂ¬nh Ä‘á»™_";
-		if (this.hoTen == null || this.hoTen.equals("")) properties += "Há»� tĂªn_";
-		if (this.nganhHocId == null) properties += "NgĂ nh há»�c_";
-		if (this.ngaySinh == null) properties += "NgĂ y sinh_";
+		if (this.trinhDo == null) properties += "TrÃ¬nh Ä‘á»™_";
+		if (this.hoTen == null || this.hoTen.equals("")) properties += "Há»� tÃªn_";
+		if (this.nganhHocId == null) properties += "NgÃ nh há»�c_";
+		if (this.ngaySinh == null) properties += "NgÃ y sinh_";
 		if (this.sdt == null || this.sdt.equals("")) properties += "Sá»‘ Ä‘iá»‡n thoáº¡i";
 		return properties;
 	}

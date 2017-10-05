@@ -22,6 +22,10 @@ public interface LopHocRespository extends JpaRepository<LopHoc, Long>{
 	
 	@Query("select l from LopHoc l where l.isDeleted = 0 and l.khoaHocId = ?1")
 	public List<LopHoc> findLopHocByKhoaHocId(Integer id);
+
+	@Query("select l from LopHoc l where l.isDeleted = 0 and l.khoaHocId = ?1 and l.code LIKE CONCAT('%',?2,'%')")
+	public List<LopHoc> checkExist(Integer khoaHocId, String trinhDo);
+
 	
 
 }

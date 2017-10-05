@@ -1,6 +1,8 @@
 package vn.edu.hou.sis.validator;
 
 import java.util.Calendar;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -28,10 +30,22 @@ public class KhoaHocValidation implements Validator {
 			error.rejectValue("tenKhoaHoc", "error.khoaHoc.tenKhoaHoc.size");
 			return;
 		}
-		KhoaHoc khoaHoc = khoaHocServices.findByTenKhoaHoc(tenKhoaHoc);
-		if (khoaHoc != null && temp.getId() != khoaHoc.getId()) {
-			error.rejectValue("tenKhoaHoc", "error.khoaHoc.tenKhoaHoc.conflict");
-			return;
+		List<KhoaHoc> lstKhoaHoc = khoaHocServices.findByTenKhoaHoc(tenKhoaHoc);
+		if (lstKhoaHoc != null) {
+			if (temp.getId() == null) {
+				if (lstKhoaHoc.size() != 0) {
+					error.rejectValue("tenKhoaHoc", "error.khoaHoc.tenKhoaHoc.conflict");
+					return;
+				}
+			} else {
+				for (int i = 0; i < lstKhoaHoc.size(); ++i) {
+					if (lstKhoaHoc.get(i).getId() != temp.getId()) {
+						error.rejectValue("tenKhoaHoc", "error.khoaHoc.tenKhoaHoc.conflict");
+						return;
+					}
+				}
+			}
+
 		}
 	}
 

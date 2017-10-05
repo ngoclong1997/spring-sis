@@ -29,9 +29,20 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${spring.security.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>3.2.3.RELEASE</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
 		<dependency>
@@ -146,6 +157,7 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.0</version>
 		</dependency>
+
 		<!-- adminnlte -->
 		<dependency>
 			<groupId>org.webjars.bower</groupId>
@@ -157,6 +169,11 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.7</version>
+		</dependency>		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>datatables</artifactId>
+			<version>1.10.12</version>
+
 		</dependency>
 
 	</dependencies>

@@ -106,7 +106,6 @@ public class GiaoVuController {
 	@RequestMapping(value = "/nghiep-vu/quan-ly-sinh-vien")
 	public String nghiepVuQuanLySinhVien(Model model, Principal principal) {
 		model.addAttribute("listSinhVien", sinhVienService.findAll());
-		// System.out.println(sinhVienService.findAll().get(0).getHoTen());
 		return "QuanLySinhVienPage";
 	}
 
@@ -230,7 +229,6 @@ public class GiaoVuController {
 	public List<KhoaHoc> ajaxAddLopHoc(@RequestParam("nganhHocId") String nganhHocId) {
 		List<KhoaHoc> list = null;
 		list = khoaHocServices.findKhoaHocByNganhHocId(nganhHocId);
-		System.out.println(list.size());
 		return list;
 	}
 
@@ -244,6 +242,9 @@ public class GiaoVuController {
 
 	@RequestMapping(value = "/nghiep-vu/quan-ly-lop-hoc/save", method = RequestMethod.POST)
 	public String saveLopHoc(Model model, @Valid @ModelAttribute("lopHoc") LopHoc lopHoc, BindingResult result) {
+		KhoaHoc k = khoaHocServices.findById(lopHoc.getKhoaHocId().toString());
+		NganhHoc nganh = nganhHocService.findById(Integer.toString(lopHoc.getNganhHocId()));
+		lopHoc.setCode(lopHocService.genCode(lopHoc, k, nganh));
 		lopHocValidation.validate(lopHoc, result);
 		if (result.hasErrors()) {
 			model.addAttribute("lopHoc", lopHoc);
